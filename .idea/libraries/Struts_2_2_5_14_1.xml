@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Struts 2-2.5.14.1" type="struts2">
+    <properties version="2.5.14.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/commons-fileupload.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/ognl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/log4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/commons-io.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/commons-lang.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/freemarker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-json-plugin-2.5.14.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-spring-plugin-2.5.14.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-jfreechart-plugin-2.5.14.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

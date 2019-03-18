@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.objectFactory.spring.autoWire" value="name"/>
+    <constant name="struts.ui.theme" value="xhtml"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <package name="action" extends="json-default" namespace="/">
+        <action name="login" class="action.UserAction" method="login">
+            <result name="success">/WEB-INF/view/${target}.jsp</result>
+            <result name="input">index.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="logout" class="action.UserAction" method="logout">
+            <result name="success" type="redirect">index.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="upload" class="action.FileAction" method="setUploadFile">
+            <result name="success">/WEB-INF/view/teacher.jsp</result>
+            <result name="error">error.jsp</result>
+        </action>
+        <action name="download" class="action.FileAction">
+            <result type="stream" name="success">
+                <param name="inputName">downloadFile</param>
+                <param name="bufferSize">4096</param>
+                <param name="contentDisposition">attachment;filename="${filesFileName}"</param>
+            </result>
+        </action>
+        <action name="deleteFile" class="action.FileAction" method="deleteFile">
+            <result name="success">/WEB-INF/view/teacher.jsp</result>
+        </action>
+        <action name="student_login">
+            <result>/WEB-INF/view/student.jsp</result>
+        </action>
+        <action name="addStudent" class="action.StudentAction" method="addStudent">
+            <result>/WEB-INF/view/teacher.jsp</result>
+        </action>
+        <action name="academyBean" class="academyBean">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="specialtyBean" class="specialtyBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="classesBean" class="classesBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="courseBean" class="courseBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="studentBean" class="studentBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="deleteStudent" class="action.StudentAction" method="deleteStudent">
+            <result name="success">/WEB-INF/view/teacher.jsp</result>
+        </action>
+        <action name="updateStudent" class="action.StudentAction" method="updateStudent">
+            <result name="success">/WEB-INF/view/teacher.jsp</result>
+        </action>
+        <action name="deleteCourse" class="action.CourseAction" method="deleteCourseById">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="updateCourse" class="action.CourseAction" method="updateCourseById">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="addCourse" class="action.CourseAction" method="addCourse">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="saveTeaching" class="action.TeachingAction" method="saveTeaching">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="deleteTeaching" class="action.TeachingAction" method="deleteTeachingById">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="updateTeaching" class="action.TeachingAction" method="updateTeachingById">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="saveElectiveCourse" class="action.ElectiveCourseAction" method="saveElectiveCourse">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="deleteElectiveCourse" class="action.ElectiveCourseAction" method="deleteElectiveCourseById">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="updateElectiveCourse" class="action.ElectiveCourseAction" method="updateElectiveCourseById">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="count" class="studentLogService">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+    </package>
+</struts>
