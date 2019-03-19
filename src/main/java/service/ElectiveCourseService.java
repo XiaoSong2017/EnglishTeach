@@ -62,4 +62,24 @@ public class ElectiveCourseService {
         setElectiveCourse(electiveCoursePo, studentId, teachingId, usualGrade, examGrade, grade);
         electiveCourseDao.save(electiveCoursePo);
     }
+
+    public List<ElectiveCoursePo> getElectiveCourseByTeacherId(String teacherId) {
+        return electiveCourseDao.getElectiveCourseByTeacherId(teacherId);
+    }
+
+    public void saveElectiveCourseByAcademyId(String s, String teacherId, String courseId) {
+        electiveCourseDao.saveElectiveCoursesByAcademyId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+    }
+
+    public void saveElectiveCourseBySpecialtyId(String s, String teacherId, String courseId) {
+        electiveCourseDao.saveElectiveCoursesBySpecialtyId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+    }
+
+    public void saveElectiveCourseByClassesId(String s, String teacherId, String courseId) {
+        electiveCourseDao.saveElectiveCoursesByClassesId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+    }
+
+    public void saveElectiveCourseByStudentId(String s, String teacherId, String courseId) {
+        electiveCourseDao.saveElectiveCourseByStudentId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+    }
 }

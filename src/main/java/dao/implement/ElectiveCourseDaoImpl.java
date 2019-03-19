@@ -8,6 +8,9 @@ import po.StudentPo;
 import po.TeachingPo;
 
 import java.util.List;
+
+import static org.hibernate.internal.HEMLogging.logger;
+
 @Transactional
 public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> implements ElectiveCourseDao {
     @Override
@@ -28,14 +31,15 @@ public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> impleme
     }
 
     private void saveElectiveCourseByStudents(String teachingId, List<StudentPo> studentPos) {
-        Integer teaching=Integer.valueOf(teachingId);
-        List<TeachingPo> teachingPos=getSessionFactory().getCurrentSession().createQuery("select en from TeachingPo en where en.id=?1").setParameter(1,teaching).getResultList();
+        List<TeachingPo> teachingPos=getSessionFactory().getCurrentSession().createQuery("select en from TeachingPo en where en.id=?1").setParameter(1,Integer.valueOf(teachingId)).getResultList();
         int size=0;
+        logger("saveElectiveCourseByStudents:"+teachingPos);
         for(StudentPo studentPo:studentPos){
             for(TeachingPo teachingPo:teachingPos){
                 ElectiveCoursePo electiveCoursePo=new ElectiveCoursePo();
                 electiveCoursePo.setTeachingByEId(teachingPo);
                 electiveCoursePo.setStudentBySId(studentPo);
+                logger("ElectiveCoursePo:"+electiveCoursePo);
                 save(electiveCoursePo);
                 if(size++%20==0){
                     getSessionFactory().getCurrentSession().flush();
@@ -55,6 +59,11 @@ public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> impleme
     public void saveElectiveCourseByStudentId(String teachingId, String studentId) {
         List<StudentPo> studentPos=getSessionFactory().getCurrentSession().createQuery("select en from StudentPo en where en.id=?1").setParameter(1,studentId).getResultList();
         saveElectiveCourseByStudents(teachingId, studentPos);
+    }
+
+    @Override
+    public List<ElectiveCoursePo> getElectiveCourseByTeacherId(String teacherId) {
+        return getSessionFactory().getCurrentSession().createQuery("select en from ElectiveCoursePo en where en.teachingByEId.teacherByTId.id=?1").setParameter(1,teacherId).getResultList();
     }
 
 }

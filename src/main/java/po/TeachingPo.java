@@ -1,10 +1,12 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "teaching", schema = "english_teach", catalog = "")
+@Table(name = "teaching")
 public class TeachingPo {
     private double usualProportion;
     private double examProportion;

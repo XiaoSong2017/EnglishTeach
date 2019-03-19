@@ -65,6 +65,11 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="electiveCourseBean" class="electiveCourseBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
         <action name="deleteStudent" class="action.StudentAction" method="deleteStudent">
             <result name="success">/WEB-INF/view/teacher.jsp</result>
         </action>
@@ -117,6 +122,11 @@
             </result>
         </action>
         <action name="count" class="studentLogService">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="saveElectiveCourseBatchBy" class="action.ElectiveCourseAction" method="saveElectiveCourseByBatch">
             <result name="success" type="json">
                 <param name="noCache">true</param>
             </result>

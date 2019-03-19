@@ -13,4 +13,6 @@ public interface ElectiveCourseDao extends BaseDao<ElectiveCoursePo> {
     void saveElectiveCoursesBySpecialtyId(String teachingId,String specialtyId);
     void saveElectiveCoursesByClassesId(String teachingId,String classesId);
     void saveElectiveCourseByStudentId(String teachingId,String studentId);
+
+    List<ElectiveCoursePo> getElectiveCourseByTeacherId(String teacherId);
 }

@@ -1,6 +1,7 @@
 package po;
 
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -16,6 +17,7 @@ public class ElectiveCoursePo {
     private TeachingPo teachingByEId;
 
     @Id
+    @GenericGenerator(name = "id",strategy = "org.hibernate.id.IdentityGenerator")
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -71,8 +73,8 @@ public class ElectiveCoursePo {
         return Objects.hash(id, usualGrade, examGrade, grade);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
+    @JSON
     @JoinColumn(name = "s_id", referencedColumnName = "id", nullable = false)
     public StudentPo getStudentBySId() {
         return studentBySId;
@@ -82,8 +84,8 @@ public class ElectiveCoursePo {
         this.studentBySId = studentBySId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
+    @JSON
     @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false)
     public TeachingPo getTeachingByEId() {
         return teachingByEId;

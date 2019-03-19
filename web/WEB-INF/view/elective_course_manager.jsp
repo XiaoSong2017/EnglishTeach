@@ -69,7 +69,7 @@
             </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody_elective_course">
         <%
             ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(application);
             ElectiveCourseService electiveCourseService = (ElectiveCourseService) applicationContext.getAutowireCapableBeanFactory().getBean("electiveCourseService");
@@ -191,24 +191,69 @@
         }
     };
     function addElectiveCourse(){
-        //TODO:学生选课批量插入操作
+        var id=[];
+        var levels=[];
         var temp=obj.getCheckedNodes(true);
-        for(var i=0;i<temp.length;++i){
-            if(!temp[i].isParent)
-            console.log(temp[i].id+":"+temp[i].level);
+        for(var i=0,j=0;i<temp.length;++i){
+            if(!temp[i].isParent){
+                id.push(temp[i].id);
+                levels.push(temp[i].level);
+                ++j;
+            }
         }
-        <%--$.ajax({--%>
-            <%--url:'<%=request.getContextPath()%>/saveElectiveCourse',--%>
-            <%--type:'post',--%>
-            <%--async:true,--%>
-            <%--data:{},--%>
-            <%--success:function (data) {--%>
-            <%--},--%>
-            <%--error:function () {--%>
-                <%--alert("添加出错！请重试！");--%>
-            <%--}--%>
-        <%--});--%>
-    };
+        var data=$.param({'id':id},true);
+        data+='&'+$.param({'level':levels},true);
+        data+='&teacherId='+'<%=request.getSession().getAttribute("ID")%>'+'&courseId='+$('#selectElectiveCourse option:checked').val();
+        console.log(data);
+        $.ajax({
+            url:'<%=request.getContextPath()%>/saveElectiveCourseBatchBy',
+            type:'post',
+            async:true,
+            dataType:'json',
+            data:data,
+            success:function (data) {
+                $.ajax({
+                   url:'<%=request.getContextPath()%>/electiveCourseBean',
+                    type:'post',
+                    async:true,
+                    data:{'teacherId':<%=request.getSession().getAttribute("ID")%>},
+                    success:function (data) {
+                        $('#tbody_elective_course').empty();
+                        for(var i=0;i<data.data.length;++i){
+                            $('#tbody_elective_course').append('<tr class="row">\n' +
+                                '            <td class="col">'+(i+1)+
+                                '            </td>\n' +
+                                '            <td class="col">'+data.data[i].teachingByEId.id+<%--<%=electiveCoursePo.getTeachingByEId().getCourseByCId().getId()%>--%>
+                                '            </td>\n' +
+                                '            <td class="col">'+data.data[i].teachingByEId.courseByCId.name+'<%--<%=electiveCoursePo.getTeachingByEId().getCourseByCId().getName()%>--%>' +
+                                '            </td>\n' +
+                                '            <td class="col">'+data.data[i].studentBySId.id+'<%--<%=electiveCoursePo.getStudentBySId().getId()%>--%>' +
+                                '            </td>\n' +
+                                '            <td class="col">'+data.data[i].studentBySId.name+'<%--<%=electiveCoursePo.getStudentBySId().getName()%>--%>' +
+                                '            </td>\n' +
+                                '            <td class="col">\n' +
+                                '                <div class="btn-group" role="group">\n' +
+                                '                    <a class="btn btn-outline-info" onclick="updateElectiveCourse(\''+data.data[i].id+'<%--<%=electiveCoursePo.getId()%>--%>\',\n' +
+                                '                            \''+data.data[i].studentBySId.id+'<%--<%=electiveCoursePo.getStudentBySId().getId()%>--%>\',\''+data.data[i].studentBySId.name+'<%--<%=electiveCoursePo.getStudentBySId().getName()%>--%>\',this)"\n' +
+                                '                       data-toggle="modal" href="#updateElectiveCourse">修改</a>\n' +
+                                '                    <a class="btn btn-outline-danger"\n' +
+                                '                       onclick="deleteElectiveCourseById(\''+data.data[i].id+'<%--<%=electiveCoursePo.getId()%>--%>\',this)">删除</a>\n' +
+                                '                </div>\n' +
+                                '            </td>\n' +
+                                '        </tr>');
+                        }
+                        alert("添加已完成！");
+                    },
+                    error:function () {
+                        alert("加载失败！请重试！");
+                    }
+                });
+            },
+            error:function () {
+                alert("添加出错！请重试！");
+            }
+        });
+    }
 
     $(function () {
         $.ajax({
