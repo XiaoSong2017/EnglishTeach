@@ -94,19 +94,19 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-striped align-content-center">
+    <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <%--<tr class="row"></tr>--%>
         <tr class="row">
-            <th>序号</th>
+            <th class="col text-center">序号</th>
             <%--<th class="col">--%>
             <%--<label>--%>
             <%--<input type="checkbox">选项--%>
             <%--</label>--%>
             <%--</th>--%>
-            <th class="col">学号</th>
-            <th class="col">姓名</th>
-            <th class="col">
+            <th class="col text-center">学号</th>
+            <th class="col text-center">姓名</th>
+            <th class="col text-center">
                 操作
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModa2">
@@ -123,13 +123,13 @@
             for (StudentPo studentPo : userService.getAllStudent()) {
         %>
         <tr class="row">
-            <td class="col"><%=i++%>
+            <td class="col text-center"><%=i++%>
             </td>
-            <td class="col"><%=studentPo.getId()%>
+            <td class="col text-center"><%=studentPo.getId()%>
             </td>
-            <td class="col"><%=studentPo.getName()%>
+            <td class="col text-center"><%=studentPo.getName()%>
             </td>
-            <td class="col">
+            <td class="col text-center">
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info" data-toggle="modal" data-target="#editStudent"
                        onclick="editStudent('<%=studentPo.getId()%>','<%=studentPo.getName()%>','<%=studentPo.getPassword()%>')">修改</a>

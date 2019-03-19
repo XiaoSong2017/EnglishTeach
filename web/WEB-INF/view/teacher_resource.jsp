@@ -62,61 +62,65 @@
         </div>
     </div>
 </div>
-<table class="table table-striped">
-    <thead class="thead-dark">
-    <tr class="row">
-        <th class="col">条目</th>
-        <th class="col">文件名</th>
-        <th class="col">文件类型</th>
-        <th class="col">上传时间</th>
-        <th class="col">下载量</th>
-        <th class="col">操作
-            <a role="button" class="btn btn-outline-info" data-toggle="modal" href="#exampleModal"
-               data-whatever="文件">
-                <img src="<%=request.getContextPath()%>/images/add_course.svg" type="svg">
-            </a>
-        </th>
-    </tr>
-    </thead>
-    <tbody id="tbody">
-    <%
-        FileService fileService = (FileService) applicationContext.getAutowireCapableBeanFactory().getBean("fileService");
-        PageBean<TeachResourcePo> teachResourcePos = fileService.getFilesByUser(1, 20, String.valueOf(request.getSession().getAttribute("ID")));
-        int i = 1;
-        for (TeachResourcePo teachResourcePo : teachResourcePos.getData()) {
-    %>
-    <tr class="row">
-        <td class="col"><%=i++%>
-        </td>
-        <td class="col"><a href="download.action?id=<%=teachResourcePo.getId()%>"><%=teachResourcePo.getFileName()%>
-        </a></td>
-        <td class="col"><%=teachResourcePo.getFileType()%>
-        </td>
-        <td class="col"><%=teachResourcePo.getUploadTime()%>
-        </td>
-        <td class="col"><%=teachResourcePo.getDowns()%>
-        </td>
-        <td class="col">
-            <div class="btn-group" role="group">
-                <a href="download.action?id=<%=teachResourcePo.getId()%>" class="btn btn-outline-info" role="button"
-                   aria-pressed="true">下载</a>
-                <a onclick="deleteResource('<%=teachResourcePo.getId()%>')" class="btn btn-outline-danger" role="button"
-                   aria-pressed="true">删除</a>
-            </div>
-        </td>
-    </tr>
-    <%}%>
-    </tbody>
-    <tfoot>
-    <tr class="row">
-        <td class="col">
-            <nav>
-                <ul class="pagination justify-content-center" id="pagination1"></ul>
-            </nav>
-        </td>
-    </tr>
-    </tfoot>
-</table>
+<div class="container">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr class="row">
+            <th class="col text-center">条目</th>
+            <th class="col text-center">文件名</th>
+            <th class="col text-center">文件类型</th>
+            <th class="col text-center">上传时间</th>
+            <th class="col text-center">下载量</th>
+            <th class="col text-center">操作
+                <a role="button" class="btn btn-outline-info" data-toggle="modal" href="#exampleModal"
+                   data-whatever="文件">
+                    <img src="<%=request.getContextPath()%>/images/add_course.svg" type="svg">
+                </a>
+            </th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <%
+            FileService fileService = (FileService) applicationContext.getAutowireCapableBeanFactory().getBean("fileService");
+            PageBean<TeachResourcePo> teachResourcePos = fileService.getFilesByUser(1, 20, String.valueOf(request.getSession().getAttribute("ID")));
+            int i = 1;
+            for (TeachResourcePo teachResourcePo : teachResourcePos.getData()) {
+        %>
+        <tr class="row">
+            <td class="col text-center"><%=i++%>
+            </td>
+            <td class="col text-center"><a
+                    href="download.action?id=<%=teachResourcePo.getId()%>"><%=teachResourcePo.getFileName()%>
+            </a></td>
+            <td class="col text-center"><%=teachResourcePo.getFileType()%>
+            </td>
+            <td class="col text-center"><%=teachResourcePo.getUploadTime()%>
+            </td>
+            <td class="col text-center"><%=teachResourcePo.getDowns()%>
+            </td>
+            <td class="col text-center">
+                <div class="btn-group" role="group">
+                    <a href="download.action?id=<%=teachResourcePo.getId()%>" class="btn btn-outline-info" role="button"
+                       aria-pressed="true">下载</a>
+                    <a onclick="deleteResource('<%=teachResourcePo.getId()%>')" class="btn btn-outline-danger"
+                       role="button"
+                       aria-pressed="true">删除</a>
+                </div>
+            </td>
+        </tr>
+        <%}%>
+        </tbody>
+        <tfoot>
+        <tr class="row">
+            <td class="col text-center">
+                <nav>
+                    <ul class="pagination justify-content-center" id="pagination1"></ul>
+                </nav>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
 <script type="text/javascript">
     // $('#tbody')._clear();
     $.jqPaginator('#pagination1', {

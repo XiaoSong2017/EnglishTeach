@@ -1,8 +1,7 @@
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
-<%@ page import="service.CourseService" %>
 <%@ page import="po.CoursePo" %>
-<%@ page import="java.util.List" %>
+<%@ page import="service.CourseService" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
@@ -65,13 +64,13 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr class="row">
-            <th class="col">序号</th>
-            <th class="col">课程号</th>
-            <th class="col">课程名</th>
-            <th class="col">操作
+            <th class="col text-center">序号</th>
+            <th class="col text-center">课程号</th>
+            <th class="col text-center">课程名</th>
+            <th class="col text-center">操作
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                             data-target="#ModalCourse">
@@ -90,13 +89,13 @@
             for (CoursePo coursePo : courseService.getAll()) {
         %>
         <tr class="row">
-            <td class="col"><%=i++%>
+            <td class="col text-center"><%=i++%>
             </td>
-            <td class="col"><%=coursePo.getId()%>
+            <td class="col text-center"><%=coursePo.getId()%>
             </td>
-            <td class="col"><%=coursePo.getName()%>
+            <td class="col text-center"><%=coursePo.getName()%>
             </td>
-            <td class="col">
+            <td class="col text-center">
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info" role="button" data-toggle="modal"
                        onclick="udateCourse('<%=coursePo.getId()%>','<%=coursePo.getName()%>',$(this).parent().parent().prev())"
@@ -212,10 +211,10 @@
                 data: {"id": $('#course_id').val(), "name": $('#course_name').val()},
                 success: function () {
                     $('#tbodyCourse').append('<tr class="row">' +
-                        '<td class="col">' + (parseInt($('#tbodyCourse').children().length )+ 1) + '</td>' +
-                        '<td class="col">' + $('#course_id').val() + '</td>' +
-                        '<td class="col">' + $('#course_name').val() + '</td>' +
-                        '<td class="col">' +
+                        '<td class="col text-center">' + (parseInt($('#tbodyCourse').children().length )+ 1) + '</td>' +
+                        '<td class="col text-center">' + $('#course_id').val() + '</td>' +
+                        '<td class="col text-center">' + $('#course_name').val() + '</td>' +
+                        '<td class="col text-center">' +
                         '<div class="btn-group" role="group">' +
                         '<a class="btn btn-outline-info" role="button" data-toggle="modal"' +
                         'onclick="udateCourse(\'' + $('#course_id').val() + '\',\'' + $('#course_name').val() + '\',$(this).parent().parent().prev())"' +

@@ -59,16 +59,16 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-striped align-content-center">
+    <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr class="row">
-            <th>序号</th>
-            <th class="col">课程号</th>
-            <th class="col">课程名</th>
-            <th class="col">平时成绩比重</th>
-            <th class="col">考试成绩比重</th>
-            <th class="col">任课教师</th>
-            <th class="col">
+            <th class="col text-center">序号</th>
+            <th class="col text-center">课程号</th>
+            <th class="col text-center">课程名</th>
+            <th class="col text-center">平时成绩比重</th>
+            <th class="col text-center">考试成绩比重</th>
+            <th class="col text-center">任课教师</th>
+            <th class="col text-center">
                 操作
                 <div class="btn-group" role="group">
                     <a role="button" class="btn btn-outline-primary"
@@ -87,19 +87,19 @@
             for (TeachingPo teachingPo : teachingService.getAll()) {
         %>
         <tr class="row">
-            <td class="col"><%=i++%>
+            <td class="col text-center"><%=i++%>
             </td>
-            <td class="col"><%=teachingPo.getCourseByCId().getId()%>
+            <td class="col text-center"><%=teachingPo.getCourseByCId().getId()%>
             </td>
-            <td class="col"><%=teachingPo.getCourseByCId().getName()%>
+            <td class="col text-center"><%=teachingPo.getCourseByCId().getName()%>
             </td>
-            <td class="col"><%=teachingPo.getUsualProportion()%>
+            <td class="col text-center"><%=teachingPo.getUsualProportion()%>
             </td>
-            <td class="col"><%=teachingPo.getExamProportion()%>
+            <td class="col text-center"><%=teachingPo.getExamProportion()%>
             </td>
-            <td class="col"><%=teachingPo.getTeacherByTId().getName()%>
+            <td class="col text-center"><%=teachingPo.getTeacherByTId().getName()%>
             </td>
-            <td class="col">
+            <td class="col text-center">
                 <div class="btn-group" role="group">
                     <a role="button" class="btn btn-outline-info" data-toggle="modal"
                        onclick="updateTeachingById('<%=teachingPo.getId()%>','<%=teachingPo.getCourseByCId().getId()%>'
@@ -184,14 +184,14 @@
                 if (data.result === 'repeat') alert("不允许重复添加！");
                 else {
                     $('#tbodyTeaching').append('<tr class="row">' +
-                        '            <td class="col">' +(parseInt($('#tbodyTeaching').children().length)+1)+'</td>' +
-                        '            <td class="col">'+$('#selectTeaching option:checked').val()+'</td>' +
-                        '            <td class="col">'+$('#selectTeaching option:checked').text()+'</td>'+
-                        '            <td class="col">'+$('#addUsualProportion').val() + '</td>' +
-                        '            <td class="col">'+ $('#addExamProportion').val()+ '</td>\n' +
-                        '            <td class="col"><%=request.getSession().getAttribute("user")%>\n' +
+                        '            <td class="col text-center">' +(parseInt($('#tbodyTeaching').children().length)+1)+'</td>' +
+                        '            <td class="col text-center">'+$('#selectTeaching option:checked').val()+'</td>' +
+                        '            <td class="col text-center">'+$('#selectTeaching option:checked').text()+'</td>'+
+                        '            <td class="col text-center">'+$('#addUsualProportion').val() + '</td>' +
+                        '            <td class="col text-center">'+ $('#addExamProportion').val()+ '</td>\n' +
+                        '            <td class="col text-center"><%=request.getSession().getAttribute("user")%>\n' +
                         '            </td>\n' +
-                        '            <td class="col">\n' +
+                        '            <td class="col text-center">\n' +
                         '                <div class="btn-group" role="group">\n' +
                         '                    <a role="button" class="btn btn-outline-info" data-toggle="modal"\n' +
                         '                       onclick="updateTeachingById(\''+data.result+'\',\''+$('#selectTeaching option:checked').val()+'\'\n' +

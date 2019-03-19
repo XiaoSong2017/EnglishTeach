@@ -49,7 +49,7 @@
          aria-labelledby="v-pills-homework-tab">
         <jsp:include page="homework_manager.jsp" flush="true"/>
     </div>
-    <div class="tab-pane fade" id="v=pills-exam" role="tabpanel"
+    <div class="tab-pane fade" id="v-pills-exam" role="tabpanel"
          aria-labelledby="v-pills-exam-tab">
         <jsp:include page="exam_manager.jsp" flush="true"/>
     </div>

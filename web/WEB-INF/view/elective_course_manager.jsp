@@ -49,15 +49,15 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-striped align-content-center">
+    <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr class="row">
-            <th>序号</th>
-            <th class="col">课程号</th>
-            <th class="col">课程名</th>
-            <th class="col">学号</th>
-            <th class="col">选课学生</th>
-            <th class="col">
+            <th class="col text-center">序号</th>
+            <th class="col text-center">课程号</th>
+            <th class="col text-center">课程名</th>
+            <th class="col text-center">学号</th>
+            <th class="col text-center">选课学生</th>
+            <th class="col text-center">
                 操作
                 <div class="btn-group" role="group">
                     <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
@@ -77,17 +77,17 @@
             for (ElectiveCoursePo electiveCoursePo : electiveCourseService.getAll()) {
         %>
         <tr class="row">
-            <td class="col"><%=i++%>
+            <td class="col text-center"><%=i++%>
             </td>
-            <td class="col"><%=electiveCoursePo.getTeachingByEId().getCourseByCId().getId()%>
+            <td class="col text-center"><%=electiveCoursePo.getTeachingByEId().getCourseByCId().getId()%>
             </td>
-            <td class="col"><%=electiveCoursePo.getTeachingByEId().getCourseByCId().getName()%>
+            <td class="col text-center"><%=electiveCoursePo.getTeachingByEId().getCourseByCId().getName()%>
             </td>
-            <td class="col"><%=electiveCoursePo.getStudentBySId().getId()%>
+            <td class="col text-center"><%=electiveCoursePo.getStudentBySId().getId()%>
             </td>
-            <td class="col"><%=electiveCoursePo.getStudentBySId().getName()%>
+            <td class="col text-center"><%=electiveCoursePo.getStudentBySId().getName()%>
             </td>
-            <td class="col">
+            <td class="col text-center">
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info" onclick="updateElectiveCourse('<%=electiveCoursePo.getId()%>',
                             '<%=electiveCoursePo.getStudentBySId().getId()%>','<%=electiveCoursePo.getStudentBySId().getName()%>',this)"
@@ -168,7 +168,7 @@
             }
         },
         check: {
-            enable: true,
+            enable: true
         },
         callback: {
             onClick: function (event, treeId, treeNode, clickFlag) {
@@ -221,17 +221,17 @@
                         $('#tbody_elective_course').empty();
                         for(var i=0;i<data.data.length;++i){
                             $('#tbody_elective_course').append('<tr class="row">\n' +
-                                '            <td class="col">'+(i+1)+
+                                '            <td class="col text-center">'+(i+1)+
                                 '            </td>\n' +
-                                '            <td class="col">'+data.data[i].teachingByEId.id+<%--<%=electiveCoursePo.getTeachingByEId().getCourseByCId().getId()%>--%>
+                                '            <td class="col text-center">'+data.data[i].teachingByEId.id+<%--<%=electiveCoursePo.getTeachingByEId().getCourseByCId().getId()%>--%>
                                 '            </td>\n' +
-                                '            <td class="col">'+data.data[i].teachingByEId.courseByCId.name+'<%--<%=electiveCoursePo.getTeachingByEId().getCourseByCId().getName()%>--%>' +
+                                '            <td class="col text-center">'+data.data[i].teachingByEId.courseByCId.name+'<%--<%=electiveCoursePo.getTeachingByEId().getCourseByCId().getName()%>--%>' +
                                 '            </td>\n' +
-                                '            <td class="col">'+data.data[i].studentBySId.id+'<%--<%=electiveCoursePo.getStudentBySId().getId()%>--%>' +
+                                '            <td class="col text-center">'+data.data[i].studentBySId.id+'<%--<%=electiveCoursePo.getStudentBySId().getId()%>--%>' +
                                 '            </td>\n' +
-                                '            <td class="col">'+data.data[i].studentBySId.name+'<%--<%=electiveCoursePo.getStudentBySId().getName()%>--%>' +
+                                '            <td class="col text-center">'+data.data[i].studentBySId.name+'<%--<%=electiveCoursePo.getStudentBySId().getName()%>--%>' +
                                 '            </td>\n' +
-                                '            <td class="col">\n' +
+                                '            <td class="col text-center">\n' +
                                 '                <div class="btn-group" role="group">\n' +
                                 '                    <a class="btn btn-outline-info" onclick="updateElectiveCourse(\''+data.data[i].id+'<%--<%=electiveCoursePo.getId()%>--%>\',\n' +
                                 '                            \''+data.data[i].studentBySId.id+'<%--<%=electiveCoursePo.getStudentBySId().getId()%>--%>\',\''+data.data[i].studentBySId.name+'<%--<%=electiveCoursePo.getStudentBySId().getName()%>--%>\',this)"\n' +

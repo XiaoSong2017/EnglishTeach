@@ -10,6 +10,7 @@ import java.util.Objects;
 public class OptionPo {
     private int id;
     private String content;
+    private String mark;
     private QuestionPo questionByQuestion;
 
     @Id
@@ -23,7 +24,7 @@ public class OptionPo {
     }
 
     @Basic
-    @Column(name = "content", nullable = false, length = 255)
+    @Column(name = "content", nullable = false)
     public String getContent() {
         return content;
     }
@@ -32,13 +33,24 @@ public class OptionPo {
         this.content = content;
     }
 
+    @Basic
+    @Column(name = "mark",nullable = false,length = 1)
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OptionPo optionPo = (OptionPo) o;
         return id == optionPo.id &&
-                Objects.equals(content, optionPo.content);
+                Objects.equals(content, optionPo.content)&&
+                Objects.equals(mark,optionPo.mark);
     }
 
     @Override
@@ -46,8 +58,7 @@ public class OptionPo {
         return Objects.hash(id, content);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "question", referencedColumnName = "id", nullable = false)
     public QuestionPo getQuestionByQuestion() {
         return questionByQuestion;

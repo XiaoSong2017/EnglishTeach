@@ -1501,16 +1501,24 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="355" parent="285" name="FK9tbphl6ie9wp1jvgndvq9l31e">
+    <column id="355" parent="285" name="mark">
+      <Position>4</Position>
+      <Comment>标识符</Comment>
+      <DataType>char(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="356" parent="285" name="FK9tbphl6ie9wp1jvgndvq9l31e">
       <ColNames>question</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="356" parent="285" name="PRIMARY">
+    <key id="357" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="357" parent="285" name="FK9tbphl6ie9wp1jvgndvq9l31e">
+    <foreign-key id="358" parent="285" name="FK9tbphl6ie9wp1jvgndvq9l31e">
       <ColNames>question</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>question</RefTableName>
@@ -1518,68 +1526,68 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="358" parent="286" name="id">
+    <column id="359" parent="286" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="286" name="c_id">
+    <column id="360" parent="286" name="c_id">
       <Position>2</Position>
       <Comment>课程号</Comment>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="286" name="t_id">
+    <column id="361" parent="286" name="t_id">
       <Position>3</Position>
       <Comment>教师号</Comment>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="286" name="content">
+    <column id="362" parent="286" name="content">
       <Position>4</Position>
       <Comment>题目内容</Comment>
       <DataType>longtext|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="362" parent="286" name="type">
+    <column id="363" parent="286" name="type">
       <Position>5</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="363" parent="286" name="FK9tbphl6ie9wp1jvgndvq9l31r">
+    <index id="364" parent="286" name="FK9tbphl6ie9wp1jvgndvq9l31r">
       <ColNames>c_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="364" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lb">
+    <index id="365" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lb">
       <ColNames>t_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="365" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lc">
+    <index id="366" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lc">
       <ColNames>type</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="366" parent="286" name="PRIMARY">
+    <key id="367" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="367" parent="286" name="FK9tbphl6ie9wp1jvgndvq9l31r">
+    <foreign-key id="368" parent="286" name="FK9tbphl6ie9wp1jvgndvq9l31r">
       <ColNames>c_id</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>course</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="368" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lb">
+    <foreign-key id="369" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lb">
       <ColNames>t_id</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>teacher</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="369" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lc">
+    <foreign-key id="370" parent="286" name="FKb7s5qrewa5j3l33mb70bip9lc">
       <ColNames>type</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>topic</RefTableName>
@@ -1587,41 +1595,41 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="370" parent="287" name="id">
+    <column id="371" parent="287" name="id">
       <Position>1</Position>
       <DataType>int(11) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="371" parent="287" name="answer">
+    <column id="372" parent="287" name="answer">
       <Position>2</Position>
       <Comment>答案</Comment>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="372" parent="287" name="problem">
+    <column id="373" parent="287" name="problem">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="373" parent="287" name="content">
+    <column id="374" parent="287" name="content">
       <Position>4</Position>
       <Comment>问题内容</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="374" parent="287" name="FKb7s5qrewa5j3l33mb70bip9ld">
+    <index id="375" parent="287" name="FKb7s5qrewa5j3l33mb70bip9ld">
       <ColNames>problem</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="375" parent="287" name="PRIMARY">
+    <key id="376" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="376" parent="287" name="FKb7s5qrewa5j3l33mb70bip9ld">
+    <foreign-key id="377" parent="287" name="FKb7s5qrewa5j3l33mb70bip9ld">
       <ColNames>problem</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>problem</RefTableName>
@@ -1629,54 +1637,54 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="377" parent="288" name="id">
+    <column id="378" parent="288" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="378" parent="288" name="name">
+    <column id="379" parent="288" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="379" parent="288" name="academy">
+    <column id="380" parent="288" name="academy">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="380" parent="288" name="FKml4lnw17w2q09k8x2d7iq1l1v">
+    <index id="381" parent="288" name="FKml4lnw17w2q09k8x2d7iq1l1v">
       <ColNames>academy</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="381" parent="288" name="PRIMARY">
+    <key id="382" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="382" parent="288" name="FKml4lnw17w2q09k8x2d7iq1l1v">
+    <foreign-key id="383" parent="288" name="FKml4lnw17w2q09k8x2d7iq1l1v">
       <ColNames>academy</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>academy</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="383" parent="289" name="id">
+    <column id="384" parent="289" name="id">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="384" parent="289" name="name">
+    <column id="385" parent="289" name="name">
       <Position>2</Position>
       <Comment>姓名</Comment>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="385" parent="289" name="password">
+    <column id="386" parent="289" name="password">
       <Position>3</Position>
       <Comment>密码</Comment>
       <DataType>varchar(25)|0s</DataType>
@@ -1684,38 +1692,38 @@
       <DefaultExpression>&apos;123456&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="386" parent="289" name="class">
+    <column id="387" parent="289" name="class">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="387" parent="289" name="user_student">
+    <index id="388" parent="289" name="user_student">
       <ColNames>name</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="388" parent="289" name="FK8a52gnu1r27rjpyww6ef8x30u">
+    <index id="389" parent="289" name="FK8a52gnu1r27rjpyww6ef8x30u">
       <ColNames>class</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="389" parent="289" name="PRIMARY">
+    <key id="390" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="390" parent="289" name="FK8a52gnu1r27rjpyww6ef8x30u">
+    <foreign-key id="391" parent="289" name="FK8a52gnu1r27rjpyww6ef8x30u">
       <ColNames>class</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>classes</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="391" parent="290" name="id">
+    <column id="392" parent="290" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="392" parent="290" name="login_time">
+    <column id="393" parent="290" name="login_time">
       <Position>2</Position>
       <Comment>登录时间</Comment>
       <DataType>datetime|0s</DataType>
@@ -1723,14 +1731,14 @@
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <column id="393" parent="290" name="s_id">
+    <column id="394" parent="290" name="s_id">
       <Position>3</Position>
       <Comment>用户ID</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="394" parent="290" name="logout_time">
+    <column id="395" parent="290" name="logout_time">
       <Position>4</Position>
       <Comment>退出时间</Comment>
       <DataType>datetime|0s</DataType>
@@ -1739,49 +1747,49 @@
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <index id="395" parent="290" name="FKd9jio9l5gwflovum81gkccwf4">
+    <index id="396" parent="290" name="FKd9jio9l5gwflovum81gkccwf4">
       <ColNames>s_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="396" parent="290" name="PRIMARY">
+    <key id="397" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="397" parent="290" name="FKd9jio9l5gwflovum81gkccwf4">
+    <foreign-key id="398" parent="290" name="FKd9jio9l5gwflovum81gkccwf4">
       <ColNames>s_id</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>student</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="398" parent="291" name="id">
+    <column id="399" parent="291" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="399" parent="291" name="file">
+    <column id="400" parent="291" name="file">
       <Position>2</Position>
       <Comment>文件内容</Comment>
       <DataType>longblob|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="400" parent="291" name="file_name">
+    <column id="401" parent="291" name="file_name">
       <Position>3</Position>
       <Comment>文件名</Comment>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="401" parent="291" name="file_type">
+    <column id="402" parent="291" name="file_type">
       <Position>4</Position>
       <Comment>文件类型</Comment>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="402" parent="291" name="upload_time">
+    <column id="403" parent="291" name="upload_time">
       <Position>5</Position>
       <Comment>上传时间</Comment>
       <DataType>datetime|0s</DataType>
@@ -1789,14 +1797,14 @@
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <column id="403" parent="291" name="upload_user">
+    <column id="404" parent="291" name="upload_user">
       <Position>6</Position>
       <Comment>上传人ID</Comment>
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="404" parent="291" name="downs">
+    <column id="405" parent="291" name="downs">
       <Position>7</Position>
       <Comment>下载量</Comment>
       <DataType>int(12) unsigned|0s</DataType>
@@ -1804,129 +1812,129 @@
       <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="405" parent="291" name="course">
+    <column id="406" parent="291" name="course">
       <Position>8</Position>
       <Comment>课程号</Comment>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="406" parent="291" name="FK6247ydv3d5hp86qfuwn9smcpk">
+    <index id="407" parent="291" name="FK6247ydv3d5hp86qfuwn9smcpk">
       <ColNames>upload_user</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="407" parent="291" name="FK98kr20vv0nicsgmqb9r7g6rgv">
+    <index id="408" parent="291" name="FK98kr20vv0nicsgmqb9r7g6rgv">
       <ColNames>course</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="408" parent="291" name="PRIMARY">
+    <key id="409" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="409" parent="291" name="FK6247ydv3d5hp86qfuwn9smcpk">
+    <foreign-key id="410" parent="291" name="FK6247ydv3d5hp86qfuwn9smcpk">
       <ColNames>upload_user</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>teacher</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="410" parent="291" name="FK98kr20vv0nicsgmqb9r7g6rgv">
+    <foreign-key id="411" parent="291" name="FK98kr20vv0nicsgmqb9r7g6rgv">
       <ColNames>course</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>course</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="411" parent="292" name="id">
+    <column id="412" parent="292" name="id">
       <Position>1</Position>
       <Comment>职工号</Comment>
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="412" parent="292" name="name">
+    <column id="413" parent="292" name="name">
       <Position>2</Position>
       <Comment>姓名</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="413" parent="292" name="password">
+    <column id="414" parent="292" name="password">
       <Position>3</Position>
       <Comment>密码</Comment>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="414" parent="292" name="academy">
+    <column id="415" parent="292" name="academy">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="415" parent="292" name="FKj9q30sg7458hb0vxkygf0mckf">
+    <index id="416" parent="292" name="FKj9q30sg7458hb0vxkygf0mckf">
       <ColNames>academy</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="416" parent="292" name="PRIMARY">
+    <key id="417" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="417" parent="292" name="FKj9q30sg7458hb0vxkygf0mckf">
+    <foreign-key id="418" parent="292" name="FKj9q30sg7458hb0vxkygf0mckf">
       <ColNames>academy</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>academy</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="418" parent="293" name="c_id">
+    <column id="419" parent="293" name="c_id">
       <Position>1</Position>
       <Comment>课程ID</Comment>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="419" parent="293" name="t_id">
+    <column id="420" parent="293" name="t_id">
       <Position>2</Position>
       <Comment>教师ID</Comment>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="420" parent="293" name="usual_proportion">
+    <column id="421" parent="293" name="usual_proportion">
       <Position>3</Position>
       <Comment>平时比重</Comment>
       <DataType>float(3,2 digit) unsigned zerofill|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="421" parent="293" name="exam_proportion">
+    <column id="422" parent="293" name="exam_proportion">
       <Position>4</Position>
       <Comment>考试比重</Comment>
       <DataType>float(3,2 digit) unsigned zerofill|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="422" parent="293" name="id">
+    <column id="423" parent="293" name="id">
       <Position>5</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="423" parent="293" name="FKrycxqf9t3vqsuwcttadh9etdn">
+    <index id="424" parent="293" name="FKrycxqf9t3vqsuwcttadh9etdn">
       <ColNames>c_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="424" parent="293" name="FKg5684au00194atgoo6dapdgxj">
+    <index id="425" parent="293" name="FKg5684au00194atgoo6dapdgxj">
       <ColNames>t_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="425" parent="293" name="PRIMARY">
+    <key id="426" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="426" parent="293" name="FKrycxqf9t3vqsuwcttadh9etdn">
+    <foreign-key id="427" parent="293" name="FKrycxqf9t3vqsuwcttadh9etdn">
       <ColNames>c_id</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>course</RefTableName>
@@ -1934,7 +1942,7 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="427" parent="293" name="FKg5684au00194atgoo6dapdgxj">
+    <foreign-key id="428" parent="293" name="FKg5684au00194atgoo6dapdgxj">
       <ColNames>t_id</ColNames>
       <RefSchemaName>english_teach</RefSchemaName>
       <RefTableName>teacher</RefTableName>
@@ -1942,21 +1950,21 @@
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="428" parent="294" name="id">
+    <column id="429" parent="294" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="429" parent="294" name="name">
+    <column id="430" parent="294" name="name">
       <Position>2</Position>
       <Comment>题型名</Comment>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="430" parent="294" name="PRIMARY">
+    <key id="431" parent="294" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

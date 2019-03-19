@@ -18,16 +18,16 @@
 </head>
 <body>
 <div class="container">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr class="row">
-            <th class="col">条目</th>
-            <th class="col">文件名</th>
-            <th class="col">文件类型</th>
-            <th class="col">上传时间</th>
-            <th class="col">上传人</th>
-            <th class="col">下载量</th>
-            <th class="col">操作</th>
+            <th class="col text-center">条目</th>
+            <th class="col text-center">文件名</th>
+            <th class="col text-center">文件类型</th>
+            <th class="col text-center">上传时间</th>
+            <th class="col text-center">上传人</th>
+            <th class="col text-center">下载量</th>
+            <th class="col text-center">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -39,19 +39,19 @@
             for (TeachResourcePo teachResourcePo : teachResourcePos) {
         %>
         <tr class="row">
-            <td class="col"><%=i++%>
+            <td class="col text-center"><%=i++%>
             </td>
-            <td class="col"><a href="download.action?id=<%=teachResourcePo.getId()%>"><%=teachResourcePo.getFileName()%>
+            <td class="col text-center"><a href="download.action?id=<%=teachResourcePo.getId()%>"><%=teachResourcePo.getFileName()%>
             </a></td>
-            <td class="col"><%=teachResourcePo.getFileType()%>
+            <td class="col text-center"><%=teachResourcePo.getFileType()%>
             </td>
-            <td class="col"><%=teachResourcePo.getUploadTime()%>
+            <td class="col text-center"><%=teachResourcePo.getUploadTime()%>
             </td>
-            <td class="col"><%=teachResourcePo.getTeacherByUploadUser().getName()%>
+            <td class="col text-center"><%=teachResourcePo.getTeacherByUploadUser().getName()%>
             </td>
-            <td class="col"><%=teachResourcePo.getDowns()%>
+            <td class="col text-center"><%=teachResourcePo.getDowns()%>
             </td>
-            <td class="col">
+            <td class="col text-center">
                 <div class="btn-group" role="group">
                     <a href="download.action?id=<%=teachResourcePo.getId()%>" class="btn btn-outline-primary"
                        role="button" aria-pressed="true">下载</a>
