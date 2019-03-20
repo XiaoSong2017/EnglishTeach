@@ -39,37 +39,6 @@
         <action name="addStudent" class="action.StudentAction" method="addStudent">
             <result>/WEB-INF/view/teacher.jsp</result>
         </action>
-        <action name="academyBean" class="academyBean">
-            <result type="json" name="success">
-                <param name="noCache">true</param>
-            </result>
-            <result name="error">/error.jsp</result>
-        </action>
-        <action name="specialtyBean" class="specialtyBean">
-            <result name="success" type="json">
-                <param name="noCache">true</param>
-            </result>
-        </action>
-        <action name="classesBean" class="classesBean">
-            <result name="success" type="json">
-                <param name="noCache">true</param>
-            </result>
-        </action>
-        <action name="courseBean" class="courseBean">
-            <result name="success" type="json">
-                <param name="noCache">true</param>
-            </result>
-        </action>
-        <action name="studentBean" class="studentBean">
-            <result name="success" type="json">
-                <param name="noCache">true</param>
-            </result>
-        </action>
-        <action name="electiveCourseBean" class="electiveCourseBean">
-            <result name="success" type="json">
-                <param name="noCache">true</param>
-            </result>
-        </action>
         <action name="deleteStudent" class="action.StudentAction" method="deleteStudent">
             <result name="success">/WEB-INF/view/teacher.jsp</result>
         </action>
@@ -127,6 +96,47 @@
             </result>
         </action>
         <action name="saveElectiveCourseBatchBy" class="action.ElectiveCourseAction" method="saveElectiveCourseByBatch">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="deleteExaminationPaperById" class="action.ExaminationPaperAction" method="deleteExaminationPaperById">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="academyBean" class="academyBean">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+            </result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="specialtyBean" class="specialtyBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="classesBean" class="classesBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="courseBean" class="courseBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="studentBean" class="studentBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="electiveCourseBean" class="electiveCourseBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="examinationPaperBean" class="examinationPaperBean">
             <result name="success" type="json">
                 <param name="noCache">true</param>
             </result>

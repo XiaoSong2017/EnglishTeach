@@ -12,6 +12,32 @@
     <title>考试管理</title>
 </head>
 <body>
+<div class="modal fade" id="addExaminationPaper" tabindex="-1" role="dialog"
+     aria-labelledby="addExaminationPaperTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addExaminationPaperTitle">添加试卷</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <label for="myEditor">请输入内容：</label>
+                    <textarea id="myEditor" class="text-justify"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                <button type="button" id="updateElectiveCourseButton" class="btn btn-outline-primary"
+                        data-dismiss="modal">添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
@@ -21,17 +47,80 @@
             <th class="col text-center">试题名称</th>
             <th class="col text-center">开考时间</th>
             <th class="col text-center">结束时间</th>
-            <th class="col text-center">出题人</th>
-            <th class="col text-center">操作</th>
+            <th class="col text-center">出卷人</th>
+            <th class="col text-center">操作
+                <div class="btn-group" role="group">
+                    <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
+                       href="#addExaminationPaper">
+                        <img role="img" class="img-fluid" src="<%=request.getContextPath()%>/images/add.svg"
+                             type="svg" alt="img">
+                    </a>
+                </div>
+            </th>
         </tr>
         </thead>
-        <tbody class="popover-body">
-
-        </tbody>
+        <tbody class="popover-body" id="tbody_exam"></tbody>
     </table>
 </div>
 </body>
 <script type="text/javascript">
+    var ue = UM.getEditor('myEditor');
+    $(function () {
+        $.ajax({
+            url: '<%=request.getContextPath()%>/examinationPaperBean',
+            datatype: 'json',
+            async: true,
+            type: 'post',
+            data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: false},
+            success: function (data) {
+                for (var i = 0; i < data.data.length; ++i) {
+                    $('#tbody_exam').append('<tr class="row">\n' +
+                        '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
+                        '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
+                        '            <td class="col text-center">\n' +
+                        '                <div class="btn-group" role="group">\n' +
+                        '                    <a class="btn btn-outline-info" data-toggle="modal">修改</a>\n' +
+                        '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
+                        '                </div>\n' +
+                        '            </td>\n' +
+                        '        </tr>');
+                }
+            },
+            error: function () {
+                alert("加载失败！请刷新页面重试！");
+            }
+        });
+    });
 
+    function deleteExaminationPaperById(id, obj) {
+        if (confirm("确定删除？")) {
+            $.ajax({
+                url: '<%=request.getContextPath()%>/deleteExaminationPaperById',
+                type: 'post',
+                async: true,
+                data: {"examinationPaperId": id},
+                success: function (data) {
+                    //console.log(data);
+                    if (data.resultCode === 'success') {
+                        $(obj).parent().parent().parent().remove();
+                        var rows = $('#tbody_exam').children();
+                        for (var i = 0; i < rows.length; ++i) {
+                            rows.eq(i).children().eq(0).text(parseInt(i) + 1);
+                        }
+                        alert("已删除！");
+                    } else {
+                        alert("删除失败!请重试！")
+                    }
+                },
+                error: function () {
+                    alert("删除失败！请重试！")
+                }
+            });
+        }
+    }
 </script>
 </html>

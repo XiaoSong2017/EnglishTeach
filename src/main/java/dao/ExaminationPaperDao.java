@@ -2,6 +2,9 @@ package dao;
 
 import org.springframework.transaction.annotation.Transactional;
 import po.ExaminationPaperPo;
+
+import java.util.List;
+
 /**
  * (ExaminationPaper)表数据库访问层
  *
@@ -11,4 +14,5 @@ import po.ExaminationPaperPo;
 @Transactional
 public interface ExaminationPaperDao extends BaseDao<ExaminationPaperPo> {
 
+    List<ExaminationPaperPo> getExaminationPaperByTeacherId(String teacherId,String type);
 }

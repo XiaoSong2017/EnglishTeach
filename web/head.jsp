@@ -12,21 +12,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/zTreeStyle/zTreeStyle.css">
-    <script src="<%=request.getContextPath()%>/js/jquery-3.3.1.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jq-paginator.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/json3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.ztree.core.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.ztree.excheck.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.ztree.exedit.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery.ztree.exhide.js" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/zTreeStyle/zTreeStyle.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ueditor/themes/default/css/umeditor.css">
     <title>头部</title>
 </head>
 <body>
@@ -53,5 +41,20 @@
         </div>
     </nav>
 </div>
+<script src="<%=request.getContextPath()%>/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jq-paginator.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/json3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.ztree.core.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.ztree.excheck.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.ztree.exedit.js" type="text/javascript"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/umeditor.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/umeditor.config.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
 </body>
 </html>

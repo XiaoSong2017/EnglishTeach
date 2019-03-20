@@ -7,12 +7,13 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "examination_paper", schema = "english_teach", catalog = "")
+@Table(name = "examination_paper")
 public class ExaminationPaperPo {
     private int id;
     private boolean type;
     private Timestamp startTime;
     private Timestamp endTime;
+    private String name;
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
 
@@ -56,6 +57,16 @@ public class ExaminationPaperPo {
         this.endTime = endTime;
     }
 
+    @Basic
+    @Column(name = "name", nullable = false)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,7 +75,8 @@ public class ExaminationPaperPo {
         return id == that.id &&
                 type == that.type &&
                 Objects.equals(startTime, that.startTime) &&
-                Objects.equals(endTime, that.endTime);
+                Objects.equals(endTime, that.endTime)&&Objects.equals(
+                        name,that.name);
     }
 
     @Override
