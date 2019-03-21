@@ -97,6 +97,7 @@
     <bean name="courseBean" class="bean.CourseBean" scope="prototype" autowire="byName"/>
     <bean name="electiveCourseBean" class="bean.ElectiveCourseBean" scope="prototype" autowire="byName"/>
     <bean name="examinationPaperBean" class="bean.ExaminationPaperBean" scope="prototype"  autowire="byName"/>
+    <bean name="teachResourceBean" class="bean.TeachResourceBean" scope="prototype" autowire="byName"/>
     <!--配置Quartz框架来定时操作任务-->
    <!-- <bean id="quartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" p:targetObject-ref=""
     p:targetMethod=""/>-->

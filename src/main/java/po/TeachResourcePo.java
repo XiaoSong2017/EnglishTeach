@@ -31,6 +31,7 @@ public class TeachResourcePo {
 
     @Basic(fetch = FetchType.LAZY)
     @Lob
+    @JSON(serialize = false)
     @Column(name = "file", nullable = false)
     public byte[] getFile() {
         return file;
@@ -100,8 +101,7 @@ public class TeachResourcePo {
         return result;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "upload_user", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByUploadUser() {
         return teacherByUploadUser;

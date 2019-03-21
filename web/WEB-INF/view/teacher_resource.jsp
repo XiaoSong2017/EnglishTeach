@@ -7,7 +7,6 @@
 <%@ page import="service.CourseService" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="sx" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangsong
@@ -71,45 +70,16 @@
             <th class="col text-center">文件类型</th>
             <th class="col text-center">上传时间</th>
             <th class="col text-center">下载量</th>
+            <th class="col text-center">上传人</th>
             <th class="col text-center">操作
                 <a role="button" class="btn btn-outline-info" data-toggle="modal" href="#exampleModal"
                    data-whatever="文件">
-                    <img src="<%=request.getContextPath()%>/images/add_course.svg" type="svg">
+                    <img src="<%=request.getContextPath()%>/images/add_course.svg" type="svg" alt="">
                 </a>
             </th>
         </tr>
         </thead>
-        <tbody id="tbody">
-        <%
-            FileService fileService = (FileService) applicationContext.getAutowireCapableBeanFactory().getBean("fileService");
-            PageBean<TeachResourcePo> teachResourcePos = fileService.getFilesByUser(1, 20, String.valueOf(request.getSession().getAttribute("ID")));
-            int i = 1;
-            for (TeachResourcePo teachResourcePo : teachResourcePos.getData()) {
-        %>
-        <tr class="row">
-            <td class="col text-center"><%=i++%>
-            </td>
-            <td class="col text-center"><a
-                    href="download.action?id=<%=teachResourcePo.getId()%>"><%=teachResourcePo.getFileName()%>
-            </a></td>
-            <td class="col text-center"><%=teachResourcePo.getFileType()%>
-            </td>
-            <td class="col text-center"><%=teachResourcePo.getUploadTime()%>
-            </td>
-            <td class="col text-center"><%=teachResourcePo.getDowns()%>
-            </td>
-            <td class="col text-center">
-                <div class="btn-group" role="group">
-                    <a href="download.action?id=<%=teachResourcePo.getId()%>" class="btn btn-outline-info" role="button"
-                       aria-pressed="true">下载</a>
-                    <a onclick="deleteResource('<%=teachResourcePo.getId()%>')" class="btn btn-outline-danger"
-                       role="button"
-                       aria-pressed="true">删除</a>
-                </div>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
+        <tbody id="tbodyTeacherResource"></tbody>
         <tfoot>
         <tr class="row">
             <td class="col text-center">
@@ -122,13 +92,51 @@
     </table>
 </div>
 <script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: '<%=request.getContextPath()%>/teachResourceBean',
+            datatype: 'json',
+            async: true,
+            type: 'post',
+            success: function (data) {
+                for (var i = 0; i < data.data.length; ++i) {
+                    $('#tbodyTeacherResource').append('<tr class="row">\n' +
+                        '            <td class="col text-center">'+(i+1)+
+                        '            </td>\n' +
+                        '            <td class="col text-center"><a\n' +
+                        '                    href="download.action?id='+data.data[i].id+'">'+data.data[i].fileName+
+                        '            </a></td>\n' +
+                        '            <td class="col text-center">'+data.data[i].fileType +
+                        '            </td>\n' +
+                        '            <td class="col text-center">'+data.data[i].uploadTime +
+                        '            </td>\n' +
+                        '            <td class="col text-center">'+data.data[i].downs +
+                        '            </td>\n' +
+                        '            <td class="col text-center">'+data.data[i].teacherByUploadUser.name +
+                        '            </td>\n' +
+                        '            <td class="col text-center">\n' +
+                        '                <div class="btn-group" role="group">\n' +
+                        '                    <a href="download.action?id='+data.data[i].id+'" class="btn btn-outline-info" role="button"\n' +
+                        '                       aria-pressed="true">下载</a>\n' +
+                        '                    <a onclick="deleteResource(\''+data.data[i].id+'\')" class="btn '+(data.data[i].teacherByUploadUser.name==='<%=request.getSession().getAttribute("user")%>'?'btn-outline-danger':'btn-outline-light text-dark disabled')+'" role="button"\n' +
+                        '                       aria-pressed="true">删除</a>\n' +
+                        '                </div>\n' +
+                        '            </td>\n' +
+                        '        </tr>');
+                }
+            },
+            error: function () {
+                alert("加载失败！请刷新页面重试！");
+            }
+        });
+    });
     // $('#tbody')._clear();
     $.jqPaginator('#pagination1', {
         totalPages: 100,
         visiblePages: 3,
         currentPage: 1,
         onPageChange: function (num, type) {
-            if (type == 'change') {
+            if (type ==='change') {
                 //这里是点击分页的回调
             }
         }
