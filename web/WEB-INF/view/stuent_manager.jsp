@@ -24,7 +24,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <s:form cssClass="form-control" cssErrorClass="alert-danger" method="POST" action="addStudent">
+            <s:form theme="simple" cssClass="form-control" cssErrorClass="alert-danger" method="POST" action="addStudent">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModa2Label">添加学生</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

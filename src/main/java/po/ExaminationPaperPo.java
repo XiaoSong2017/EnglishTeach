@@ -84,8 +84,7 @@ public class ExaminationPaperPo {
         return Objects.hash(id, type, startTime, endTime);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCId() {
         return courseByCId;
@@ -95,8 +94,7 @@ public class ExaminationPaperPo {
         this.courseByCId = courseByCId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByTId() {
         return teacherByTId;

@@ -3,6 +3,7 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,7 @@ public class ProblemPo {
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
     private TopicPo topicByType;
+    private Timestamp time;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -34,13 +36,23 @@ public class ProblemPo {
         this.content = content;
     }
 
+    @Basic
+    @Column(name = "time",nullable = false)
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProblemPo problemPo = (ProblemPo) o;
         return id == problemPo.id &&
-                Objects.equals(content, problemPo.content);
+                Objects.equals(content, problemPo.content) && Objects.equals(time, problemPo.time);
     }
 
     @Override
@@ -48,8 +60,7 @@ public class ProblemPo {
         return Objects.hash(id, content);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCId() {
         return courseByCId;
@@ -59,8 +70,7 @@ public class ProblemPo {
         this.courseByCId = courseByCId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByTId() {
         return teacherByTId;
@@ -70,8 +80,7 @@ public class ProblemPo {
         this.teacherByTId = teacherByTId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "type", referencedColumnName = "id")
     public TopicPo getTopicByType() {
         return topicByType;
@@ -80,4 +89,5 @@ public class ProblemPo {
     public void setTopicByType(TopicPo topicByType) {
         this.topicByType = topicByType;
     }
+
 }

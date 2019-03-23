@@ -23,6 +23,8 @@
        aria-controls="v-pills-messages" aria-selected="false">学生选课管理</a>
     <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
        aria-controls="v-pills-settings" aria-selected="false">教师授课管理</a>
+    <a class="nav-link" id="v-pills-problem-tab" data-toggle="pill" href="#v-pills-problem" role="tab"
+       aria-controls="v-pills-problem" aria-selected="false">题目管理</a>
     <a class="nav-link" id="v-pills-homework-tab" data-toggle="pill" href="#v-pills-homework" role="tab"
        aria-controls="v-pills-homework" aria-selected="false">作业管理</a>
     <a class="nav-link" id="v-pills-exam-tab" data-toggle="pill" href="#v-pills-exam" role="tab"
@@ -44,6 +46,10 @@
     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
          aria-labelledby="v-pills-settings-tab">
         <jsp:include page="teaching_manager.jsp" flush="true"/>
+    </div>
+    <div class="tab-pane fade" id="v-pills-problem" role="tabpanel"
+         aria-labelledby="v-pills-problem-tab">
+        <jsp:include page="problem_manager.jsp" flush="true"/>
     </div>
     <div class="tab-pane fade" id="v-pills-homework" role="tabpanel"
          aria-labelledby="v-pills-homework-tab">

@@ -66,7 +66,6 @@ public class UserAction extends ActionSupport {
                 ActionContext.getContext().getSession().put("ID", userService.getTeacherPo().getId());
                 ActionContext.getContext().getSession().put("user", userService.getTeacherPo().getName());
                 ActionContext.getContext().getSession().put("userType",target);
-
                 return SUCCESS;
             }
         } else {

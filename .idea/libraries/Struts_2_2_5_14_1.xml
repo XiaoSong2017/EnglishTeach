@@ -12,6 +12,7 @@
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-json-plugin-2.5.14.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-spring-plugin-2.5.14.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-jfreechart-plugin-2.5.14.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/struts2-dojo-plugin-2.3.37.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -34,6 +34,7 @@ public class StudentPo {
     }
 
     @Basic
+    @JSON(serialize = false)
     @Column(name = "password", nullable = false, length = 25)
     public String getPassword() {
         return password;

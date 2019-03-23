@@ -105,6 +105,11 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="problem" class="action.ProblemAction">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
         <action name="academyBean" class="academyBean">
             <result type="json" name="success">
                 <param name="noCache">true</param>
@@ -142,6 +147,11 @@
             </result>
         </action>
         <action name="teachResourceBean" class="teachResourceBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="problemBean" class="problemBean">
             <result name="success" type="json">
                 <param name="noCache">true</param>
             </result>
