@@ -18,6 +18,10 @@ public class ProblemAction extends ActionSupport {
         this.resultCode = resultCode;
     }
 
+    public void setRequestCode(String requestCode) {
+        this.requestCode = requestCode;
+    }
+
     @JSON(serialize = false)
     public int getProblemId() {
         return problemId;
@@ -42,7 +46,7 @@ public class ProblemAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        switch (resultCode){
+        switch (requestCode){
             case "delete":deleteProblemById();
             break;
             default:

@@ -63,7 +63,7 @@
                         '                <div class="btn-group" role="group">\n' +
                         '                    <a href="#id='+data.data[i].id+'" class="btn '+(data.data[i].teacherByTId.name==='<%=request.getSession().getAttribute("user")%>'?'btn-outline-info':'btn-outline-light text-dark disabled')+'" role="button"\n' +
                         '                       aria-pressed="true">编辑</a>\n' +
-                        '                    <a onclick="deleteExaminationPaperById(\''+data.data[i].id+'\',this)" class="btn '+(data.data[i].teacherByTId.name==='<%=request.getSession().getAttribute("user")%>'?'btn-outline-danger':'btn-outline-light text-dark disabled')+'" role="button"\n' +
+                        '                    <a onclick="deleteProblemById(\''+data.data[i].id+'\',this)" class="btn '+(data.data[i].teacherByTId.name==='<%=request.getSession().getAttribute("user")%>'?'btn-outline-danger':'btn-outline-light text-dark disabled')+'" role="button"\n' +
                         '                       aria-pressed="true">删除</a>\n' +
                         '                </div>\n' +
                         '            </td>\n' +
@@ -75,10 +75,10 @@
             }
         });
     });
-    function deleteExaminationPaperById(id, obj) {
+    function deleteProblemById(id, obj) {
         if (confirm("确定删除？")) {
             $.ajax({
-                url: '<%=request.getContextPath()%>/problemAction',
+                url: '<%=request.getContextPath()%>/problem',
                 type: 'post',
                 async: true,
                 data: {"problemId": id,"requestCode":"delete"},
@@ -86,7 +86,7 @@
                     //console.log(data);
                     if (data.resultCode === 'success') {
                         $(obj).parent().parent().parent().remove();
-                        var rows = $('#tbody_exam').children();
+                        var rows = $('#tbody_problem').children();
                         for (var i = 0; i < rows.length; ++i) {
                             rows.eq(i).children().eq(0).text(parseInt(i) + 1);
                         }
