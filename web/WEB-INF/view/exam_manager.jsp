@@ -52,7 +52,7 @@
                 <div class="btn-group" role="group">
                     <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
                        href="#addExaminationPaper">
-                        <img role="img" class="img-fluid" src="<%=request.getContextPath()%>/images/add.svg"
+                        <img role="img" class="img-fluid rounded-circle" src="<%=request.getContextPath()%>/images/add.svg"
                              type="svg" alt="img">
                     </a>
                 </div>
@@ -91,7 +91,10 @@
                 }
             },
             error: function () {
-                alert("加载失败！请刷新页面重试！");
+                Swal.fire({
+                    type:'error',
+                    title:'提示',
+                    text:"加载失败！请刷新页面重试！"});
             }
         });
     });

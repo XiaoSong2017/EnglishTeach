@@ -15,6 +15,8 @@
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/zTreeStyle/zTreeStyle.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ueditor/themes/default/css/umeditor.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.jnotify.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/sweetalert2.min.css">
     <title>头部</title>
 </head>
 <body>
@@ -56,5 +58,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/umeditor.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/umeditor.config.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.jnotify.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/promise-polyfill.js"></script>
 </body>
 </html>

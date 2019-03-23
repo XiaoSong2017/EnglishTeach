@@ -12,6 +12,27 @@
     <title>题目管理</title>
 </head>
 <body>
+<div class="modal hide fade" id="ModalProblem" tabindex="-1" role="dialog" aria-labelledby="ModalProblemLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalProblemLabel">添加题目</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="form-group">
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
+                    <input type="submit" class="btn btn-primary" onclick="" data-dismiss="modal" value="添加"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="container">
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
@@ -25,7 +46,7 @@
             <th class="col text-center">操作
                 <div class="btn-group" role="group">
                     <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
-                       href="#">
+                       href="#ModalProblem">
                         <img role="img" class="img-fluid" src="<%=request.getContextPath()%>/images/add.svg"
                              type="svg" alt="img">
                     </a>

@@ -185,10 +185,10 @@
                     for (var i = 0; i < rows.length; ++i) {
                         rows.eq(i).children().eq(0).text(parseInt(i) + 1);
                     }
-                    alert("已删除！");
+                    Swal.fire("已删除！",'','info');
                 },
                 error: function () {
-                    alert("删除失败！请请确定无人选课后重试！")
+                    Swal.fire("删除失败！请请确定无人选课后重试！",'','warning');
                 }
             });
         }
@@ -224,14 +224,14 @@
                         '</div>' +
                         '</td>' +
                         '</tr>');
-                    alert('添加成功！');
+                    Swal.fire('添加成功！','','success');
                 },
                 error: function () {
-                    alert('添加失败！请重试！');
+                    Swal.fire('添加失败！请重试！','','error');
                 }
             });
         } else {
-            alert("输入有误！请重试！");
+            Swal.fire('输入有误！请重试！','','error');
         }
     }
 </script>
