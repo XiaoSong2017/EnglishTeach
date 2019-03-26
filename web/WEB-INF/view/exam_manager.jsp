@@ -52,7 +52,8 @@
                 <div class="btn-group" role="group">
                     <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
                        href="#addExaminationPaper">
-                        <img role="img" class="img-fluid rounded-circle" src="<%=request.getContextPath()%>/images/add.svg"
+                        <img role="img" class="img-fluid rounded-circle"
+                             src="<%=request.getContextPath()%>/images/add.svg"
                              type="svg" alt="img">
                     </a>
                 </div>
@@ -77,7 +78,7 @@
                     $('#tbody_exam').append('<tr class="row">\n' +
                         '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
                         '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
-                        '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+                        '            <td class="col text-center"><a href="#" >' + data.data[i].name + '</a></td>\n' +
                         '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
                         '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
                         '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
@@ -92,38 +93,58 @@
             },
             error: function () {
                 Swal.fire({
-                    type:'error',
-                    title:'提示',
-                    text:"加载失败！请刷新页面重试！"});
+                    type: 'error',
+                    title: '提示',
+                    text: "加载失败！请刷新页面重试！"
+                });
             }
         });
     });
 
     function deleteExaminationPaperById(id, obj) {
-        if (confirm("确定删除？")) {
-            $.ajax({
-                url: '<%=request.getContextPath()%>/deleteExaminationPaperById',
-                type: 'post',
-                async: true,
-                data: {"examinationPaperId": id},
-                success: function (data) {
-                    //console.log(data);
-                    if (data.resultCode === 'success') {
-                        $(obj).parent().parent().parent().remove();
-                        var rows = $('#tbody_exam').children();
-                        for (var i = 0; i < rows.length; ++i) {
-                            rows.eq(i).children().eq(0).text(parseInt(i) + 1);
+        Swal.fire({
+            title: "确定删除？",
+            text: '这是不可恢复操作！',
+            showCancelButton: true,
+            confirmButtonText: '删除',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then((result) => {
+            if (result.value)
+                $.ajax({
+                    url: '<%=request.getContextPath()%>/deleteExaminationPaperById',
+                    type: 'post',
+                    async: true,
+                    data: {"examinationPaperId": id},
+                    success: (data) => {
+                        if (data.resultCode === 'success') {
+                            $(obj).parent().parent().parent().remove();
+                            var rows = $('#tbody_exam').children();
+                            for (var i = 0; i < rows.length; ++i) {
+                                rows.eq(i).children().eq(0).text(parseInt(i) + 1);
+                            }
+                            Swal.fire({
+                                title: "已删除！",
+                                confirmButton: '确定',
+                                type: 'info'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "删除失败!请重试！",
+                                confirmButton: '确定',
+                                type: 'error'
+                            });
                         }
-                        alert("已删除！");
-                    } else {
-                        alert("删除失败!请重试！");
+                    },
+                    error: () => {
+                        Swal.fire({
+                            title: "网络出错!请重试！",
+                            confirmButton: '确定',
+                            type: 'error'
+                        });
                     }
-                },
-                error: function () {
-                    alert("删除失败！请重试！");
-                }
-            });
-        }
+                });
+        });
     }
 </script>
 </html>
