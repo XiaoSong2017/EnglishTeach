@@ -77,6 +77,7 @@
     <bean name="studentLogService" class="service.StudentLogService" scope="prototype" autowire="byName"/>
     <bean name="examinationPaperService" class="service.ExaminationPaperService" scope="prototype" autowire="byName"/>
     <bean name="problemService" class="service.ProblemService" scope="prototype" autowire="byName"/>
+    <bean name="topicService" class="service.TopicService" scope="prototype" autowire="byName"/>
     <!--Dao文件-->
     <bean name="baseDao" class="dao.implement.BaseDaoImpl" scope="prototype" autowire="byName"/>
     <bean name="studentDao" class="dao.implement.StudentDaoImpl" scope="prototype" autowire="byName"/>
@@ -91,6 +92,7 @@
     <bean name="studentLogDao" class="dao.implement.StudentLogDaoImpl" scope="prototype" autowire="byName"/>
     <bean name="examinationPaperDao" class="dao.implement.ExaminationPaperDaoImpl" scope="prototype" autowire="byName"/>
     <bean name="problemDao" class="dao.implement.ProblemDaoImpl" scope="prototype" autowire="byName"/>
+    <bean name="topicDao" class="dao.implement.TopicDaoImpl" scope="prototype" autowire="byName"/>
     <!--Bean文件-->
     <bean name="academyBean" class="bean.AcademyBean" scope="prototype" autowire="byName"/>
     <bean name="specialtyBean" class="bean.SpecialtyBean" scope="prototype" autowire="byName"/>
@@ -101,6 +103,7 @@
     <bean name="examinationPaperBean" class="bean.ExaminationPaperBean" scope="prototype"  autowire="byName"/>
     <bean name="teachResourceBean" class="bean.TeachResourceBean" scope="prototype" autowire="byName"/>
     <bean name="problemBean" class="bean.ProblemBean" scope="prototype" autowire="byName"/>
+    <bean name="topicBean" class="bean.TopicBean" scope="prototype" autowire="byName"/>
     <!--配置Quartz框架来定时操作任务-->
    <!-- <bean id="quartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" p:targetObject-ref=""
     p:targetMethod=""/>-->

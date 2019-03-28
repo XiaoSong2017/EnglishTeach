@@ -24,7 +24,25 @@
             </div>
             <form class="form-group">
                 <div class="modal-body">
-                    <div id="summernote" class="text-area"></div>
+                    <div id="parent_homework" class="container-fluid">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#1">第1题：</a>
+                            </div>
+                            <div id="1" class="collapse" data-parent="#parent_homework">
+                                <div class="card-body">
+                                    <label class="label" for="topic">选择题型：</label>
+                                    <select class="custom-select" id="topic"></select>
+                                    <label class="label" for="problem"></label>
+                                    <div id="problem" class="text-area"></div>
+                                    <label class="label" for="question">问题1：</label>
+                                    <div id="question" class="text-area"></div>
+                                    <label class="label" for="option">选项1：</label>
+                                    <div id="option" class="text-area"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
@@ -46,7 +64,8 @@
             <th class="col text-center">出题人</th>
             <th class="col text-center">操作
                 <div class="btn-group" role="group">
-                    <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal" href="#ModalHomework">
+                    <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
+                       href="#ModalHomework">
                         <img role="img" class="img-fluid" src="<%=request.getContextPath()%>/images/add.svg"
                              type="svg" alt="img">
                     </a>
@@ -60,39 +79,51 @@
 </div>
 </body>
 <script type="text/javascript">
-    $('#summernote').summernote({
-        lang:'zh-CN',
-        placeholder: 'Hello bootstrap 4',
-        hieght:300,
-        focus:true
+    $('#problem').summernote({
+        lang: 'zh-CN',
+        placeholder: '请输入内容！',
+        focus: true
     });
-    $(function () {
+    $(() => {
         $.ajax({
             url: '<%=request.getContextPath()%>/examinationPaperBean',
             datatype: 'json',
             async: true,
             type: 'post',
             data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: true},
-            success: function (data) {
-                for(var i=0;i<data.data.length;++i) {
+            success: (data) => {
+                for (var i = 0; i < data.data.length; ++i) {
                     $('#tbody_homework').append('<tr class="row">\n' +
-                        '            <td class="col text-center">'+(parseInt(i)+1)+'</td>\n' +
-                        '            <td class="col text-center">'+data.data[i].id+'</td>\n' +
-                        '            <td class="col text-center">'+data.data[i].name+'</td>\n' +
-                        '            <td class="col text-center">'+data.data[i].startTime+'</td>\n' +
-                        '            <td class="col text-center">'+data.data[i].endTime+'</td>\n' +
-                        '            <td class="col text-center">'+'<%=request.getSession().getAttribute("user")%>'+'</td>\n' +
+                        '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
+                        '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
+                        '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
                         '            <td class="col text-center">\n' +
                         '                <div class="btn-group" role="group">\n' +
                         '                    <a class="btn btn-outline-info" data-toggle="modal">修改</a>\n' +
-                        '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\''+data.data[i].id+'\',this)">删除</a>\n' +
+                        '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
                         '                </div>\n' +
                         '            </td>\n' +
                         '        </tr>');
                 }
             },
-            error: function () {
-                alert("加载失败！请刷新页面重试！");
+            error: () => {
+                Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});
+            }
+        });
+        $.ajax({
+            url: '<%=request.getContextPath()%>/topicBean',
+            async: true,
+            type: 'post',
+            success: (data) => {
+                for (var i = 0; i < data.data.length; ++i) {
+                    $('#topic').append(' <option class="selectedItem" value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                }
+            },
+            error: () => {
+                Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});
             }
         });
     });

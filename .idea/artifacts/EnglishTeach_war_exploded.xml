@@ -16,7 +16,6 @@
           <element id="library" level="project" name="mysql-connector-java-8.0.12" />
           <element id="library" level="project" name="quartz-2.2.3" />
           <element id="library" level="project" name="jcommon-1.0.24" />
-          <element id="library" level="project" name="commons-fileupload-1.2.2" />
         </element>
       </element>
     </root>

@@ -156,5 +156,10 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="topicBean" class="topicBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
     </package>
 </struts>
