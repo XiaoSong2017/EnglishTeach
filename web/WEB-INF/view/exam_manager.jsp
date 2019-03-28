@@ -24,9 +24,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container-fluid">
-                    <label for="myEditor">请输入内容：</label>
-                    <textarea id="myEditor" class="text-justify"></textarea>
+                <div class="container">
                 </div>
             </div>
             <div class="modal-footer">
@@ -65,7 +63,6 @@
 </div>
 </body>
 <script type="text/javascript">
-    var ue = UM.getEditor('myEditor');
     $(function () {
         $.ajax({
             url: '<%=request.getContextPath()%>/examinationPaperBean',

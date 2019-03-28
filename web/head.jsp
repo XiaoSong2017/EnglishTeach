@@ -14,9 +14,9 @@
     <!-- 上述meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/zTreeStyle/zTreeStyle.css">
-    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/ueditor/themes/default/css/umeditor.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.jnotify.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/sweetalert2.min.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/summernote-bs4.css">
     <title>头部</title>
 </head>
 <body>
@@ -55,11 +55,11 @@
 <script src="<%=request.getContextPath()%>/js/jquery.ztree.core.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.ztree.excheck.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.ztree.exedit.js" type="text/javascript"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/umeditor.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/umeditor.config.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.jnotify.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/sweetalert2.all.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/promise-polyfill.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/summernote-bs4.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/summernote-zh-CN.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap-show-password.js"></script>
 </body>
 </html>

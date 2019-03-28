@@ -23,8 +23,7 @@
                 <s:actionmessage cssClass="alert alert-danger dismissible fade show"/>
                 <s:textfield name="account" type="number" cssClass="form-control glyphicon glyphicon-user" label="账号"
                              placeholder="请输入学号或职工号！" required="true" requiredLabel="*" requiredPosition="right"/>
-                <s:password  name="password" theme="xhtml" cssClass="form-control" label="密码" placeholder="请输入密码！" required="true"
-                            requiredLabel="*" requiredPosition="right"/>
+                <s:password  name="password" autocomplete="on" data-toggle="password" cssClass="form-control" label="密码" placeholder="请输入密码！" required="true"/>
                 <s:radio name="type" cssClass="custom-radio" cssStyle="align-content: center" required="true"
                          list="#{0:'学生',1:'教师'}" label="用户类型"/>
                 <s:submit cssClass="btn btn-block btn-success" cssStyle="margin-top: 20px" value="登录"/>

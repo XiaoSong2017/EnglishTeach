@@ -24,6 +24,7 @@
             </div>
             <form class="form-group">
                 <div class="modal-body">
+                    <div id="summernote" class="text-area"></div>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
@@ -59,6 +60,12 @@
 </div>
 </body>
 <script type="text/javascript">
+    $('#summernote').summernote({
+        lang:'zh-CN',
+        placeholder: 'Hello bootstrap 4',
+        hieght:300,
+        focus:true
+    });
     $(function () {
         $.ajax({
             url: '<%=request.getContextPath()%>/examinationPaperBean',
