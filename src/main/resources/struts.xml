@@ -10,6 +10,11 @@
     <constant name="struts.ui.theme" value="xhtml"/>
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <package name="action" extends="json-default" namespace="/">
+        <interceptors>
+            <interceptor name="authorityIntercept" class="interceptor.AuthorityInterceptor">
+                <param name="excludeMethods">login,*Bean</param>
+            </interceptor>
+        </interceptors>
         <action name="login" class="action.UserAction" method="login">
             <result name="success">/WEB-INF/view/${target}.jsp</result>
             <result name="input">index.jsp</result>
@@ -22,6 +27,9 @@
         <action name="upload" class="action.FileAction" method="setUploadFile">
             <result name="success">/WEB-INF/view/teacher.jsp</result>
             <result name="error">error.jsp</result>
+            <result name="login" type="redirect">index.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authorityIntercept"/>
         </action>
         <action name="download" class="action.FileAction">
             <result type="stream" name="success">
@@ -29,6 +37,9 @@
                 <param name="bufferSize">4096</param>
                 <param name="contentDisposition">attachment;filename="${filesFileName}"</param>
             </result>
+            <result name="login" type="redirect">index.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authorityIntercept"/>
         </action>
         <action name="deleteFile" class="action.FileAction" method="deleteFile">
             <result name="success">/WEB-INF/view/teacher.jsp</result>

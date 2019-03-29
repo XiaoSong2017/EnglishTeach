@@ -27,18 +27,20 @@
                     <div id="parent_homework" class="container-fluid">
                         <div class="card">
                             <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" href="#1">第1题：</a>
+                                <a class="card-link" data-toggle="collapse" href="#tow">第1题：</a>
                             </div>
-                            <div id="1" class="collapse" data-parent="#parent_homework">
+                            <div id="tow" class="collapse" data-parent="#parent_homework">
                                 <div class="card-body">
-                                    <label class="label" for="topic">选择题型：</label>
-                                    <select class="custom-select" id="topic"></select>
-                                    <label class="label" for="problem"></label>
-                                    <div id="problem" class="text-area"></div>
-                                    <label class="label" for="question">问题1：</label>
-                                    <div id="question" class="text-area"></div>
-                                    <label class="label" for="option">选项1：</label>
-                                    <div id="option" class="text-area"></div>
+                                    <label class="label">选择题型：</label>
+                                    <select class="custom-select" ></select>
+                                    <label class="label">题目内容：</label>
+                                    <div class="text-area"></div>
+                                    <label class="label">问题：</label>
+                                    <div class="text-area"></div>
+                                    <label class="label">答案：</label>
+                                    <div class="text-area"></div>
+                                    <label class="label">选项：</label>
+                                    <div class="text-area"></div>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +81,7 @@
 </div>
 </body>
 <script type="text/javascript">
-    $('#problem').summernote({
+    $('.text-area').summernote({
         lang: 'zh-CN',
         placeholder: '请输入内容！',
         focus: true
@@ -119,7 +121,7 @@
             type: 'post',
             success: (data) => {
                 for (var i = 0; i < data.data.length; ++i) {
-                    $('#topic').append(' <option class="selectedItem" value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                    $('.custom-select').append(' <option class="selectedItem" value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
                 }
             },
             error: () => {
