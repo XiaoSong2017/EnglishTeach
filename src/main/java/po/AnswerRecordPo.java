@@ -1,7 +1,5 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -15,6 +13,7 @@ public class AnswerRecordPo {
     private ExaminationPaperPo examinationPaperByEId;
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -25,7 +24,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "answer", nullable = false, length = -1)
+    @Column(name = "answer", nullable = false)
     public String getAnswer() {
         return answer;
     }
@@ -48,8 +47,7 @@ public class AnswerRecordPo {
         return Objects.hash(id, answer);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "s_id", referencedColumnName = "id", nullable = false)
     public StudentPo getStudentBySId() {
         return studentBySId;
@@ -59,8 +57,7 @@ public class AnswerRecordPo {
         this.studentBySId = studentBySId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "q_id", referencedColumnName = "id", nullable = false)
     public QuestionPo getQuestionByQId() {
         return questionByQId;
@@ -70,8 +67,7 @@ public class AnswerRecordPo {
         this.questionByQId = questionByQId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false)
     public ExaminationPaperPo getExaminationPaperByEId() {
         return examinationPaperByEId;

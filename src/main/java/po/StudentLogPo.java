@@ -15,6 +15,7 @@ public class StudentLogPo {
     private StudentPo studentBySId;
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public long getId() {
         return id;

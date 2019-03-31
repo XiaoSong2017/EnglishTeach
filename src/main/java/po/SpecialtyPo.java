@@ -13,6 +13,7 @@ public class SpecialtyPo {
     private AcademyPo academyByAcademy;
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
