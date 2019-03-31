@@ -10,6 +10,7 @@ public class TopicPo {
     private String name;
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

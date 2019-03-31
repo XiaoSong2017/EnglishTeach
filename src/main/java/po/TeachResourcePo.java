@@ -1,6 +1,7 @@
 package po;
 
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -20,7 +21,8 @@ public class TeachResourcePo {
     private CoursePo courseByCourse;
 
     @Id
-    @Column(name = "id", nullable = false, length = 255)
+    @GenericGenerator(name = "resourceById",strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", nullable = false)
     public String getId() {
         return id;
     }
@@ -111,8 +113,7 @@ public class TeachResourcePo {
         this.teacherByUploadUser = teacherByUploadUser;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "course", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCourse() {
         return courseByCourse;

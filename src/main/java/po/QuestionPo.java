@@ -1,7 +1,5 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -14,6 +12,7 @@ public class QuestionPo {
     private ProblemPo problemByProblem;
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -58,8 +57,7 @@ public class QuestionPo {
         return Objects.hash(id, answer, content);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "problem", referencedColumnName = "id")
     public ProblemPo getProblemByProblem() {
         return problemByProblem;
