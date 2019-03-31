@@ -1,7 +1,5 @@
 package po;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -12,7 +10,6 @@ public class AcademyPo {
     private String name;
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -23,7 +20,7 @@ public class AcademyPo {
     }
 
     @Basic
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 255)
     public String getName() {
         return name;
     }

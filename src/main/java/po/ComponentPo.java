@@ -36,7 +36,6 @@ public class ComponentPo {
     }
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

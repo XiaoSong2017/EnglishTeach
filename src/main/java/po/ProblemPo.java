@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -15,7 +17,6 @@ public class ProblemPo {
     private Timestamp time;
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -26,7 +27,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "content")
+    @Column(name = "content", nullable = true, length = -1)
     public String getContent() {
         return content;
     }
@@ -56,7 +57,7 @@ public class ProblemPo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, content,time);
+        return Objects.hash(id, content);
     }
 
     @ManyToOne

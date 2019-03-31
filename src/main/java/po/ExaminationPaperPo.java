@@ -1,7 +1,6 @@
 package po;
 
 import org.apache.struts2.json.annotations.JSON;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,7 +18,6 @@ public class ExaminationPaperPo {
     private TeacherPo teacherByTId;
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -33,7 +35,6 @@ public class TeachingPo {
     }
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

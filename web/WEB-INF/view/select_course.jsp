@@ -18,7 +18,7 @@
 <body>
 <%@include file="../../head.jsp" %>
 <div class="container">
-    <div class="list-group">
+    <div class="list-group justify-content-center" role="switch" align="center">
         <div class="list-group-item-info">
             <label>选择对应课程：</label>
         </div>
@@ -27,9 +27,12 @@
             CourseService courseService = (CourseService) applicationContext.getAutowireCapableBeanFactory().getBean("courseService");
             for (CoursePo coursePo : courseService.getCoursesByStudentId(String.valueOf(request.getSession().getAttribute("ID")))) {
         %>
-            <a class="list-group-item list-group-item-action" href="student_login" target="_parent"><%=coursePo.getName()%></a>
-        <%}%>
+        <div class="list-group-item">
+            <a class="page-link" href="student_login"><%=coursePo.getName()%>
+            </a>
+        </div>
     </div>
+    <%}%>
 </div>
 <%@include file="../../footer.jsp" %>
 </body>

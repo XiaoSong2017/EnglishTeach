@@ -1,18 +1,19 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "options")
-public class OptionsPo {
+@Table(name = "option")
+public class OptionPo {
     private int id;
     private String content;
     private String mark;
     private QuestionPo questionByQuestion;
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -46,15 +47,15 @@ public class OptionsPo {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OptionsPo optionsPo = (OptionsPo) o;
-        return id == optionsPo.id &&
-                Objects.equals(content, optionsPo.content)&&
-                Objects.equals(mark, optionsPo.mark);
+        OptionPo optionPo = (OptionPo) o;
+        return id == optionPo.id &&
+                Objects.equals(content, optionPo.content)&&
+                Objects.equals(mark,optionPo.mark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, content,mark);
+        return Objects.hash(id, content);
     }
 
     @ManyToOne
