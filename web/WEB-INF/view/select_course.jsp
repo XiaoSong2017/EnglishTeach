@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
 <%@ page import="po.CoursePo" %>
@@ -27,7 +28,7 @@
             CourseService courseService = (CourseService) applicationContext.getAutowireCapableBeanFactory().getBean("courseService");
             for (CoursePo coursePo : courseService.getCoursesByStudentId(String.valueOf(request.getSession().getAttribute("ID")))) {
         %>
-            <a class="list-group-item list-group-item-action" href="student_login" target="_parent"><%=coursePo.getName()%></a>
+            <s:a theme="simple" cssClass="list-group-item list-group-item-action" href="student_login" target="_parent"><%=coursePo.getName()%></s:a>
         <%}%>
     </div>
 </div>
