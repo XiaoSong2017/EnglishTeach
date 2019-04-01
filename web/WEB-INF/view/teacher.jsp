@@ -36,7 +36,7 @@
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <jsp:include page="teacher_resource.jsp" flush="true"/>
         </div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><jsp:include page="chart.jsp" flush="true"/></div>
     </div>
 </div>
 <%@include file="../../footer.jsp"%>

@@ -1,9 +1,6 @@
-<%@ page import="bean.PageBean" %>
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
 <%@ page import="po.CoursePo" %>
-<%@ page import="po.TeachResourcePo" %>
-<%@ page import="service.FileService" %>
 <%@ page import="service.CourseService" %>
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -30,7 +27,7 @@
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <s:form cssClass="form-control-file" cssErrorClass="alert-danger" method="POST"
+            <s:form theme="simple" cssClass="form-control-file" cssErrorClass="alert-danger" method="POST"
                     enctype="multipart/form-data" action="upload!setUploadFile">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">上传文件</h5>
@@ -45,8 +42,7 @@
                             <%
                                 for (CoursePo coursePo : coursePos) {
                             %>
-                            <option value="<%=coursePo.getId()%>"><%=coursePo.getName()%>
-                            </option>
+                            <option value="<%=coursePo.getId()%>"><%=coursePo.getName()%></option>
                             <%}%>
                         </select>
                         <label for="files" class="col-form-label">上传文件路径：</label>
@@ -101,24 +97,24 @@
             success: function (data) {
                 for (var i = 0; i < data.data.length; ++i) {
                     $('#tbodyTeacherResource').append('<tr class="row">\n' +
-                        '            <td class="col text-center">'+(i+1)+
+                        '            <td class="col text-center">' + (i + 1) +
                         '            </td>\n' +
                         '            <td class="col text-center"><a\n' +
-                        '                    href="download.action?id='+data.data[i].id+'">'+data.data[i].fileName+
+                        '                    href="download.action?id=' + data.data[i].id + '">' + data.data[i].fileName +
                         '            </a></td>\n' +
-                        '            <td class="col text-center">'+data.data[i].fileType +
+                        '            <td class="col text-center">' + data.data[i].fileType +
                         '            </td>\n' +
-                        '            <td class="col text-center">'+data.data[i].uploadTime +
+                        '            <td class="col text-center">' + data.data[i].uploadTime +
                         '            </td>\n' +
-                        '            <td class="col text-center">'+data.data[i].downs +
+                        '            <td class="col text-center">' + data.data[i].downs +
                         '            </td>\n' +
-                        '            <td class="col text-center">'+data.data[i].teacherByUploadUser.name +
+                        '            <td class="col text-center">' + data.data[i].teacherByUploadUser.name +
                         '            </td>\n' +
                         '            <td class="col text-center">\n' +
                         '                <div class="btn-group" role="group">\n' +
-                        '                    <a href="download.action?id='+data.data[i].id+'" class="btn btn-outline-info" role="button"\n' +
+                        '                    <a href="download.action?id=' + data.data[i].id + '" class="btn btn-outline-info" role="button"\n' +
                         '                       aria-pressed="true">下载</a>\n' +
-                        '                    <a onclick="deleteResource(\''+data.data[i].id+'\')" class="btn '+(data.data[i].teacherByUploadUser.name==='<%=request.getSession().getAttribute("user")%>'?'btn-outline-danger':'btn-outline-light text-dark disabled')+'" role="button"\n' +
+                        '                    <a onclick="deleteResource(\'' + data.data[i].id + '\')" class="btn ' + (data.data[i].teacherByUploadUser.name === '<%=request.getSession().getAttribute("user")%>' ? 'btn-outline-danger' : 'btn-outline-light text-dark disabled') + '" role="button"\n' +
                         '                       aria-pressed="true">删除</a>\n' +
                         '                </div>\n' +
                         '            </td>\n' +
@@ -136,7 +132,7 @@
         visiblePages: 3,
         currentPage: 1,
         onPageChange: function (num, type) {
-            if (type ==='change') {
+            if (type === 'change') {
                 //这里是点击分页的回调
             }
         }

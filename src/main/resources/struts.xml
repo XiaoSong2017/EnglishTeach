@@ -9,7 +9,7 @@
     <constant name="struts.objectFactory.spring.autoWire" value="name"/>
     <constant name="struts.ui.theme" value="xhtml"/>
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
-    <package name="action" extends="json-default" namespace="/">
+    <package name="action" extends="struts-default,json-default,spring-default" namespace="/">
         <interceptors>
             <interceptor name="authorityIntercept" class="interceptor.AuthorityInterceptor">
                 <param name="excludeMethods">login,*Bean</param>

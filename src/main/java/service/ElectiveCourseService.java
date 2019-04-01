@@ -68,18 +68,30 @@ public class ElectiveCourseService {
     }
 
     public void saveElectiveCourseByAcademyId(String s, String teacherId, String courseId) {
-        electiveCourseDao.saveElectiveCoursesByAcademyId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+        TeachingPo teachingPo=teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId);
+        if(teachingPo!=null){
+            electiveCourseDao.saveElectiveCoursesByAcademyId(String.valueOf(teachingPo.getId()), s);
+        }
     }
 
     public void saveElectiveCourseBySpecialtyId(String s, String teacherId, String courseId) {
-        electiveCourseDao.saveElectiveCoursesBySpecialtyId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+        TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
+        if (teachingPo != null) {
+            electiveCourseDao.saveElectiveCoursesBySpecialtyId(String.valueOf(teachingPo.getId()), s);
+        }
     }
 
     public void saveElectiveCourseByClassesId(String s, String teacherId, String courseId) {
-        electiveCourseDao.saveElectiveCoursesByClassesId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+        TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
+        if (teachingPo != null) {
+            electiveCourseDao.saveElectiveCoursesByClassesId(String.valueOf(teachingPo.getId()), s);
+        }
     }
 
     public void saveElectiveCourseByStudentId(String s, String teacherId, String courseId) {
-        electiveCourseDao.saveElectiveCourseByStudentId(String.valueOf(teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId).getId()),s);
+        TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
+        if (teachingPo != null) {
+            electiveCourseDao.saveElectiveCourseByStudentId(String.valueOf(teachingPo.getId()), s);
+        }
     }
 }
