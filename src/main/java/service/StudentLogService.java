@@ -37,14 +37,12 @@ public class StudentLogService {
         this.studentLogDao = studentLogDao;
     }
     public Long save(Timestamp loginTime,Timestamp logoutTime,String id){
-        long count=studentLogDao.count(StudentLogPo.class);
         StudentLogPo studentLogPo=new StudentLogPo();
-        studentLogPo.setId(++count);
         studentLogPo.setLoginTime(loginTime);
         studentLogPo.setLogoutTime(logoutTime);
         studentLogPo.setStudentBySId(studentDao.getById(StudentPo.class,id));
         studentLogDao.save(studentLogPo);
-        return count;
+        return studentLogPo.getId();
     }
     public String execute() throws Exception {
         log.info("LogId:"+id);

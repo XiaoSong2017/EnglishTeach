@@ -85,7 +85,7 @@ public class UserAction extends ActionSupport {
         return INPUT;
     }
     public String logout() throws Exception{
-        if(ActionContext.getContext().getSession()==null)return ERROR;
+        if(ActionContext.getContext().getSession().get("user")==null)return ERROR;
         if(ActionContext.getContext().getSession().get("userType").equals("student")){
             studentLogService.updateById(new Timestamp(System.currentTimeMillis()), (long)ActionContext.getContext().getSession().get("LogId"));
         }

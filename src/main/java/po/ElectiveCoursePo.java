@@ -17,7 +17,7 @@ public class ElectiveCoursePo {
     private TeachingPo teachingByEId;
 
     @Id
-    @GenericGenerator(name = "id",strategy = "org.hibernate.id.IdentityGenerator")
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

@@ -13,12 +13,6 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div>
-        <label for="chart_course">选择课程：</label>
-        <select id="chart_course">
-            <option>大学英语</option>
-        </select>
-    </div>
     <div class="row align-items-center justify-content-center">
         <div class="m-auto">
             <div id="chart" style="width:800px;height:400px"></div>
@@ -56,7 +50,19 @@
         legend: {
             data: ['分数', '学习时间', '总人数']
         },
-        xAxis: [
+        xAxis: [{
+            type: 'value',
+            name: '分钟',
+            min: 0,
+            axisPointer: {
+                type: 'shadow'
+            },
+            axisLabel: {
+                formatter: '{value} min'
+            }
+        }
+        ],
+        yAxis: [
             {
                 type: 'value',
                 min: 0,
@@ -67,19 +73,6 @@
                 },
                 axisLabel: {
                     formatter: '{value} 分'
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: '分钟',
-                min: 0,
-                axisPointer: {
-                    type: 'shadow'
-                },
-                axisLabel: {
-                    formatter: '{value} min'
                 }
             },
             {
@@ -93,16 +86,16 @@
         ],
         series: [
             {
-                name: '分数',
-                type: 'line',
-                data: [20, 49, 70, 23.2, 56, 76.7, 10, 100, 32.6, 20.0]
-            },
-            {
                 name: '学习时间',
                 type: 'line',
                 color: '#ffee07',
                 smooth: true,
                 data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
+            },
+            {
+                name: '分数',
+                type: 'line',
+                data: [20, 49, 70, 23.2, 56, 76.7, 10, 100, 32.6, 20.0]
             },
             {
                 name: '总人数',

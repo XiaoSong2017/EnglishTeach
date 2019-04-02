@@ -22,17 +22,42 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form-group">
+            <%--<form class="form-group">--%>
                 <div class="modal-body">
                     <div id="parent_homework" class="container-fluid">
                         <div class="card">
                             <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" href="#tow">第1题：</a>
+                                <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)" href="#">第1题：</a>
                             </div>
-                            <div id="tow" class="collapse" data-parent="#parent_homework">
+                            <div class="collapse" data-parent="#parent_homework">
                                 <div class="card-body">
-                                    <label class="label">选择题型：</label>
-                                    <select class="custom-select" ></select>
+                                    <label class="label">选择题型：
+                                        <select class="custom-select" >
+
+                                        </select>
+                                    </label>
+                                    <label class="label">题目内容：</label>
+                                    <div class="text-area"></div>
+                                    <label class="label">问题：</label>
+                                    <div class="text-area"></div>
+                                    <label class="label">答案：</label>
+                                    <div class="text-area"></div>
+                                    <label class="label">选项：</label>
+                                    <div class="text-area"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)" href="#">第1题：</a>
+                            </div>
+                            <div class="collapse" data-parent="#parent_homework">
+                                <div class="card-body">
+                                    <label class="label">选择题型：
+                                        <select class="custom-select" >
+
+                                        </select>
+                                    </label>
                                     <label class="label">题目内容：</label>
                                     <div class="text-area"></div>
                                     <label class="label">问题：</label>
@@ -50,7 +75,7 @@
                     <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
                     <input type="submit" class="btn btn-primary" onclick="" data-dismiss="modal" value="添加"/>
                 </div>
-            </form>
+            <%--</form>--%>
         </div>
     </div>
 </div>
@@ -129,5 +154,8 @@
             }
         });
     });
+    function onclickCollapse(obj) {
+        $(obj).parent().next().collapse('toggle');
+    }
 </script>
 </html>
