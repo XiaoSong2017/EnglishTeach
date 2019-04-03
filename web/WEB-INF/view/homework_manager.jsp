@@ -22,59 +22,56 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <%--<form class="form-group">--%>
-                <div class="modal-body">
-                    <div id="parent_homework" class="container-fluid">
-                        <div class="card">
-                            <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)" href="#">第1题：</a>
-                            </div>
-                            <div class="collapse" data-parent="#parent_homework">
-                                <div class="card-body">
-                                    <label class="label">选择题型：
-                                        <select class="custom-select" >
-
-                                        </select>
-                                    </label>
-                                    <label class="label">题目内容：</label>
-                                    <div class="text-area"></div>
-                                    <label class="label">问题：</label>
-                                    <div class="text-area"></div>
-                                    <label class="label">答案：</label>
-                                    <div class="text-area"></div>
-                                    <label class="label">选项：</label>
-                                    <div class="text-area"></div>
+            <div class="modal-body">
+                <div id="parent_homework" class="container-fluid">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-light">
+                        <tr class="row">
+                            <th class="col text-center">
+                                <label for="home_work_title">作业标题：</label>
+                            </th>
+                            <th class="col text-center">
+                                <input type="text" id="home_work_title" required>
+                            </th>
+                            <th class="col text-center">
+                                <img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加题目"
+                                     onclick="addProblem()" class="img-circle btn btn-outline-info" type="svg">
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody_work_Problem">
+                        <tr class="row">
+                            <td class="col" colspan="3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"
+                                           href="#">第<label>1</label>题：</a>
+                                    </div>
+                                    <div class="collapse" data-parent="#parent_homework">
+                                        <div class="card-body">
+                                            <label class="label">
+                                                选择题型：
+                                                <select class="custom-select"required title="选择题型!"></select>
+                                            </label>
+                                            <label class="label">题目内容：<textarea class="text-area"></textarea></label>
+                                            <label class="label">问题： <textarea class="text-area"></textarea></label>
+                                            <label class="label">
+                                                答案：<textarea class="text-area"></textarea>
+                                            </label>
+                                            <label class="label">选项<span>A</span>:<textarea class="text-area"></textarea></label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)" href="#">第1题：</a>
-                            </div>
-                            <div class="collapse" data-parent="#parent_homework">
-                                <div class="card-body">
-                                    <label class="label">选择题型：
-                                        <select class="custom-select" >
-
-                                        </select>
-                                    </label>
-                                    <label class="label">题目内容：</label>
-                                    <div class="text-area"></div>
-                                    <label class="label">问题：</label>
-                                    <div class="text-area"></div>
-                                    <label class="label">答案：</label>
-                                    <div class="text-area"></div>
-                                    <label class="label">选项：</label>
-                                    <div class="text-area"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
-                    <input type="submit" class="btn btn-primary" onclick="" data-dismiss="modal" value="添加"/>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
+                <input type="submit" class="btn btn-primary" onclick="" data-dismiss="modal" value="添加"/>
+            </div>
             <%--</form>--%>
         </div>
     </div>
@@ -146,7 +143,9 @@
             type: 'post',
             success: (data) => {
                 for (var i = 0; i < data.data.length; ++i) {
-                    $('.custom-select').append(' <option class="selectedItem" value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                    //console.log('select:'+$('#tbody_work_Problem').children().eq(0).children().children().children().eq(1).children().children().eq(0).children());
+                    $('#tbody_work_Problem').children().eq(0).children().children().children().eq(1).children().children().eq(0).children()
+                        .append(' <option class="selectedItem" value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
                 }
             },
             error: () => {
@@ -154,8 +153,18 @@
             }
         });
     });
+
     function onclickCollapse(obj) {
         $(obj).parent().next().collapse('toggle');
+    }
+
+    function addProblem() {
+        // console.log($('#tbody_work_Problem').children('last'));
+        var row=$('#tbody_work_Problem').children().eq(parseInt($('#tbody_work_Problem').children().length)-1).clone();
+        //console.log(row.children().children().children().eq(0).children().children().text());
+        var label=row.children().children().children().eq(0).children().children();
+        label.text(parseInt(label.text())+1);
+        $('#tbody_work_Problem').append(row);
     }
 </script>
 </html>
