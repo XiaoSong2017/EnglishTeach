@@ -194,7 +194,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="edit_password">密码：</label>
-                            <input type="password" id="edit_password" name="edit_password" required>
+                            <input type="password" placeholder="请输入密码！" data-toggle="password" Class="form-control" id="edit_password" name="edit_password" required>
                         </div>
                     </div>
                 </div>

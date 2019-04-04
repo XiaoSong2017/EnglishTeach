@@ -27,15 +27,35 @@
                     <table class="table table-striped table-hover">
                         <thead class="thead-light">
                         <tr class="row">
+                            <th><label for="add_homework_manager_course" class="label">选择课程：</label></th>
+                            <th><select id="add_homework_manager_course" class="custom-select"></select></th>
+                        </tr>
+                        <tr class="row">
                             <th class="col text-center">
                                 <label for="home_work_title">作业标题：</label>
                             </th>
                             <th class="col text-center">
-                                <input type="text" id="home_work_title" required>
+                                <input type="text" id="home_work_title" required class="text-input">
                             </th>
                             <th class="col text-center">
                                 <img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加题目"
                                      onclick="addProblem()" class="img-circle btn btn-outline-info" type="svg">
+                            </th>
+                        </tr>
+                        <tr class="row">
+                            <th class="col text-center">
+                                <label for="home_work_start_time">开始时间：</label>
+                            </th>
+                            <th class="col text-center">
+                                <input id="home_work_start_time" class="currentDate" type="datetime-local" required>
+                            </th>
+                        </tr>
+                        <tr class="row">
+                            <th class="col text-center">
+                                <label for="home_work_end_time">结束时间：</label>
+                            </th>
+                            <th class="col text-center">
+                                <input id="home_work_end_time" class="currentDate" type="datetime-local" required>
                             </th>
                         </tr>
                         </thead>
@@ -51,14 +71,75 @@
                                         <div class="card-body">
                                             <label class="label">
                                                 选择题型：
-                                                <select class="custom-select"required title="选择题型!"></select>
+                                                <select class="custom-select" required title="选择题型!"></select>
                                             </label>
-                                            <label class="label">题目内容：<textarea class="text-area"></textarea></label>
-                                            <label class="label">问题： <textarea class="text-area"></textarea></label>
-                                            <label class="label">
-                                                答案：<textarea class="text-area"></textarea>
-                                            </label>
-                                            <label class="label">选项<span>A</span>:<textarea class="text-area"></textarea></label>
+                                            <table class="table table-striped">
+                                                <thead class="thead-light">
+                                                <tr class="row">
+                                                    <td class="col">
+                                                        <label class="label">题目内容：
+                                                            <textarea class="text-area" required></textarea>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="row">
+                                                    <td class="col">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                            <tr class="row">
+                                                                <td class="col">
+                                                                    <label class="label">问题：<textarea
+                                                                            class="text-area"></textarea></label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="row">
+                                                                <td class="col">
+                                                                    <label class="label">
+                                                                        参考答案：<textarea class="text-area"></textarea>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr class="row">
+                                                                <td class="col">
+                                                                    <label class="label">选项<span>A</span>:
+                                                                        <textarea class="text-area"></textarea>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                            <tr class="row">
+                                                                <td class="col text-center">
+                                                                    <img role="button"
+                                                                         src="<%=request.getContextPath()%>/images/add.svg"
+                                                                         alt="添加选项！"
+                                                                         onclick="addTopic(this)"
+                                                                         class="img-circle btn btn-outline-info"
+                                                                         type="svg">
+                                                                </td>
+                                                            </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr class="row">
+                                                    <td class="col text-center">
+                                                        <img role="button"
+                                                             src="<%=request.getContextPath()%>/images/add.svg"
+                                                             alt="添加问题！"
+                                                             onclick="addQuestion(this)"
+                                                             class="img-circle btn btn-outline-info"
+                                                             type="svg">
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +170,7 @@
             <th class="col text-center">操作
                 <div class="btn-group" role="group">
                     <a role="button" shape="circle" class="btn btn-outline-info" data-toggle="modal"
-                       href="#ModalHomework">
+                       href="#ModalHomework" onclick="onclickAddHomework()">
                         <img role="img" class="img-fluid" src="<%=request.getContextPath()%>/images/add.svg"
                              type="svg" alt="img">
                     </a>
@@ -153,18 +234,41 @@
             }
         });
     });
-
+    function onclickAddHomework() {
+        $.ajax({
+            url: '<%=request.getContextPath()%>/courseBean',
+            async: true,
+            type: 'post',
+            success: function (data) {
+                $('#add_homework_manager_course').empty();
+                for (var i = 0; i < data.data.length; ++i) {
+                    $('#add_homework_manager_course').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                    //$('#updateSelectElectiveCourse').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                }
+            }
+        });
+    }
     function onclickCollapse(obj) {
         $(obj).parent().next().collapse('toggle');
     }
-
     function addProblem() {
         // console.log($('#tbody_work_Problem').children('last'));
-        var row=$('#tbody_work_Problem').children().eq(parseInt($('#tbody_work_Problem').children().length)-1).clone();
+        var row = $('#tbody_work_Problem').children().eq(parseInt($('#tbody_work_Problem').children().length) - 1).clone();
         //console.log(row.children().children().children().eq(0).children().children().text());
-        var label=row.children().children().children().eq(0).children().children();
-        label.text(parseInt(label.text())+1);
+        var label = row.children().children().children().eq(0).children().children();
+        label.text(parseInt(label.text()) + 1);
         $('#tbody_work_Problem').append(row);
+    }
+    function  addQuestion(obj) {
+        var tbody=$(obj).parent().parent().parent().prev();
+        var row=tbody.children().eq(parseInt(tbody.children().length)-1).clone();
+        tbody.append(row);
+    }
+    function addTopic(obj) {
+        var tbody=$(obj).parent().parent().parent().prev();
+        var row=tbody.children().eq(parseInt(tbody.children().length)-1).clone();
+        row.children().children().children().eq(0).text( String.fromCharCode(row.children().children().children().eq(0).text().charCodeAt()+1));
+        tbody.append(row);
     }
 </script>
 </html>

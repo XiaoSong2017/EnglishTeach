@@ -47,7 +47,7 @@ public class ComponentPo {
     }
 
     @Basic
-    @Column(name = "title", nullable = false, length = 255)
+    @Column(name = "title", length = 255)
     public String getTitle() {
         return title;
     }
@@ -72,8 +72,7 @@ public class ComponentPo {
         return Objects.hash(core, questionNumber, id, title);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false)
     public ExaminationPaperPo getExaminationPaperByEId() {
         return examinationPaperByEId;
@@ -83,8 +82,7 @@ public class ComponentPo {
         this.examinationPaperByEId = examinationPaperByEId;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "q_id", referencedColumnName = "id", nullable = false)
     public ProblemPo getProblemByQId() {
         return problemByQId;
