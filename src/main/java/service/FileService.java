@@ -78,4 +78,8 @@ public class FileService {
     public List<TeachResourcePo> getFiles() {
         return filesDao.getAll(TeachResourcePo.class);
     }
+
+    public List<TeachResourcePo> getFilesByCourseId(String courseId){
+        return filesDao.getFilesByCourseId(courseId);
+    }
 }

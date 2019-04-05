@@ -65,7 +65,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"
-                                           href="#">第<label>1</label>题：</a>
+                                           href="#">第<label class="label">1</label>题：</a>
                                     </div>
                                     <div class="collapse" data-parent="#parent_homework">
                                         <div class="card-body">
@@ -105,7 +105,7 @@
                                                             <tbody>
                                                             <tr class="row">
                                                                 <td class="col">
-                                                                    <label class="label">选项<span>A</span>:
+                                                                    <label class="label">选项<span style="color: #e0a800">A</span>:
                                                                         <textarea class="text-area"></textarea>
                                                                     </label>
                                                                 </td>

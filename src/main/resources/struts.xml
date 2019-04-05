@@ -44,8 +44,8 @@
         <action name="deleteFile" class="action.FileAction" method="deleteFile">
             <result name="success">/WEB-INF/view/teacher.jsp</result>
         </action>
-        <action name="student_login">
-            <result>/WEB-INF/view/student.jsp</result>
+        <action name="student_login" class="action.StudentAction" method="studentLogin">
+            <result name="success">/WEB-INF/view/student.jsp</result>
         </action>
         <action name="addStudent" class="action.StudentAction" method="addStudent">
             <result>/WEB-INF/view/teacher.jsp</result>
@@ -112,6 +112,11 @@
             </result>
         </action>
         <action name="deleteExaminationPaperById" class="action.ExaminationPaperAction" method="deleteExaminationPaperById">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="saveExaminationPaper" class="action.ExaminationPaperAction" method="saveExaminationPager">
             <result name="success" type="json">
                 <param name="noCache">true</param>
             </result>

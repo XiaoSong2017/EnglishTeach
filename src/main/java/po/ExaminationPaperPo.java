@@ -1,8 +1,5 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;

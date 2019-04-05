@@ -34,7 +34,7 @@
         <%
             ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(application);
             FileService fileService = (FileService) applicationContext.getAutowireCapableBeanFactory().getBean("fileService");
-            List<TeachResourcePo> teachResourcePos = fileService.getFiles();
+            List<TeachResourcePo> teachResourcePos = fileService.getFilesByCourseId(String.valueOf(request.getSession().getAttribute("courseById")));
             int i = 1;
             for (TeachResourcePo teachResourcePo : teachResourcePos) {
         %>

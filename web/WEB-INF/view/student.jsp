@@ -38,6 +38,32 @@
 </div>
 <%@include file="../../footer.jsp"%>
 <script>
+    <%--$(()=>{--%>
+        <%--//console.log('<%=request.getSession().getAttribute("courseById")%>');--%>
+        <%--loadCourse();--%>
+        <%--$('#selectStudentCourse').on('change',function () {--%>
+            <%--console.log('select:'+$('#selectStudentCourse option:selected').text());--%>
+            <%--sessionStorage.removeItem('courseById');--%>
+            <%--sessionStorage.setItem('courseById',$('#selectStudentCourse option:selected').val());--%>
+            <%--console.log('session:'+sessionStorage.getItem('courseById'));--%>
+            <%--location.reload();--%>
+        <%--})--%>
+    <%--});--%>
+    <%--function loadCourse(){--%>
+        <%--$.ajax({--%>
+            <%--url:'<%=request.getContextPath()%>/courseBean',--%>
+            <%--type:'post',--%>
+            <%--async:true,--%>
+            <%--data:{'studentById':'<%=request.getSession().getAttribute("ID")%>'},--%>
+            <%--success:(data)=>{--%>
+                    <%--$('#selectStudentCourse').empty();--%>
+                    <%--console.log(data);--%>
+                    <%--for (var i = 0; i < data.data.length; ++i) {--%>
+                        <%--$('#selectStudentCourse').append('<option value="' + data.data[i].id + '"'+(data.data[i].id==='<%=request.getSession().getAttribute("courseById")%>'?"selected":"\n")+'>' + data.data[i].name + '</option>');--%>
+                    <%--}--%>
+            <%--}--%>
+        <%--});--%>
+    <%--}--%>
     $('#pills-tab a').on('click', function (e) {
         e.preventDefault();
         $(this).tab('show');

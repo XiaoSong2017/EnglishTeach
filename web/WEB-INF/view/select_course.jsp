@@ -28,7 +28,7 @@
             CourseService courseService = (CourseService) applicationContext.getAutowireCapableBeanFactory().getBean("courseService");
             for (CoursePo coursePo : courseService.getCoursesByStudentId(String.valueOf(request.getSession().getAttribute("ID")))) {
         %>
-            <s:a theme="simple" cssClass="list-group-item list-group-item-action" href="student_login" target="_parent"><%=coursePo.getName()%></s:a>
+            <a  Class="list-group-item list-group-item-action" href="<%=request.getContextPath()%>/student_login?courseById=<%=coursePo.getId()%>"><%=coursePo.getName()%></a>
         <%}%>
     </div>
 </div>

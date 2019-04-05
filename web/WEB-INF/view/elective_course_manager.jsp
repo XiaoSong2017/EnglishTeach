@@ -204,7 +204,7 @@
         var data=$.param({'id':id},true);
         data+='&'+$.param({'level':levels},true);
         data+='&teacherId='+'<%=request.getSession().getAttribute("ID")%>'+'&courseId='+$('#selectElectiveCourse option:checked').val();
-        console.log(data);
+        //console.log(data);
         $.ajax({
             url:'<%=request.getContextPath()%>/saveElectiveCourseBatchBy',
             type:'post',

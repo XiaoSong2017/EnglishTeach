@@ -1,5 +1,6 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import service.UserService;
 
@@ -9,6 +10,7 @@ public class StudentAction extends ActionSupport {
     private String id;
     private UserService userService;
     private String password;
+    private String courseById;
 
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -46,6 +48,10 @@ public class StudentAction extends ActionSupport {
         this.id = id;
     }
 
+    public void setCourseById(String courseById) {
+        this.courseById = courseById;
+    }
+
     public String addStudent() throws Exception{
         userService.addStudent(id,name,classes);
         return SUCCESS;
@@ -58,6 +64,11 @@ public class StudentAction extends ActionSupport {
 
     public String updateStudent(){
         userService.updateStudent(id,name,classes,password);
+        return SUCCESS;
+    }
+
+    public String studentLogin()throws Exception{
+        ActionContext.getContext().getSession().put("courseById",courseById);
         return SUCCESS;
     }
 }
