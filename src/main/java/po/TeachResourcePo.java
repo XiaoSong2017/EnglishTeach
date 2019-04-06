@@ -12,23 +12,35 @@ import java.util.Objects;
 @Table(name = "teach_resource")
 public class TeachResourcePo {
     private String id;
+    private int downs;
     private byte[] file;
     private String fileName;
     private String fileType;
     private Timestamp uploadTime;
-    private int downs;
-    private TeacherPo teacherByUploadUser;
+    private String course;
+    private String uploadUser;
     private CoursePo courseByCourse;
+    private TeacherPo teacherByUploadUser;
 
     @Id
     @GenericGenerator(name = "resourceById",strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, length = 255)
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "downs", nullable = false)
+    public int getDowns() {
+        return downs;
+    }
+
+    public void setDowns(int downs) {
+        this.downs = downs;
     }
 
     @Basic(fetch = FetchType.LAZY)
@@ -74,13 +86,23 @@ public class TeachResourcePo {
     }
 
     @Basic
-    @Column(name = "downs", nullable = false)
-    public int getDowns() {
-        return downs;
+    @Column(name = "course", nullable = false, length = 25,insertable = false,updatable = false)
+    public String getCourse() {
+        return course;
     }
 
-    public void setDowns(int downs) {
-        this.downs = downs;
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    @Basic
+    @Column(name = "upload_user", nullable = false, length = 15,insertable = false,updatable = false)
+    public String getUploadUser() {
+        return uploadUser;
+    }
+
+    public void setUploadUser(String uploadUser) {
+        this.uploadUser = uploadUser;
     }
 
     @Override
@@ -93,24 +115,16 @@ public class TeachResourcePo {
                 Arrays.equals(file, that.file) &&
                 Objects.equals(fileName, that.fileName) &&
                 Objects.equals(fileType, that.fileType) &&
-                Objects.equals(uploadTime, that.uploadTime);
+                Objects.equals(uploadTime, that.uploadTime) &&
+                Objects.equals(course, that.course) &&
+                Objects.equals(uploadUser, that.uploadUser);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, fileName, fileType, uploadTime, downs);
+        int result = Objects.hash(id, downs, fileName, fileType, uploadTime, course, uploadUser);
         result = 31 * result + Arrays.hashCode(file);
         return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "upload_user", referencedColumnName = "id", nullable = false)
-    public TeacherPo getTeacherByUploadUser() {
-        return teacherByUploadUser;
-    }
-
-    public void setTeacherByUploadUser(TeacherPo teacherByUploadUser) {
-        this.teacherByUploadUser = teacherByUploadUser;
     }
 
     @ManyToOne
@@ -121,5 +135,15 @@ public class TeachResourcePo {
 
     public void setCourseByCourse(CoursePo courseByCourse) {
         this.courseByCourse = courseByCourse;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "upload_user", referencedColumnName = "id", nullable = false)
+    public TeacherPo getTeacherByUploadUser() {
+        return teacherByUploadUser;
+    }
+
+    public void setTeacherByUploadUser(TeacherPo teacherByUploadUser) {
+        this.teacherByUploadUser = teacherByUploadUser;
     }
 }

@@ -2,6 +2,7 @@ package po;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -9,10 +10,15 @@ import java.util.Objects;
 public class ProblemPo {
     private int id;
     private String content;
+    private Timestamp time;
+    private String cId;
+    private String tId;
+    private Integer type;
+    private Collection<ComponentPo> componentsById;
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
     private TopicPo topicByType;
-    private Timestamp time;
+    private Collection<QuestionPo> questionsById;
 
     @Id
     @GeneratedValue
@@ -26,7 +32,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "content")
+    @Column(name = "content", nullable = true, length = 255)
     public String getContent() {
         return content;
     }
@@ -36,7 +42,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "time",nullable = false)
+    @Column(name = "time", nullable = false)
     public Timestamp getTime() {
         return time;
     }
@@ -45,18 +51,61 @@ public class ProblemPo {
         this.time = time;
     }
 
+    @Basic
+    @Column(name = "c_id", nullable = false, length = 25,insertable = false,updatable = false)
+    public String getcId() {
+        return cId;
+    }
+
+    public void setcId(String cId) {
+        this.cId = cId;
+    }
+
+    @Basic
+    @Column(name = "t_id", nullable = false, length = 15,insertable = false,updatable = false)
+    public String gettId() {
+        return tId;
+    }
+
+    public void settId(String tId) {
+        this.tId = tId;
+    }
+
+    @Basic
+    @Column(name = "type", nullable = true,insertable = false,updatable = false)
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProblemPo problemPo = (ProblemPo) o;
         return id == problemPo.id &&
-                Objects.equals(content, problemPo.content) && Objects.equals(time, problemPo.time);
+                Objects.equals(content, problemPo.content) &&
+                Objects.equals(time, problemPo.time) &&
+                Objects.equals(cId, problemPo.cId) &&
+                Objects.equals(tId, problemPo.tId) &&
+                Objects.equals(type, problemPo.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, content,time);
+        return Objects.hash(id, content, time, cId, tId, type);
+    }
+
+    @OneToMany(mappedBy = "problemByQId")
+    public Collection<ComponentPo> getComponentsById() {
+        return componentsById;
+    }
+
+    public void setComponentsById(Collection<ComponentPo> componentsById) {
+        this.componentsById = componentsById;
     }
 
     @ManyToOne
@@ -89,4 +138,12 @@ public class ProblemPo {
         this.topicByType = topicByType;
     }
 
+    @OneToMany(mappedBy = "problemByProblem")
+    public Collection<QuestionPo> getQuestionsById() {
+        return questionsById;
+    }
+
+    public void setQuestionsById(Collection<QuestionPo> questionsById) {
+        this.questionsById = questionsById;
+    }
 }

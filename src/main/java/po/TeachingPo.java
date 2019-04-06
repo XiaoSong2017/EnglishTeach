@@ -1,36 +1,20 @@
 package po;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "teaching")
 public class TeachingPo {
-    private double usualProportion;
-    private double examProportion;
     private int id;
+    private double examProportion;
+    private double usualProportion;
+    private String cId;
+    private String tId;
+    private Collection<ElectiveCoursePo> electiveCoursesById;
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
-
-    @Basic
-    @Column(name = "usual_proportion", nullable = false, precision = 2)
-    public double getUsualProportion() {
-        return usualProportion;
-    }
-
-    public void setUsualProportion(double usualProportion) {
-        this.usualProportion = usualProportion;
-    }
-
-    @Basic
-    @Column(name = "exam_proportion", nullable = false, precision = 2)
-    public double getExamProportion() {
-        return examProportion;
-    }
-
-    public void setExamProportion(double examProportion) {
-        this.examProportion = examProportion;
-    }
 
     @Id
     @GeneratedValue
@@ -43,19 +27,70 @@ public class TeachingPo {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "exam_proportion", nullable = false, precision = 0)
+    public double getExamProportion() {
+        return examProportion;
+    }
+
+    public void setExamProportion(double examProportion) {
+        this.examProportion = examProportion;
+    }
+
+    @Basic
+    @Column(name = "usual_proportion", nullable = false, precision = 0)
+    public double getUsualProportion() {
+        return usualProportion;
+    }
+
+    public void setUsualProportion(double usualProportion) {
+        this.usualProportion = usualProportion;
+    }
+
+    @Basic
+    @Column(name = "c_id", nullable = false, length = 25,insertable = false,updatable = false)
+    public String getcId() {
+        return cId;
+    }
+
+    public void setcId(String cId) {
+        this.cId = cId;
+    }
+
+    @Basic
+    @Column(name = "t_id", nullable = false, length = 15,insertable = false,updatable = false)
+    public String gettId() {
+        return tId;
+    }
+
+    public void settId(String tId) {
+        this.tId = tId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TeachingPo that = (TeachingPo) o;
-        return Double.compare(that.usualProportion, usualProportion) == 0 &&
+        return id == that.id &&
                 Double.compare(that.examProportion, examProportion) == 0 &&
-                id == that.id;
+                Double.compare(that.usualProportion, usualProportion) == 0 &&
+                Objects.equals(cId, that.cId) &&
+                Objects.equals(tId, that.tId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(usualProportion, examProportion, id);
+        return Objects.hash(id, examProportion, usualProportion, cId, tId);
+    }
+
+    @OneToMany(mappedBy = "teachingByEId")
+    public Collection<ElectiveCoursePo> getElectiveCoursesById() {
+        return electiveCoursesById;
+    }
+
+    public void setElectiveCoursesById(Collection<ElectiveCoursePo> electiveCoursesById) {
+        this.electiveCoursesById = electiveCoursesById;
     }
 
     @ManyToOne

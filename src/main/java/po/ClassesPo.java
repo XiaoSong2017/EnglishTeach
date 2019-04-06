@@ -1,8 +1,7 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +9,9 @@ import java.util.Objects;
 public class ClassesPo {
     private int id;
     private String name;
+    private int specialty;
     private SpecialtyPo specialtyBySpecialty;
+    private Collection<StudentPo> studentsById;
 
     @Id
     @GeneratedValue
@@ -33,22 +34,32 @@ public class ClassesPo {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "specialty", nullable = false,insertable = false,updatable = false)
+    public int getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(int specialty) {
+        this.specialty = specialty;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClassesPo classesPo = (ClassesPo) o;
         return id == classesPo.id &&
+                specialty == classesPo.specialty &&
                 Objects.equals(name, classesPo.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, specialty);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "specialty", referencedColumnName = "id", nullable = false)
     public SpecialtyPo getSpecialtyBySpecialty() {
         return specialtyBySpecialty;
@@ -56,5 +67,14 @@ public class ClassesPo {
 
     public void setSpecialtyBySpecialty(SpecialtyPo specialtyBySpecialty) {
         this.specialtyBySpecialty = specialtyBySpecialty;
+    }
+
+    @OneToMany(mappedBy = "classesByClazz")
+    public Collection<StudentPo> getStudentsById() {
+        return studentsById;
+    }
+
+    public void setStudentsById(Collection<StudentPo> studentsById) {
+        this.studentsById = studentsById;
     }
 }

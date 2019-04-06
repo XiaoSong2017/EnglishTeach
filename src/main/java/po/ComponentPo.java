@@ -1,19 +1,30 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "component")
 public class ComponentPo {
+    private int id;
     private int core;
     private int questionNumber;
-    private int id;
     private String title;
+    private int eId;
+    private int qId;
     private ExaminationPaperPo examinationPaperByEId;
     private ProblemPo problemByQId;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Basic
     @Column(name = "core", nullable = false)
@@ -35,19 +46,8 @@ public class ComponentPo {
         this.questionNumber = questionNumber;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Basic
-    @Column(name = "title", length = 255)
+    @Column(name = "title", nullable = true, length = 255)
     public String getTitle() {
         return title;
     }
@@ -56,20 +56,42 @@ public class ComponentPo {
         this.title = title;
     }
 
+    @Basic
+    @Column(name = "e_id", nullable = false,insertable = false,updatable = false)
+    public int geteId() {
+        return eId;
+    }
+
+    public void seteId(int eId) {
+        this.eId = eId;
+    }
+
+    @Basic
+    @Column(name = "q_id", nullable = false,insertable = false,updatable = false)
+    public int getqId() {
+        return qId;
+    }
+
+    public void setqId(int qId) {
+        this.qId = qId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComponentPo that = (ComponentPo) o;
-        return core == that.core &&
+        return id == that.id &&
+                core == that.core &&
                 questionNumber == that.questionNumber &&
-                id == that.id &&
+                eId == that.eId &&
+                qId == that.qId &&
                 Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(core, questionNumber, id, title);
+        return Objects.hash(id, core, questionNumber, title, eId, qId);
     }
 
     @ManyToOne

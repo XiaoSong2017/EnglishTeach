@@ -1,6 +1,7 @@
 package po;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -8,6 +9,8 @@ import java.util.Objects;
 public class AcademyPo {
     private int id;
     private String name;
+    private Collection<SpecialtyPo> specialtiesById;
+    private Collection<TeacherPo> teachersById;
 
     @Id
     @GeneratedValue
@@ -21,7 +24,7 @@ public class AcademyPo {
     }
 
     @Basic
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 255)
     public String getName() {
         return name;
     }
@@ -42,5 +45,23 @@ public class AcademyPo {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @OneToMany(mappedBy = "academyByAcademy")
+    public Collection<SpecialtyPo> getSpecialtiesById() {
+        return specialtiesById;
+    }
+
+    public void setSpecialtiesById(Collection<SpecialtyPo> specialtiesById) {
+        this.specialtiesById = specialtiesById;
+    }
+
+    @OneToMany(mappedBy = "academyByAcademy")
+    public Collection<TeacherPo> getTeachersById() {
+        return teachersById;
+    }
+
+    public void setTeachersById(Collection<TeacherPo> teachersById) {
+        this.teachersById = teachersById;
     }
 }

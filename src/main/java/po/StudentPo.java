@@ -1,8 +1,7 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,9 +10,14 @@ public class StudentPo {
     private String id;
     private String name;
     private String password;
+    private int clazz;
+    private Collection<AnswerRecordPo> answerRecordsById;
+    private Collection<ElectiveCoursePo> electiveCoursesById;
     private ClassesPo classesByClazz;
+    private Collection<StudentLogPo> studentLogsById;
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false, length = 20)
     public String getId() {
         return id;
@@ -34,7 +38,6 @@ public class StudentPo {
     }
 
     @Basic
-    @JSON(serialize = false)
     @Column(name = "password", nullable = false, length = 25)
     public String getPassword() {
         return password;
@@ -44,23 +47,51 @@ public class StudentPo {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "class", nullable = false,insertable = false,updatable = false)
+    public int getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(int clazz) {
+        this.clazz = clazz;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StudentPo studentPo = (StudentPo) o;
-        return Objects.equals(id, studentPo.id) &&
+        return clazz == studentPo.clazz &&
+                Objects.equals(id, studentPo.id) &&
                 Objects.equals(name, studentPo.name) &&
                 Objects.equals(password, studentPo.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password);
+        return Objects.hash(id, name, password, clazz);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @OneToMany(mappedBy = "studentBySId")
+    public Collection<AnswerRecordPo> getAnswerRecordsById() {
+        return answerRecordsById;
+    }
+
+    public void setAnswerRecordsById(Collection<AnswerRecordPo> answerRecordsById) {
+        this.answerRecordsById = answerRecordsById;
+    }
+
+    @OneToMany(mappedBy = "studentBySId")
+    public Collection<ElectiveCoursePo> getElectiveCoursesById() {
+        return electiveCoursesById;
+    }
+
+    public void setElectiveCoursesById(Collection<ElectiveCoursePo> electiveCoursesById) {
+        this.electiveCoursesById = electiveCoursesById;
+    }
+
+    @ManyToOne
     @JoinColumn(name = "class", referencedColumnName = "id", nullable = false)
     public ClassesPo getClassesByClazz() {
         return classesByClazz;
@@ -68,5 +99,14 @@ public class StudentPo {
 
     public void setClassesByClazz(ClassesPo classesByClazz) {
         this.classesByClazz = classesByClazz;
+    }
+
+    @OneToMany(mappedBy = "studentBySId")
+    public Collection<StudentLogPo> getStudentLogsById() {
+        return studentLogsById;
+    }
+
+    public void setStudentLogsById(Collection<StudentLogPo> studentLogsById) {
+        this.studentLogsById = studentLogsById;
     }
 }

@@ -1,6 +1,7 @@
 package po;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -8,9 +9,9 @@ import java.util.Objects;
 public class TopicPo {
     private int id;
     private String name;
+    private Collection<ProblemPo> problemsById;
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -42,5 +43,14 @@ public class TopicPo {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @OneToMany(mappedBy = "topicByType")
+    public Collection<ProblemPo> getProblemsById() {
+        return problemsById;
+    }
+
+    public void setProblemsById(Collection<ProblemPo> problemsById) {
+        this.problemsById = problemsById;
     }
 }

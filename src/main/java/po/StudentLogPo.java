@@ -1,7 +1,5 @@
 package po;
 
-import org.apache.struts2.json.annotations.JSON;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -12,6 +10,7 @@ public class StudentLogPo {
     private long id;
     private Timestamp loginTime;
     private Timestamp logoutTime;
+    private String sId;
     private StudentPo studentBySId;
 
     @Id
@@ -45,6 +44,16 @@ public class StudentLogPo {
         this.logoutTime = logoutTime;
     }
 
+    @Basic
+    @Column(name = "s_id", nullable = false, length = 20,insertable = false,updatable = false)
+    public String getsId() {
+        return sId;
+    }
+
+    public void setsId(String sId) {
+        this.sId = sId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,16 +61,16 @@ public class StudentLogPo {
         StudentLogPo that = (StudentLogPo) o;
         return id == that.id &&
                 Objects.equals(loginTime, that.loginTime) &&
-                Objects.equals(logoutTime, that.logoutTime);
+                Objects.equals(logoutTime, that.logoutTime) &&
+                Objects.equals(sId, that.sId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, loginTime, logoutTime);
+        return Objects.hash(id, loginTime, logoutTime, sId);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSON(serialize = false)
+    @ManyToOne
     @JoinColumn(name = "s_id", referencedColumnName = "id", nullable = false)
     public StudentPo getStudentBySId() {
         return studentBySId;

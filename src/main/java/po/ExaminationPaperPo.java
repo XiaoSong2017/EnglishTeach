@@ -2,16 +2,21 @@ package po;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "examination_paper")
 public class ExaminationPaperPo {
     private int id;
-    private boolean type;
-    private Timestamp startTime;
     private Timestamp endTime;
     private String name;
+    private Timestamp startTime;
+    private boolean type;
+    private String cId;
+    private String tId;
+    private Collection<AnswerRecordPo> answerRecordsById;
+    private Collection<ComponentPo> componentsById;
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
 
@@ -27,13 +32,23 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @Column(name = "type", nullable = false)
-    public boolean isType() {
-        return type;
+    @Column(name = "end_time", nullable = false)
+    public Timestamp getEndTime() {
+        return endTime;
     }
 
-    public void setType(boolean type) {
-        this.type = type;
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
+    }
+
+    @Basic
+    @Column(name = "name", nullable = false, length = 255)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -47,23 +62,33 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @Column(name = "end_time", nullable = false)
-    public Timestamp getEndTime() {
-        return endTime;
+    @Column(name = "type", nullable = false)
+    public boolean isType() {
+        return type;
     }
 
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
+    public void setType(boolean type) {
+        this.type = type;
     }
 
     @Basic
-    @Column(name = "name", nullable = false)
-    public String getName() {
-        return name;
+    @Column(name = "c_id", nullable = false, length = 25,insertable = false,updatable = false)
+    public String getcId() {
+        return cId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setcId(String cId) {
+        this.cId = cId;
+    }
+
+    @Basic
+    @Column(name = "t_id", nullable = false, length = 15,insertable = false,updatable = false)
+    public String gettId() {
+        return tId;
+    }
+
+    public void settId(String tId) {
+        this.tId = tId;
     }
 
     @Override
@@ -73,14 +98,34 @@ public class ExaminationPaperPo {
         ExaminationPaperPo that = (ExaminationPaperPo) o;
         return id == that.id &&
                 type == that.type &&
+                Objects.equals(endTime, that.endTime) &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(startTime, that.startTime) &&
-                Objects.equals(endTime, that.endTime)&&Objects.equals(
-                        name,that.name);
+                Objects.equals(cId, that.cId) &&
+                Objects.equals(tId, that.tId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, startTime, endTime);
+        return Objects.hash(id, endTime, name, startTime, type, cId, tId);
+    }
+
+    @OneToMany(mappedBy = "examinationPaperByEId")
+    public Collection<AnswerRecordPo> getAnswerRecordsById() {
+        return answerRecordsById;
+    }
+
+    public void setAnswerRecordsById(Collection<AnswerRecordPo> answerRecordsById) {
+        this.answerRecordsById = answerRecordsById;
+    }
+
+    @OneToMany(mappedBy = "examinationPaperByEId")
+    public Collection<ComponentPo> getComponentsById() {
+        return componentsById;
+    }
+
+    public void setComponentsById(Collection<ComponentPo> componentsById) {
+        this.componentsById = componentsById;
     }
 
     @ManyToOne

@@ -1,6 +1,7 @@
 package po;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -9,6 +10,9 @@ public class QuestionPo {
     private int id;
     private String answer;
     private String content;
+    private Integer problem;
+    private Collection<AnswerRecordPo> answerRecordsById;
+    private Collection<OptionsPo> optionsById;
     private ProblemPo problemByProblem;
 
     @Id
@@ -42,6 +46,16 @@ public class QuestionPo {
         this.content = content;
     }
 
+    @Basic
+    @Column(name = "problem", nullable = true,insertable = false,updatable = false)
+    public Integer getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Integer problem) {
+        this.problem = problem;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,12 +63,31 @@ public class QuestionPo {
         QuestionPo that = (QuestionPo) o;
         return id == that.id &&
                 Objects.equals(answer, that.answer) &&
-                Objects.equals(content, that.content);
+                Objects.equals(content, that.content) &&
+                Objects.equals(problem, that.problem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, answer, content);
+        return Objects.hash(id, answer, content, problem);
+    }
+
+    @OneToMany(mappedBy = "questionByQId")
+    public Collection<AnswerRecordPo> getAnswerRecordsById() {
+        return answerRecordsById;
+    }
+
+    public void setAnswerRecordsById(Collection<AnswerRecordPo> answerRecordsById) {
+        this.answerRecordsById = answerRecordsById;
+    }
+
+    @OneToMany(mappedBy = "questionByQuestion")
+    public Collection<OptionsPo> getOptionsById() {
+        return optionsById;
+    }
+
+    public void setOptionsById(Collection<OptionsPo> optionsById) {
+        this.optionsById = optionsById;
     }
 
     @ManyToOne

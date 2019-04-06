@@ -150,8 +150,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="取消"/>
-                <input type="submit" class="btn btn-primary" onclick="" data-dismiss="modal" value="添加"/>
+                <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button class="btn btn-primary" onclick="addExamPager(this)" data-dismiss="modal">添加</button>
             </div>
             <%--</form>--%>
         </div>
@@ -184,6 +184,54 @@
 </div>
 </body>
 <script type="text/javascript">
+    function addExamPager(obj){
+        //console.log($(obj).parent().prev().children().children().children().eq(0));
+        const thead = $(obj).parent().prev().children().children().children().eq(0);
+        //console.log($(thead.children().eq(2).children().eq(1).children()).val());
+        var courseById=$(thead.children().eq(0).children().eq(1).children()).val();
+        var title=$(thead.children().eq(1).children().eq(1).children()).val();
+        var startTime=$(thead.children().eq(2).children().eq(1).children()).val();
+        var startTime=$(thead.children().eq(3).children().eq(1).children()).val();
+        var rows = $(obj).parent().prev().children().children().children().eq(1).children();
+        var problems=[];
+        for(var i=0;i<rows.length;++i){
+            var problem=[];
+            var problemNumber=rows.eq(i).children().children().children().eq(0).children().children().text();
+            var problemTopic=rows.eq(i).children().children().children().eq(1).children().children().eq(0).children().val();
+            var problemContent=rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().children().children().children().summernote('code');
+            var questions=[];
+            var rowsI=rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(1).children();
+            for(var j=0;j<rowsI.length;++j){
+                var question=[];
+                var tableJ=rowsI.eq(j).children().children();
+                var theadJ=tableJ.children().eq(0);
+                var questionContent=theadJ.children().eq(0).children().children().children().summernote('code');
+                var answer=theadJ.children().eq(1).children().children().children().summernote('code');
+                var options=[];
+                var tbodyJ=tableJ.children().eq(1);
+                for(var k=0;k<tbodyJ.children().length;++k){
+                    var option=[];
+                    var mark=tbodyJ.children().eq(k).children().children().children().eq(0).text();
+                    var optionContent=tbodyJ.children().eq(k).children().children().children().eq(1).summernote('code');
+                    option.push({'mark':mark});
+                    option.push({'content':optionContent});
+                    options.push(option);
+                    //console.log(tbodyJ.children().eq(k).children().children().children().eq(0).text());
+                }
+                question.push({'question':questionContent});
+                question.push({'answer':answer});
+                question.push({'option':options});
+                questions.push(question);
+            }
+            problem.push({'number':problemNumber});
+            problem.push({'topicId':problemTopic});
+            problem.push({'content':problemContent});
+            problem.push({'question':questions});
+            problems.push(problem);
+            //console.log(rowsI.eq(0).children().children());
+        }
+        console.log(problems);
+    }
     $('.text-area').summernote({
         lang: 'zh-CN',
         placeholder: '请输入内容！',
@@ -239,7 +287,7 @@
             url: '<%=request.getContextPath()%>/courseBean',
             async: true,
             type: 'post',
-            success: function (data) {
+            success: (data)=> {
                 $('#add_homework_manager_course').empty();
                 for (var i = 0; i < data.data.length; ++i) {
                     $('#add_homework_manager_course').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
