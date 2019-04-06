@@ -1,5 +1,7 @@
 package po;
 
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -25,6 +27,7 @@ public class StudentLogPo {
     }
 
     @Basic
+    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
     @Column(name = "login_time", nullable = false)
     public Timestamp getLoginTime() {
         return loginTime;
@@ -35,6 +38,7 @@ public class StudentLogPo {
     }
 
     @Basic
+    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
     @Column(name = "logout_time", nullable = false)
     public Timestamp getLogoutTime() {
         return logoutTime;

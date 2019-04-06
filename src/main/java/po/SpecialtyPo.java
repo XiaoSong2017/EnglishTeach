@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -59,7 +61,8 @@ public class SpecialtyPo {
         return Objects.hash(id, name, academy);
     }
 
-    @OneToMany(mappedBy = "specialtyBySpecialty")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "specialtyBySpecialty",fetch = FetchType.LAZY)
     public Collection<ClassesPo> getClassesById() {
         return classesById;
     }

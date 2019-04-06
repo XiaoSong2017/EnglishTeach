@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -45,7 +47,8 @@ public class TopicPo {
         return Objects.hash(id, name);
     }
 
-    @OneToMany(mappedBy = "topicByType")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "topicByType",fetch = FetchType.LAZY)
     public Collection<ProblemPo> getProblemsById() {
         return problemsById;
     }

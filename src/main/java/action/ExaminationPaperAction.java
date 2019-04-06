@@ -2,18 +2,20 @@ package action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.json.annotations.JSON;
+import po.ExaminationPaperPo;
+import po.ProblemPo;
 import service.ExaminationPaperService;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import static org.hibernate.internal.HEMLogging.logger;
 
 public class ExaminationPaperAction extends ActionSupport {
     private ExaminationPaperService examinationPaperService;
     private String examinationPaperId;
     private String resultCode;
-    private String courseById;
-    private String examinationTitle;
-    private Timestamp start_time;
-    private Timestamp end_time;
+    private ExaminationPaperPo examinationPaperPo;
 
     public void setExaminationPaperService(ExaminationPaperService examinationPaperService) {
         this.examinationPaperService = examinationPaperService;
@@ -27,20 +29,8 @@ public class ExaminationPaperAction extends ActionSupport {
         this.resultCode = resultCode;
     }
 
-    public void setCourseById(String courseById) {
-        this.courseById = courseById;
-    }
-
-    public void setExaminationTitle(String examinationTitle) {
-        this.examinationTitle = examinationTitle;
-    }
-
-    public void setStart_time(Timestamp start_time) {
-        this.start_time = start_time;
-    }
-
-    public void setEnd_time(Timestamp end_time) {
-        this.end_time = end_time;
+    public void setExaminationPaperPo(ExaminationPaperPo examinationPaperPo) {
+        this.examinationPaperPo = examinationPaperPo;
     }
 
     @JSON
@@ -60,8 +50,9 @@ public class ExaminationPaperAction extends ActionSupport {
     }
 
     public String saveExaminationPager()throws Exception{
-
+        logger("examinationTitle:"+examinationPaperPo);
+        examinationPaperService.saveExaminationPaper(examinationPaperPo);
         resultCode=SUCCESS;
-        return resultCode;
+        return SUCCESS;
     }
 }

@@ -1,6 +1,7 @@
 package po;
 
 import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -76,6 +77,7 @@ public class TeachResourcePo {
     }
 
     @Basic
+    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
     @Column(name = "upload_time", nullable = false)
     public Timestamp getUploadTime() {
         return uploadTime;

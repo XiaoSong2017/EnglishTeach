@@ -184,54 +184,111 @@
 </div>
 </body>
 <script type="text/javascript">
-    function addExamPager(obj){
+    function addExamPager(obj) {
         //console.log($(obj).parent().prev().children().children().children().eq(0));
         const thead = $(obj).parent().prev().children().children().children().eq(0);
         //console.log($(thead.children().eq(2).children().eq(1).children()).val());
-        var courseById=$(thead.children().eq(0).children().eq(1).children()).val();
-        var title=$(thead.children().eq(1).children().eq(1).children()).val();
-        var startTime=$(thead.children().eq(2).children().eq(1).children()).val();
-        var startTime=$(thead.children().eq(3).children().eq(1).children()).val();
+        var courseById = $(thead.children().eq(0).children().eq(1).children()).val();
+        var title = $(thead.children().eq(1).children().eq(1).children()).val();
+        var startTime = $(thead.children().eq(2).children().eq(1).children()).val();
+        var endTime = $(thead.children().eq(3).children().eq(1).children()).val();
         var rows = $(obj).parent().prev().children().children().children().eq(1).children();
-        var problems=[];
-        for(var i=0;i<rows.length;++i){
-            var problem=[];
-            var problemNumber=rows.eq(i).children().children().children().eq(0).children().children().text();
-            var problemTopic=rows.eq(i).children().children().children().eq(1).children().children().eq(0).children().val();
-            var problemContent=rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().children().children().children().summernote('code');
-            var questions=[];
-            var rowsI=rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(1).children();
-            for(var j=0;j<rowsI.length;++j){
-                var question=[];
-                var tableJ=rowsI.eq(j).children().children();
-                var theadJ=tableJ.children().eq(0);
-                var questionContent=theadJ.children().eq(0).children().children().children().summernote('code');
-                var answer=theadJ.children().eq(1).children().children().children().summernote('code');
-                var options=[];
-                var tbodyJ=tableJ.children().eq(1);
-                for(var k=0;k<tbodyJ.children().length;++k){
-                    var option=[];
-                    var mark=tbodyJ.children().eq(k).children().children().children().eq(0).text();
-                    var optionContent=tbodyJ.children().eq(k).children().children().children().eq(1).summernote('code');
-                    option.push({'mark':mark});
-                    option.push({'content':optionContent});
+        var problems = [];
+        for (var i = 0; i < rows.length; ++i) {
+            var problemNumber = rows.eq(i).children().children().children().eq(0).children().children().text();
+            var problemTopic = rows.eq(i).children().children().children().eq(1).children().children().eq(0).children().val();
+            var problemContent = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().children().children().children().summernote('code');
+            var questions = [];
+            var rowsI = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(1).children();
+            for (var j = 0; j < rowsI.length; ++j) {
+                var tableJ = rowsI.eq(j).children().children();
+                var theadJ = tableJ.children().eq(0);
+                var questionContent = theadJ.children().eq(0).children().children().children().summernote('code');
+                var answer = theadJ.children().eq(1).children().children().children().summernote('code');
+                var options = [];
+                var tbodyJ = tableJ.children().eq(1);
+                for (var k = 0; k < tbodyJ.children().length; ++k) {
+                    var mark = tbodyJ.children().eq(k).children().children().children().eq(0).text();
+                    var optionContent = tbodyJ.children().eq(k).children().children().children().eq(1).summernote('code');
+                    var option = {
+                        'mark': mark,
+                        'content': optionContent
+                    };
                     options.push(option);
                     //console.log(tbodyJ.children().eq(k).children().children().children().eq(0).text());
                 }
-                question.push({'question':questionContent});
-                question.push({'answer':answer});
-                question.push({'option':options});
+                var question = {
+                    'question': questionContent,
+                    'answer': answer,
+                    'option': options
+                };
                 questions.push(question);
             }
-            problem.push({'number':problemNumber});
-            problem.push({'topicId':problemTopic});
-            problem.push({'content':problemContent});
-            problem.push({'question':questions});
+            var problem = {
+                'questionNumber': problemNumber,
+                'type': problemTopic,
+                'content': problemContent,
+                'question': questions
+            };
             problems.push(problem);
             //console.log(rowsI.eq(0).children().children());
         }
-        console.log(problems);
+        var examinationPaper = {
+            'type': 0,
+            'name': title,
+            'startTime': startTime,
+            'endTime': endTime,
+            'cId': courseById,
+            'tId':<%=request.getSession().getAttribute("ID")%>,
+            'componentsById': problems
+        };
+        console.log(JSON.stringify(examinationPaper));
+        $.ajax({
+        url: '<%=request.getContextPath()%>/saveExaminationPaper',
+        type: 'post',
+        async: true,
+        datatype: 'json',
+        data: {'courseById':courseById,'tId':'<%=request.getSession().getAttribute("ID")%>','examinationPaperPo':examinationPaper},
+        success: (data) => {
+        if(data.resultCode==='success'){
+        $.ajax({
+        url: '<%=request.getContextPath()%>/examinationPaperBean',
+        datatype: 'json',
+        async: true,
+        type: 'post',
+        data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: true},
+        success: (data) => {
+        $('#tbody_homework').empty();
+        for (var i = 0; i < data.data.length; ++i) {
+        $('#tbody_homework').append('<tr class="row">\n' +
+        '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
+        '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
+        '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+        '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
+        '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
+        '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
+        '            <td class="col text-center">\n' +
+        '                <div class="btn-group" role="group">\n' +
+        '                    <a class="btn btn-outline-info" data-toggle="modal">修改</a>\n' +
+        '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
+        '                </div>\n' +
+        '            </td>\n' +
+        '        </tr>');
+        }
+        Swal.fire({text: "添加已完成！", type: 'success'});
+        },
+        error: () => {
+        Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});
+        }
+        });
+        } else Swal.fire({text: "添加出错！请确保上传无误后重试！", type: 'error'});
+        },
+        error: () => {
+        Swal.fire({text: "上传出错！请确保网络无误重试！", type: 'error'});
+        }
+        });
     }
+
     $('.text-area').summernote({
         lang: 'zh-CN',
         placeholder: '请输入内容！',
@@ -282,12 +339,13 @@
             }
         });
     });
+
     function onclickAddHomework() {
         $.ajax({
             url: '<%=request.getContextPath()%>/courseBean',
             async: true,
             type: 'post',
-            success: (data)=> {
+            success: (data) => {
                 $('#add_homework_manager_course').empty();
                 for (var i = 0; i < data.data.length; ++i) {
                     $('#add_homework_manager_course').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
@@ -296,9 +354,11 @@
             }
         });
     }
+
     function onclickCollapse(obj) {
         $(obj).parent().next().collapse('toggle');
     }
+
     function addProblem() {
         // console.log($('#tbody_work_Problem').children('last'));
         var row = $('#tbody_work_Problem').children().eq(parseInt($('#tbody_work_Problem').children().length) - 1).clone();
@@ -307,15 +367,17 @@
         label.text(parseInt(label.text()) + 1);
         $('#tbody_work_Problem').append(row);
     }
-    function  addQuestion(obj) {
-        var tbody=$(obj).parent().parent().parent().prev();
-        var row=tbody.children().eq(parseInt(tbody.children().length)-1).clone();
+
+    function addQuestion(obj) {
+        var tbody = $(obj).parent().parent().parent().prev();
+        var row = tbody.children().eq(parseInt(tbody.children().length) - 1).clone();
         tbody.append(row);
     }
+
     function addTopic(obj) {
-        var tbody=$(obj).parent().parent().parent().prev();
-        var row=tbody.children().eq(parseInt(tbody.children().length)-1).clone();
-        row.children().children().children().eq(0).text( String.fromCharCode(row.children().children().children().eq(0).text().charCodeAt()+1));
+        var tbody = $(obj).parent().parent().parent().prev();
+        var row = tbody.children().eq(parseInt(tbody.children().length) - 1).clone();
+        row.children().children().children().eq(0).text(String.fromCharCode(row.children().children().children().eq(0).text().charCodeAt() + 1));
         tbody.append(row);
     }
 </script>

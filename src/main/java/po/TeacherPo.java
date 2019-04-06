@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -74,7 +76,8 @@ public class TeacherPo {
         return Objects.hash(id, name, password, academy);
     }
 
-    @OneToMany(mappedBy = "teacherByTId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "teacherByTId",fetch = FetchType.LAZY)
     public Collection<ExaminationPaperPo> getExaminationPapersById() {
         return examinationPapersById;
     }
@@ -83,7 +86,8 @@ public class TeacherPo {
         this.examinationPapersById = examinationPapersById;
     }
 
-    @OneToMany(mappedBy = "teacherByTId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "teacherByTId",fetch = FetchType.LAZY)
     public Collection<ProblemPo> getProblemsById() {
         return problemsById;
     }
@@ -92,7 +96,8 @@ public class TeacherPo {
         this.problemsById = problemsById;
     }
 
-    @OneToMany(mappedBy = "teacherByUploadUser")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "teacherByUploadUser",fetch = FetchType.LAZY)
     public Collection<TeachResourcePo> getTeachResourcesById() {
         return teachResourcesById;
     }
@@ -111,7 +116,8 @@ public class TeacherPo {
         this.academyByAcademy = academyByAcademy;
     }
 
-    @OneToMany(mappedBy = "teacherByTId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "teacherByTId",fetch = FetchType.LAZY)
     public Collection<TeachingPo> getTeachingsById() {
         return teachingsById;
     }

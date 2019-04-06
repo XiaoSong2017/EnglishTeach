@@ -1,5 +1,8 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -32,6 +35,7 @@ public class ExaminationPaperPo {
     }
 
     @Basic
+    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
     @Column(name = "end_time", nullable = false)
     public Timestamp getEndTime() {
         return endTime;
@@ -52,6 +56,7 @@ public class ExaminationPaperPo {
     }
 
     @Basic
+    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
     @Column(name = "start_time", nullable = false)
     public Timestamp getStartTime() {
         return startTime;
@@ -110,7 +115,8 @@ public class ExaminationPaperPo {
         return Objects.hash(id, endTime, name, startTime, type, cId, tId);
     }
 
-    @OneToMany(mappedBy = "examinationPaperByEId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY)
     public Collection<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
@@ -119,7 +125,8 @@ public class ExaminationPaperPo {
         this.answerRecordsById = answerRecordsById;
     }
 
-    @OneToMany(mappedBy = "examinationPaperByEId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY)
     public Collection<ComponentPo> getComponentsById() {
         return componentsById;
     }

@@ -1,5 +1,8 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -42,6 +45,7 @@ public class ProblemPo {
     }
 
     @Basic
+    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
     @Column(name = "time", nullable = false)
     public Timestamp getTime() {
         return time;
@@ -99,7 +103,8 @@ public class ProblemPo {
         return Objects.hash(id, content, time, cId, tId, type);
     }
 
-    @OneToMany(mappedBy = "problemByQId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "problemByQId",fetch = FetchType.LAZY)
     public Collection<ComponentPo> getComponentsById() {
         return componentsById;
     }
@@ -138,7 +143,8 @@ public class ProblemPo {
         this.topicByType = topicByType;
     }
 
-    @OneToMany(mappedBy = "problemByProblem")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "problemByProblem",fetch = FetchType.LAZY)
     public Collection<QuestionPo> getQuestionsById() {
         return questionsById;
     }

@@ -1,6 +1,9 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
+import java.lang.invoke.LambdaConversionException;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -72,7 +75,8 @@ public class QuestionPo {
         return Objects.hash(id, answer, content, problem);
     }
 
-    @OneToMany(mappedBy = "questionByQId")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "questionByQId",fetch = FetchType.LAZY)
     public Collection<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
@@ -81,7 +85,8 @@ public class QuestionPo {
         this.answerRecordsById = answerRecordsById;
     }
 
-    @OneToMany(mappedBy = "questionByQuestion")
+    @JSON(serialize = false)
+    @OneToMany(mappedBy = "questionByQuestion",fetch = FetchType.LAZY)
     public Collection<OptionsPo> getOptionsById() {
         return optionsById;
     }
