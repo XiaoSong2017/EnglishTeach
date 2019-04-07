@@ -6,15 +6,16 @@ import org.hibernate.annotations.GenerationTime;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "examination_paper")
 public class ExaminationPaperPo {
     private int id;
-    private Timestamp endTime;
+    private Date endTime;
     private String name;
-    private Timestamp startTime;
+    private Date startTime;
     private boolean type;
     private String cId;
     private String tId;
@@ -35,13 +36,13 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_time", nullable = false)
-    public Timestamp getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -56,13 +57,13 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "start_time", nullable = false)
-    public Timestamp getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
@@ -77,7 +78,7 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @Column(name = "c_id", nullable = false, length = 25,insertable = false,updatable = false)
+    @Column(name = "c_id", nullable = false, length = 25)
     public String getcId() {
         return cId;
     }
@@ -87,7 +88,7 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @Column(name = "t_id", nullable = false, length = 15,insertable = false,updatable = false)
+    @Column(name = "t_id", nullable = false, length = 15)
     public String gettId() {
         return tId;
     }
@@ -116,7 +117,7 @@ public class ExaminationPaperPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     public Collection<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
@@ -126,7 +127,7 @@ public class ExaminationPaperPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     public Collection<ComponentPo> getComponentsById() {
         return componentsById;
     }
@@ -135,8 +136,8 @@ public class ExaminationPaperPo {
         this.componentsById = componentsById;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
     public CoursePo getCourseByCId() {
         return courseByCId;
     }
@@ -145,8 +146,8 @@ public class ExaminationPaperPo {
         this.courseByCId = courseByCId;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
     public TeacherPo getTeacherByTId() {
         return teacherByTId;
     }

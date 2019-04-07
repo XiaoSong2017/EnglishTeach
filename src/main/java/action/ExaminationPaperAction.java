@@ -1,6 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.json.annotations.JSON;
 import po.ExaminationPaperPo;
 import po.ProblemPo;
@@ -8,15 +9,15 @@ import service.ExaminationPaperService;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.hibernate.internal.HEMLogging.logger;
 
-public class ExaminationPaperAction extends ActionSupport {
+public class ExaminationPaperAction extends ActionSupport{
     private ExaminationPaperService examinationPaperService;
     private String examinationPaperId;
     private String resultCode;
     private ExaminationPaperPo examinationPaperPo;
-
     public void setExaminationPaperService(ExaminationPaperService examinationPaperService) {
         this.examinationPaperService = examinationPaperService;
     }
@@ -27,10 +28,6 @@ public class ExaminationPaperAction extends ActionSupport {
 
     public void setResultCode(String resultCode) {
         this.resultCode = resultCode;
-    }
-
-    public void setExaminationPaperPo(ExaminationPaperPo examinationPaperPo) {
-        this.examinationPaperPo = examinationPaperPo;
     }
 
     @JSON
@@ -47,6 +44,10 @@ public class ExaminationPaperAction extends ActionSupport {
         examinationPaperService.deleteExaminationPaperById(examinationPaperId);
         resultCode = SUCCESS;
         return SUCCESS;
+    }
+
+    public void setExaminationPaperPo(ExaminationPaperPo examinationPaperPo) {
+        this.examinationPaperPo = examinationPaperPo;
     }
 
     public String saveExaminationPager()throws Exception{

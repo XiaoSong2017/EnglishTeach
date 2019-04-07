@@ -44,7 +44,7 @@ public class OptionsPo {
     }
 
     @Basic
-    @Column(name = "question", nullable = false,insertable = false,updatable = false)
+    @Column(name = "question", nullable = false)
     public int getQuestion() {
         return question;
     }
@@ -69,8 +69,8 @@ public class OptionsPo {
         return Objects.hash(id, content, mark, question);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "question", referencedColumnName = "id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "question", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
     public QuestionPo getQuestionByQuestion() {
         return questionByQuestion;
     }

@@ -50,7 +50,7 @@ public class QuestionPo {
     }
 
     @Basic
-    @Column(name = "problem", nullable = true,insertable = false,updatable = false)
+    @Column(name = "problem", nullable = true)
     public Integer getProblem() {
         return problem;
     }
@@ -76,7 +76,7 @@ public class QuestionPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "questionByQId",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "questionByQId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     public Collection<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
@@ -86,7 +86,7 @@ public class QuestionPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "questionByQuestion",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "questionByQuestion",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     public Collection<OptionsPo> getOptionsById() {
         return optionsById;
     }
@@ -95,8 +95,8 @@ public class QuestionPo {
         this.optionsById = optionsById;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "problem", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "problem", referencedColumnName = "id",insertable = false,updatable = false)
     public ProblemPo getProblemByProblem() {
         return problemByProblem;
     }

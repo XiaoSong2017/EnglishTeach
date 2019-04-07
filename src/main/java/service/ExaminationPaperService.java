@@ -23,6 +23,6 @@ public class ExaminationPaperService {
     }
 
     public void saveExaminationPaper(ExaminationPaperPo examinationPaperPo) {
-        examinationPaperDao.save(examinationPaperPo);
+        examinationPaperDao.saveOrUpdate(examinationPaperPo);
     }
 }

@@ -1,11 +1,10 @@
 package po;
 
 import org.apache.struts2.json.annotations.JSON;
-import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Objects;
 public class ProblemPo {
     private int id;
     private String content;
-    private Timestamp time;
+    private Date time;
     private String cId;
     private String tId;
     private Integer type;
@@ -45,13 +44,13 @@ public class ProblemPo {
     }
 
     @Basic
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "time", nullable = false)
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -104,7 +103,7 @@ public class ProblemPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "problemByQId",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "problemByQId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     public Collection<ComponentPo> getComponentsById() {
         return componentsById;
     }
@@ -113,7 +112,7 @@ public class ProblemPo {
         this.componentsById = componentsById;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCId() {
         return courseByCId;
@@ -123,7 +122,7 @@ public class ProblemPo {
         this.courseByCId = courseByCId;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByTId() {
         return teacherByTId;
@@ -133,7 +132,7 @@ public class ProblemPo {
         this.teacherByTId = teacherByTId;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type", referencedColumnName = "id")
     public TopicPo getTopicByType() {
         return topicByType;
@@ -144,7 +143,7 @@ public class ProblemPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "problemByProblem",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "problemByProblem",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     public Collection<QuestionPo> getQuestionsById() {
         return questionsById;
     }

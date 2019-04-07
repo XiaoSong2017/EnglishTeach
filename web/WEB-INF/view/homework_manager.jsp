@@ -82,6 +82,13 @@
                                                         </label>
                                                     </td>
                                                 </tr>
+                                                <tr class="row">
+                                                    <td class="col">
+                                                        <label class="label">
+                                                            每一问分值：<input type="number" placeholder="请输入！" required>
+                                                        </label>
+                                                    </td>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr class="row">
@@ -197,7 +204,9 @@
         for (var i = 0; i < rows.length; ++i) {
             var problemNumber = rows.eq(i).children().children().children().eq(0).children().children().text();
             var problemTopic = rows.eq(i).children().children().children().eq(1).children().children().eq(0).children().val();
-            var problemContent = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().children().children().children().summernote('code');
+            var problemContent = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().eq(0).children().children().children().summernote('code');
+            //console.log( rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0));
+            var core = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().eq(1).children().children().children().val();
             var questions = [];
             var rowsI = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(1).children();
             for (var j = 0; j < rowsI.length; ++j) {
@@ -228,6 +237,7 @@
                 'questionNumber': problemNumber,
                 'type': problemTopic,
                 'content': problemContent,
+                'core': core,
                 'question': questions
             };
             problems.push(problem);
@@ -239,18 +249,18 @@
             'startTime': startTime,
             'endTime': endTime,
             'cId': courseById,
-            'tId':<%=request.getSession().getAttribute("ID")%>,
+            'tId': '<%=request.getSession().getAttribute("ID")%>',
             'componentsById': problems
         };
-        console.log(JSON.stringify(examinationPaper));
+        console.log(examinationPaper);
         $.ajax({
         url: '<%=request.getContextPath()%>/saveExaminationPaper',
         type: 'post',
         async: true,
         datatype: 'json',
-        data: {'courseById':courseById,'tId':'<%=request.getSession().getAttribute("ID")%>','examinationPaperPo':examinationPaper},
+        data: {'examinationPaperPo': JSON.stringify(examinationPaper)},
         success: (data) => {
-        if(data.resultCode==='success'){
+        if (data.resultCode === 'success') {
         $.ajax({
         url: '<%=request.getContextPath()%>/examinationPaperBean',
         datatype: 'json',
@@ -284,7 +294,7 @@
         } else Swal.fire({text: "添加出错！请确保上传无误后重试！", type: 'error'});
         },
         error: () => {
-        Swal.fire({text: "上传出错！请确保网络无误重试！", type: 'error'});
+        Swal.fire({text: "上传出错！请确保输入无误后重试！", type: 'error'});
         }
         });
     }
