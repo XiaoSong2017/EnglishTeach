@@ -3,16 +3,17 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "academy")
 public class AcademyPo {
     private int id;
     private String name;
-    private Collection<SpecialtyPo> specialtiesById;
-    private Collection<TeacherPo> teachersById;
+    private Set<SpecialtyPo> specialtiesById=new HashSet<>();
+    private Set<TeacherPo> teachersById=new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -51,20 +52,20 @@ public class AcademyPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "academyByAcademy",fetch = FetchType.LAZY)
-    public Collection<SpecialtyPo> getSpecialtiesById() {
+    public Set<SpecialtyPo> getSpecialtiesById() {
         return specialtiesById;
     }
 
-    public void setSpecialtiesById(Collection<SpecialtyPo> specialtiesById) {
+    public void setSpecialtiesById(Set<SpecialtyPo> specialtiesById) {
         this.specialtiesById = specialtiesById;
     }
     @JSON(serialize = false)
     @OneToMany(mappedBy = "academyByAcademy",fetch = FetchType.LAZY)
-    public Collection<TeacherPo> getTeachersById() {
+    public Set<TeacherPo> getTeachersById() {
         return teachersById;
     }
 
-    public void setTeachersById(Collection<TeacherPo> teachersById) {
+    public void setTeachersById(Set<TeacherPo> teachersById) {
         this.teachersById = teachersById;
     }
 }

@@ -57,7 +57,7 @@ public class ComponentPo {
     }
 
     @Basic
-    @Column(name = "e_id", nullable = false)
+    @Column(name = "e_id", nullable = false,insertable = false,updatable = false)
     public int geteId() {
         return eId;
     }
@@ -67,7 +67,7 @@ public class ComponentPo {
     }
 
     @Basic
-    @Column(name = "q_id", nullable = false)
+    @Column(name = "q_id", nullable = false,insertable = false,updatable = false)
     public int getqId() {
         return qId;
     }
@@ -95,7 +95,7 @@ public class ComponentPo {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false)
     public ExaminationPaperPo getExaminationPaperByEId() {
         return examinationPaperByEId;
     }
@@ -105,7 +105,7 @@ public class ComponentPo {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "q_id", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "q_id", referencedColumnName = "id", nullable = false)
     public ProblemPo getProblemByQId() {
         return problemByQId;
     }

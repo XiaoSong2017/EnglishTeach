@@ -39,7 +39,7 @@
                             </th>
                             <th class="col text-center">
                                 <img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加题目"
-                                     onclick="addProblem()" class="img-circle btn btn-outline-info" type="svg">
+                                     onclick="addProblemByWork()" class="img-circle btn btn-outline-info" type="svg">
                             </th>
                         </tr>
                         <tr class="row">
@@ -244,7 +244,7 @@
             //console.log(rowsI.eq(0).children().children());
         }
         var examinationPaper = {
-            'type': 0,
+            'type': 1,
             'name': title,
             'startTime': startTime,
             'endTime': endTime,
@@ -359,7 +359,7 @@
                 $('#add_homework_manager_course').empty();
                 for (var i = 0; i < data.data.length; ++i) {
                     $('#add_homework_manager_course').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
-                    //$('#updateSelectElectiveCourse').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                    //$('#add_exam_manager_course').append('<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
                 }
             }
         });
@@ -369,7 +369,7 @@
         $(obj).parent().next().collapse('toggle');
     }
 
-    function addProblem() {
+    function addProblemByWork() {
         // console.log($('#tbody_work_Problem').children('last'));
         var row = $('#tbody_work_Problem').children().eq(parseInt($('#tbody_work_Problem').children().length) - 1).clone();
         //console.log(row.children().children().children().eq(0).children().children().text());

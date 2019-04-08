@@ -3,8 +3,9 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -13,10 +14,10 @@ public class StudentPo {
     private String name;
     private String password;
     private int clazz;
-    private Collection<AnswerRecordPo> answerRecordsById;
-    private Collection<ElectiveCoursePo> electiveCoursesById;
+    private Set<AnswerRecordPo> answerRecordsById=new HashSet<>();
+    private Set<ElectiveCoursePo> electiveCoursesById=new HashSet<>();
     private ClassesPo classesByClazz;
-    private Collection<StudentLogPo> studentLogsById;
+    private Set<StudentLogPo> studentLogsById=new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -76,26 +77,26 @@ public class StudentPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "studentBySId",fetch = FetchType.LAZY)
-    public Collection<AnswerRecordPo> getAnswerRecordsById() {
+    @OneToMany(mappedBy = "studentBySId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
 
-    public void setAnswerRecordsById(Collection<AnswerRecordPo> answerRecordsById) {
+    public void setAnswerRecordsById(Set<AnswerRecordPo> answerRecordsById) {
         this.answerRecordsById = answerRecordsById;
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "studentBySId",fetch = FetchType.LAZY)
-    public Collection<ElectiveCoursePo> getElectiveCoursesById() {
+    @OneToMany(mappedBy = "studentBySId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<ElectiveCoursePo> getElectiveCoursesById() {
         return electiveCoursesById;
     }
 
-    public void setElectiveCoursesById(Collection<ElectiveCoursePo> electiveCoursesById) {
+    public void setElectiveCoursesById(Set<ElectiveCoursePo> electiveCoursesById) {
         this.electiveCoursesById = electiveCoursesById;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "class", referencedColumnName = "id", nullable = false)
     public ClassesPo getClassesByClazz() {
         return classesByClazz;
@@ -106,12 +107,12 @@ public class StudentPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "studentBySId",fetch = FetchType.LAZY)
-    public Collection<StudentLogPo> getStudentLogsById() {
+    @OneToMany(mappedBy = "studentBySId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<StudentLogPo> getStudentLogsById() {
         return studentLogsById;
     }
 
-    public void setStudentLogsById(Collection<StudentLogPo> studentLogsById) {
+    public void setStudentLogsById(Set<StudentLogPo> studentLogsById) {
         this.studentLogsById = studentLogsById;
     }
 }

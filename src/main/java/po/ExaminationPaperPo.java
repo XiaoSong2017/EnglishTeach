@@ -5,9 +5,7 @@ import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "examination_paper")
@@ -19,8 +17,8 @@ public class ExaminationPaperPo {
     private boolean type;
     private String cId;
     private String tId;
-    private Collection<AnswerRecordPo> answerRecordsById;
-    private Collection<ComponentPo> componentsById;
+    private Set<AnswerRecordPo> answerRecordsById=new HashSet<>();
+    private Set<ComponentPo> componentsById=new HashSet<>();
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
 
@@ -78,7 +76,7 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @Column(name = "c_id", nullable = false, length = 25)
+    @Column(name = "c_id", nullable = false, length = 25,insertable = false,updatable = false)
     public String getcId() {
         return cId;
     }
@@ -88,7 +86,7 @@ public class ExaminationPaperPo {
     }
 
     @Basic
-    @Column(name = "t_id", nullable = false, length = 15)
+    @Column(name = "t_id", nullable = false, length = 15,insertable = false,updatable = false)
     public String gettId() {
         return tId;
     }
@@ -118,26 +116,26 @@ public class ExaminationPaperPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public Collection<AnswerRecordPo> getAnswerRecordsById() {
+    public Set<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
 
-    public void setAnswerRecordsById(Collection<AnswerRecordPo> answerRecordsById) {
+    public void setAnswerRecordsById(Set<AnswerRecordPo> answerRecordsById) {
         this.answerRecordsById = answerRecordsById;
     }
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "examinationPaperByEId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public Collection<ComponentPo> getComponentsById() {
+    public Set<ComponentPo> getComponentsById() {
         return componentsById;
     }
 
-    public void setComponentsById(Collection<ComponentPo> componentsById) {
+    public void setComponentsById(Set<ComponentPo> componentsById) {
         this.componentsById = componentsById;
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCId() {
         return courseByCId;
     }
@@ -147,7 +145,7 @@ public class ExaminationPaperPo {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByTId() {
         return teacherByTId;
     }

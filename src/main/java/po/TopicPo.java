@@ -4,14 +4,16 @@ import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "topic")
 public class TopicPo {
     private int id;
     private String name;
-    private Collection<ProblemPo> problemsById;
+    private Set<ProblemPo> problemsById=new HashSet<>();
 
     @Id
     @Column(name = "id", nullable = false)
@@ -48,12 +50,12 @@ public class TopicPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "topicByType",fetch = FetchType.LAZY)
-    public Collection<ProblemPo> getProblemsById() {
+    @OneToMany(mappedBy = "topicByType",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<ProblemPo> getProblemsById() {
         return problemsById;
     }
 
-    public void setProblemsById(Collection<ProblemPo> problemsById) {
+    public void setProblemsById(Set<ProblemPo> problemsById) {
         this.problemsById = problemsById;
     }
 }

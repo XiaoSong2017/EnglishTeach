@@ -3,9 +3,9 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.lang.invoke.LambdaConversionException;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "question")
@@ -14,8 +14,8 @@ public class QuestionPo {
     private String answer;
     private String content;
     private Integer problem;
-    private Collection<AnswerRecordPo> answerRecordsById;
-    private Collection<OptionsPo> optionsById;
+    private Set<AnswerRecordPo> answerRecordsById=new HashSet<>() ;
+    private Set<OptionsPo> optionsById=new HashSet<>();
     private ProblemPo problemByProblem;
 
     @Id
@@ -50,7 +50,7 @@ public class QuestionPo {
     }
 
     @Basic
-    @Column(name = "problem", nullable = true)
+    @Column(name = "problem", nullable = true,insertable = false,updatable = false)
     public Integer getProblem() {
         return problem;
     }
@@ -77,26 +77,26 @@ public class QuestionPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "questionByQId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public Collection<AnswerRecordPo> getAnswerRecordsById() {
+    public Set<AnswerRecordPo> getAnswerRecordsById() {
         return answerRecordsById;
     }
 
-    public void setAnswerRecordsById(Collection<AnswerRecordPo> answerRecordsById) {
+    public void setAnswerRecordsById(Set<AnswerRecordPo> answerRecordsById) {
         this.answerRecordsById = answerRecordsById;
     }
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "questionByQuestion",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public Collection<OptionsPo> getOptionsById() {
+    public Set<OptionsPo> getOptionsById() {
         return optionsById;
     }
 
-    public void setOptionsById(Collection<OptionsPo> optionsById) {
+    public void setOptionsById(Set<OptionsPo> optionsById) {
         this.optionsById = optionsById;
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "problem", referencedColumnName = "id",insertable = false,updatable = false)
+    @JoinColumn(name = "problem", referencedColumnName = "id")
     public ProblemPo getProblemByProblem() {
         return problemByProblem;
     }

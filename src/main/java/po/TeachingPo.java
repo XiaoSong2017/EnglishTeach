@@ -3,8 +3,9 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "teaching")
@@ -14,7 +15,7 @@ public class TeachingPo {
     private double usualProportion;
     private String cId;
     private String tId;
-    private Collection<ElectiveCoursePo> electiveCoursesById;
+    private Set<ElectiveCoursePo> electiveCoursesById=new HashSet<>();
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
 
@@ -87,16 +88,16 @@ public class TeachingPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "teachingByEId",fetch = FetchType.LAZY)
-    public Collection<ElectiveCoursePo> getElectiveCoursesById() {
+    @OneToMany(mappedBy = "teachingByEId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<ElectiveCoursePo> getElectiveCoursesById() {
         return electiveCoursesById;
     }
 
-    public void setElectiveCoursesById(Collection<ElectiveCoursePo> electiveCoursesById) {
+    public void setElectiveCoursesById(Set<ElectiveCoursePo> electiveCoursesById) {
         this.electiveCoursesById = electiveCoursesById;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "c_id", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCId() {
         return courseByCId;
@@ -106,7 +107,7 @@ public class TeachingPo {
         this.courseByCId = courseByCId;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "t_id", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByTId() {
         return teacherByTId;

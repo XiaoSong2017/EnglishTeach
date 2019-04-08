@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +18,7 @@ public class TeachResourcePo {
     private byte[] file;
     private String fileName;
     private String fileType;
-    private Timestamp uploadTime;
+    private Date uploadTime;
     private String course;
     private String uploadUser;
     private CoursePo courseByCourse;
@@ -77,13 +78,13 @@ public class TeachResourcePo {
     }
 
     @Basic
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "upload_time", nullable = false)
-    public Timestamp getUploadTime() {
+    public Date getUploadTime() {
         return uploadTime;
     }
 
-    public void setUploadTime(Timestamp uploadTime) {
+    public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
     }
 
@@ -129,7 +130,7 @@ public class TeachResourcePo {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course", referencedColumnName = "id", nullable = false)
     public CoursePo getCourseByCourse() {
         return courseByCourse;
@@ -139,7 +140,7 @@ public class TeachResourcePo {
         this.courseByCourse = courseByCourse;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "upload_user", referencedColumnName = "id", nullable = false)
     public TeacherPo getTeacherByUploadUser() {
         return teacherByUploadUser;

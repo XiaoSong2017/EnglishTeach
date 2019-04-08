@@ -3,9 +3,7 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "problem")
@@ -16,11 +14,11 @@ public class ProblemPo {
     private String cId;
     private String tId;
     private Integer type;
-    private Collection<ComponentPo> componentsById;
+    private Set<ComponentPo> componentsById=new HashSet<>();
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
     private TopicPo topicByType;
-    private Collection<QuestionPo> questionsById;
+    private Set<QuestionPo> questionsById=new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -104,11 +102,11 @@ public class ProblemPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "problemByQId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public Collection<ComponentPo> getComponentsById() {
+    public Set<ComponentPo> getComponentsById() {
         return componentsById;
     }
 
-    public void setComponentsById(Collection<ComponentPo> componentsById) {
+    public void setComponentsById(Set<ComponentPo> componentsById) {
         this.componentsById = componentsById;
     }
 
@@ -144,11 +142,11 @@ public class ProblemPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "problemByProblem",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    public Collection<QuestionPo> getQuestionsById() {
+    public Set<QuestionPo> getQuestionsById() {
         return questionsById;
     }
 
-    public void setQuestionsById(Collection<QuestionPo> questionsById) {
+    public void setQuestionsById(Set<QuestionPo> questionsById) {
         this.questionsById = questionsById;
     }
 }

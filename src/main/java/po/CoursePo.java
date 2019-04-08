@@ -3,18 +3,19 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "course")
 public class CoursePo {
     private String id;
     private String name;
-    private Collection<ExaminationPaperPo> examinationPapersById;
-    private Collection<ProblemPo> problemsById;
-    private Collection<TeachResourcePo> teachResourcesById;
-    private Collection<TeachingPo> teachingsById;
+    private Set<ExaminationPaperPo> examinationPapersById=new HashSet<>();
+    private Set<ProblemPo> problemsById=new HashSet<>();
+    private Set<TeachResourcePo> teachResourcesById=new HashSet<>();
+    private Set<TeachingPo> teachingsById=new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -52,42 +53,42 @@ public class CoursePo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "courseByCId",fetch = FetchType.LAZY)
-    public Collection<ExaminationPaperPo> getExaminationPapersById() {
+    @OneToMany(mappedBy = "courseByCId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<ExaminationPaperPo> getExaminationPapersById() {
         return examinationPapersById;
     }
 
-    public void setExaminationPapersById(Collection<ExaminationPaperPo> examinationPapersById) {
+    public void setExaminationPapersById(Set<ExaminationPaperPo> examinationPapersById) {
         this.examinationPapersById = examinationPapersById;
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "courseByCId",fetch = FetchType.LAZY)
-    public Collection<ProblemPo> getProblemsById() {
+    @OneToMany(mappedBy = "courseByCId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<ProblemPo> getProblemsById() {
         return problemsById;
     }
 
-    public void setProblemsById(Collection<ProblemPo> problemsById) {
+    public void setProblemsById(Set<ProblemPo> problemsById) {
         this.problemsById = problemsById;
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "courseByCourse",fetch = FetchType.LAZY)
-    public Collection<TeachResourcePo> getTeachResourcesById() {
+    @OneToMany(mappedBy = "courseByCourse",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<TeachResourcePo> getTeachResourcesById() {
         return teachResourcesById;
     }
 
-    public void setTeachResourcesById(Collection<TeachResourcePo> teachResourcesById) {
+    public void setTeachResourcesById(Set<TeachResourcePo> teachResourcesById) {
         this.teachResourcesById = teachResourcesById;
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "courseByCId",fetch = FetchType.LAZY)
-    public Collection<TeachingPo> getTeachingsById() {
+    @OneToMany(mappedBy = "courseByCId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    public Set<TeachingPo> getTeachingsById() {
         return teachingsById;
     }
 
-    public void setTeachingsById(Collection<TeachingPo> teachingsById) {
+    public void setTeachingsById(Set<TeachingPo> teachingsById) {
         this.teachingsById = teachingsById;
     }
 }

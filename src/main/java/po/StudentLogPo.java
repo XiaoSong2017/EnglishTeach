@@ -4,14 +4,15 @@ import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "student_log")
 public class StudentLogPo {
     private long id;
-    private Timestamp loginTime;
-    private Timestamp logoutTime;
+    private Date loginTime;
+    private Date logoutTime;
     private String sId;
     private StudentPo studentBySId;
 
@@ -27,24 +28,24 @@ public class StudentLogPo {
     }
 
     @Basic
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "login_time", nullable = false)
-    public Timestamp getLoginTime() {
+    public Date getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(Timestamp loginTime) {
+    public void setLoginTime(Date loginTime) {
         this.loginTime = loginTime;
     }
 
     @Basic
-    @org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "logout_time", nullable = false)
-    public Timestamp getLogoutTime() {
+    public Date getLogoutTime() {
         return logoutTime;
     }
 
-    public void setLogoutTime(Timestamp logoutTime) {
+    public void setLogoutTime(Date logoutTime) {
         this.logoutTime = logoutTime;
     }
 
@@ -74,7 +75,7 @@ public class StudentLogPo {
         return Objects.hash(id, loginTime, logoutTime, sId);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "s_id", referencedColumnName = "id", nullable = false)
     public StudentPo getStudentBySId() {
         return studentBySId;

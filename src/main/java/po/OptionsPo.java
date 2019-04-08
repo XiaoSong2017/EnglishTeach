@@ -44,7 +44,7 @@ public class OptionsPo {
     }
 
     @Basic
-    @Column(name = "question", nullable = false)
+    @Column(name = "question", nullable = false,insertable = false,updatable = false)
     public int getQuestion() {
         return question;
     }
@@ -70,7 +70,7 @@ public class OptionsPo {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "question", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
+    @JoinColumn(name = "question", referencedColumnName = "id", nullable = false)
     public QuestionPo getQuestionByQuestion() {
         return questionByQuestion;
     }

@@ -4,7 +4,9 @@ import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "classes")
@@ -13,7 +15,7 @@ public class ClassesPo {
     private String name;
     private int specialty;
     private SpecialtyPo specialtyBySpecialty;
-    private Collection<StudentPo> studentsById;
+    private Set<StudentPo> studentsById=new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -61,7 +63,7 @@ public class ClassesPo {
         return Objects.hash(id, name, specialty);
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "specialty", referencedColumnName = "id", nullable = false)
     public SpecialtyPo getSpecialtyBySpecialty() {
         return specialtyBySpecialty;
@@ -73,11 +75,11 @@ public class ClassesPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "classesByClazz",fetch = FetchType.LAZY)
-    public Collection<StudentPo> getStudentsById() {
+    public Set<StudentPo> getStudentsById() {
         return studentsById;
     }
 
-    public void setStudentsById(Collection<StudentPo> studentsById) {
+    public void setStudentsById(Set<StudentPo> studentsById) {
         this.studentsById = studentsById;
     }
 }

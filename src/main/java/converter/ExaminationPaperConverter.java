@@ -9,9 +9,7 @@ import org.apache.struts2.util.StrutsTypeConverter;
 import po.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 public class ExaminationPaperConverter extends StrutsTypeConverter {
     private TeacherDao teacherDao;
@@ -40,7 +38,7 @@ public class ExaminationPaperConverter extends StrutsTypeConverter {
         examinationPaperPo.setCourseByCId(coursePo);
         examinationPaperPo.settId(jsonObject.getString("tId"));
         examinationPaperPo.setTeacherByTId(teacherPo);
-        Collection<ComponentPo> componentPos=new ArrayList<>();
+        Set<ComponentPo> componentPos=new HashSet<>();
         JSONArray jsonArray = jsonObject.getJSONArray("componentsById");
         for (int i = 0; i < jsonArray.size(); ++i) {
             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -58,7 +56,7 @@ public class ExaminationPaperConverter extends StrutsTypeConverter {
             componentPo.setProblemByQId(problemPo);
             componentPo.setqId(problemPo.getId());
             componentPo.setCore(jsonObject1.getInteger("core"));
-            Collection<QuestionPo> questionPos=new ArrayList<>();
+            Set<QuestionPo> questionPos=new HashSet<>();
             JSONArray jsonArray1 = jsonObject1.getJSONArray("question");
             for (int j = 0; j < jsonArray1.size(); ++j) {
                 QuestionPo questionPo = new QuestionPo();
@@ -67,7 +65,7 @@ public class ExaminationPaperConverter extends StrutsTypeConverter {
                 questionPo.setAnswer(jsonArray1.getJSONObject(j).getString("answer"));
                 questionPo.setProblem(problemPo.getId());
                 questionPos.add(questionPo);
-                Collection<OptionsPo> optionsPos=new ArrayList<>();
+                Set<OptionsPo> optionsPos=new HashSet<>();
                 JSONArray jsonArray2 = jsonArray1.getJSONObject(j).getJSONArray("option");
                 for (int k = 0; k < jsonArray2.size(); ++k) {
                     OptionsPo optionsPo = new OptionsPo();

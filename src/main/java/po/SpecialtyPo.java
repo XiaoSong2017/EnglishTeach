@@ -3,8 +3,9 @@ package po;
 import org.apache.struts2.json.annotations.JSON;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "specialty")
@@ -12,7 +13,7 @@ public class SpecialtyPo {
     private int id;
     private String name;
     private int academy;
-    private Collection<ClassesPo> classesById;
+    private Set<ClassesPo> classesById=new HashSet<>() ;
     private AcademyPo academyByAcademy;
 
     @Id
@@ -63,11 +64,11 @@ public class SpecialtyPo {
 
     @JSON(serialize = false)
     @OneToMany(mappedBy = "specialtyBySpecialty",fetch = FetchType.LAZY)
-    public Collection<ClassesPo> getClassesById() {
+    public Set<ClassesPo> getClassesById() {
         return classesById;
     }
 
-    public void setClassesById(Collection<ClassesPo> classesById) {
+    public void setClassesById(Set<ClassesPo> classesById) {
         this.classesById = classesById;
     }
 
