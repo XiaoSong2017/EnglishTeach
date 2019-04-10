@@ -18,6 +18,7 @@ public class ExaminationPaperBean extends PageBean<ExaminationPaperPo> {
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
+
     @JSON(serialize = false)
     public String getTeacherId() {
         return teacherId;
@@ -40,7 +41,7 @@ public class ExaminationPaperBean extends PageBean<ExaminationPaperPo> {
 
     @Override
     public String execute() throws Exception {
-        setData(examinationPaperService.getExaminationPaperByTeacherId(teacherId,type));
+        setData(examinationPaperService.getExaminationPaperByTeacherId(teacherId, type));
         return super.execute();
     }
 }

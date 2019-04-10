@@ -9,6 +9,7 @@ import service.ExaminationPaperService;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import static org.hibernate.internal.HEMLogging.logger;
@@ -18,6 +19,8 @@ public class ExaminationPaperAction extends ActionSupport{
     private String examinationPaperId;
     private String resultCode;
     private ExaminationPaperPo examinationPaperPo;
+    private int id;
+    private Map<String,Object> list;
     public void setExaminationPaperService(ExaminationPaperService examinationPaperService) {
         this.examinationPaperService = examinationPaperService;
     }
@@ -33,6 +36,15 @@ public class ExaminationPaperAction extends ActionSupport{
     @JSON
     public String getResultCode() {
         return resultCode;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @JSON
+    public Map<String, Object> getList() {
+        return list;
     }
 
     @Override
@@ -53,6 +65,12 @@ public class ExaminationPaperAction extends ActionSupport{
     public String saveExaminationPager()throws Exception{
         logger("examinationTitle:"+examinationPaperPo);
         examinationPaperService.saveExaminationPaper(examinationPaperPo);
+        resultCode=SUCCESS;
+        return SUCCESS;
+    }
+
+    public String getExaminationPaperDetailById()throws Exception{
+        list=examinationPaperService.getExaminationPaperDetailById(id);
         resultCode=SUCCESS;
         return SUCCESS;
     }

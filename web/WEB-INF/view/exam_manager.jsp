@@ -23,7 +23,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="parent_homework" class="container-fluid">
+                <div id="parent_exam" class="container-fluid">
                     <table class="table table-striped table-hover">
                         <thead class="thead-light">
                         <tr class="row">
@@ -67,7 +67,7 @@
                                         <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"
                                            href="#">第<label class="label">1</label>题：</a>
                                     </div>
-                                    <div class="collapse" data-parent="#parent_homework">
+                                    <div class="collapse" data-parent="#parent_exam">
                                         <div class="card-body">
                                             <label class="label">
                                                 选择题型：
@@ -235,6 +235,7 @@
                     //console.log(tbodyJ.children().eq(k).children().children().children().eq(0).text());
                 }
                 var question = {
+                    'questionNumber':j+1,
                     'question': questionContent,
                     'answer': answer,
                     'option': options
@@ -242,7 +243,7 @@
                 questions.push(question);
             }
             var problem = {
-                'questionNumber': problemNumber,
+                'problemNumber': problemNumber,
                 'type': problemTopic,
                 'content': problemContent,
                 'core': core,

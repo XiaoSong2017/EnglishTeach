@@ -14,6 +14,7 @@ public class QuestionPo {
     private String answer;
     private String content;
     private Integer problem;
+    private int questionNumber;
     private Set<AnswerRecordPo> answerRecordsById=new HashSet<>() ;
     private Set<OptionsPo> optionsById=new HashSet<>();
     private ProblemPo problemByProblem;
@@ -59,6 +60,16 @@ public class QuestionPo {
         this.problem = problem;
     }
 
+    @Basic
+    @Column(name = "question_number", nullable = true)
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,12 +78,13 @@ public class QuestionPo {
         return id == that.id &&
                 Objects.equals(answer, that.answer) &&
                 Objects.equals(content, that.content) &&
-                Objects.equals(problem, that.problem);
+                Objects.equals(problem, that.problem)&&
+                Objects.equals(questionNumber,that.questionNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, answer, content, problem);
+        return Objects.hash(id, answer, content, problem,questionNumber);
     }
 
     @JSON(serialize = false)

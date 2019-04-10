@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ComponentPo {
     private int id;
     private int core;
-    private int questionNumber;
+    private int problemNumber;
     private String title;
     private int eId;
     private int qId;
@@ -37,13 +37,13 @@ public class ComponentPo {
     }
 
     @Basic
-    @Column(name = "question_number", nullable = false)
-    public int getQuestionNumber() {
-        return questionNumber;
+    @Column(name = "problem_number", nullable = false)
+    public int getProblemNumber() {
+        return problemNumber;
     }
 
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
+    public void setProblemNumber(int problemNumber) {
+        this.problemNumber = problemNumber;
     }
 
     @Basic
@@ -83,7 +83,7 @@ public class ComponentPo {
         ComponentPo that = (ComponentPo) o;
         return id == that.id &&
                 core == that.core &&
-                questionNumber == that.questionNumber &&
+                problemNumber == that.problemNumber &&
                 eId == that.eId &&
                 qId == that.qId &&
                 Objects.equals(title, that.title);
@@ -91,7 +91,7 @@ public class ComponentPo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, core, questionNumber, title, eId, qId);
+        return Objects.hash(id, core, problemNumber, title, eId, qId);
     }
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -44,7 +44,7 @@ public class ExaminationPaperConverter extends StrutsTypeConverter {
             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
             ComponentPo componentPo = new ComponentPo();
             componentPo.setExaminationPaperByEId(examinationPaperPo);
-            componentPo.setQuestionNumber(jsonObject1.getInteger("questionNumber"));
+            componentPo.setProblemNumber(jsonObject1.getInteger("problemNumber"));
             ProblemPo problemPo = new ProblemPo();
             problemPo.setType(jsonObject1.getInteger("type"));
             problemPo.setContent(jsonObject1.getString("content"));
@@ -63,6 +63,7 @@ public class ExaminationPaperConverter extends StrutsTypeConverter {
                 questionPo.setProblemByProblem(problemPo);
                 questionPo.setContent(jsonArray1.getJSONObject(j).getString("question"));
                 questionPo.setAnswer(jsonArray1.getJSONObject(j).getString("answer"));
+                questionPo.setQuestionNumber((Integer) jsonArray1.getJSONObject(j).getOrDefault("questionNumber",j+1));
                 questionPo.setProblem(problemPo.getId());
                 questionPos.add(questionPo);
                 Set<OptionsPo> optionsPos=new HashSet<>();

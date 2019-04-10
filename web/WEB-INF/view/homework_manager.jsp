@@ -227,6 +227,7 @@
                     //console.log(tbodyJ.children().eq(k).children().children().children().eq(0).text());
                 }
                 var question = {
+                    'questionNumber':j+1,
                     'question': questionContent,
                     'answer': answer,
                     'option': options
@@ -234,7 +235,7 @@
                 questions.push(question);
             }
             var problem = {
-                'questionNumber': problemNumber,
+                'problemNumber': problemNumber,
                 'type': problemTopic,
                 'content': problemContent,
                 'core': core,
