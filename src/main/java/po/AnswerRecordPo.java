@@ -11,6 +11,7 @@ public class AnswerRecordPo {
     private int eId;
     private int qId;
     private String sId;
+    private float core;
     private ExaminationPaperPo examinationPaperByEId;
     private QuestionPo questionByQId;
     private StudentPo studentBySId;
@@ -37,7 +38,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "e_id", nullable = false,insertable = false,updatable = false)
+    @Column(name = "e_id", nullable = false, insertable = false, updatable = false)
     public int geteId() {
         return eId;
     }
@@ -47,7 +48,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "q_id", nullable = false,insertable = false,updatable = false)
+    @Column(name = "q_id", nullable = false, insertable = false, updatable = false)
     public int getqId() {
         return qId;
     }
@@ -57,13 +58,23 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "s_id", nullable = false, length = 20,insertable = false,updatable = false)
+    @Column(name = "s_id", nullable = false, length = 20, insertable = false, updatable = false)
     public String getsId() {
         return sId;
     }
 
     public void setsId(String sId) {
         this.sId = sId;
+    }
+
+    @Basic
+    @Column(name = "core")
+    public float getCore() {
+        return core;
+    }
+
+    public void setCore(float core) {
+        this.core = core;
     }
 
     @Override
@@ -74,13 +85,14 @@ public class AnswerRecordPo {
         return id == that.id &&
                 eId == that.eId &&
                 qId == that.qId &&
+                Float.compare(core, that.core) == 0 &&
                 Objects.equals(answer, that.answer) &&
                 Objects.equals(sId, that.sId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, answer, eId, qId, sId);
+        return Objects.hash(id, answer, eId, qId, sId, core);
     }
 
     @ManyToOne

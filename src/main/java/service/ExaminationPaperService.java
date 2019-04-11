@@ -45,6 +45,7 @@ public class ExaminationPaperService {
             for(QuestionPo questionPo:problemPo.getQuestionsById()){
                 Map<String,Object> question=new HashMap<>();
                 question.put("id",questionPo.getId());
+                question.put("questionNumber",questionPo.getQuestionNumber());
                 question.put("content",questionPo.getContent());
                 List options=new ArrayList();
                 for(OptionsPo optionsPo:questionPo.getOptionsById()){
@@ -61,5 +62,9 @@ public class ExaminationPaperService {
         }
         list.put("problem",problemPos);
         return list;
+    }
+
+    public List<ExaminationPaperPo> getExaminationPaperByCourseId(String courseId, String type) {
+        return examinationPaperDao.getExaminationPaperByCourseId(courseId,type);
     }
 }

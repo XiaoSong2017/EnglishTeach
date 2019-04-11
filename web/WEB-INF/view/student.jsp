@@ -30,27 +30,28 @@
     </ul>
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <%--<div class="container-fluid">--%>
+            <%--<div class="d-flex justify-content-center align-items-stretch bg-light">--%>
+            <%--<div class="p-2 border" style="height: 100%">--%>
+            <%--<div id="homework_list" class="list-group list-group-flush">--%>
+            <%--<a href="#" class="list-group-item list-group-item-heading">作业列表</a>--%>
+            <%--</div>--%>
+            <%--</div>--%>
+            <%--&lt;%&ndash;<div class="p-2 border align-self-stretch">Flex item 2</div>&ndash;%&gt;--%>
+            <%--<div class="p-2 border" style="width: 100%;height: 100%">--%>
+
+            <%--</div>--%>
+            <%--</div>--%>
+            <%--</div>--%>
             <div class="container-fluid">
-                <div class="d-flex justify-content-center align-items-stretch bg-light">
-                    <div class="p-2 border" style="height: 100%">
-                        <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-heading">作业列表</a>
-                            <a href="#" class="list-group-item list-group-item-action" target="homework">First item</a>
-                            <a href="#" class="list-group-item list-group-item-action" target="homework">Second item</a>
-                            <a href="#" class="list-group-item list-group-item-action" target="homework">Third item</a>
-                        </div>
-                    </div>
-                    <%--<div class="p-2 border align-self-stretch">Flex item 2</div>--%>
-                    <div class="p-2 border" style="width: 100%;height: 100%">
-                        <iframe id="homework" class="container-fluid"></iframe>
-                    </div>
-                </div>
+                <iframe src="<%=request.getContextPath()%>/selectHomework" class="container-fluid" align="left"
+                        style="width: 20%" height="100%" onload="changeFrameHeight(this)"></iframe>
+                <iframe name="homework" class="container-fluid" align="right"
+                        style="width: 80%" height="100%" onload="changeFrameHeight(this)"></iframe>
             </div>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <jsp:include page="examination_paper.jsp">
-                <jsp:param name="examinType" value="1"/>
-            </jsp:include>
+
         </div>
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
             <jsp:include page="student_resource.jsp"/>
@@ -98,10 +99,55 @@
         <%--}--%>
         <%--});--%>
         <%--});--%>
+        <%--$(()=>{--%>
+        <%--$.ajax({--%>
+        <%--url:'<%=request.getContextPath()%>/getExaminationPaperByCourseId',--%>
+        <%--type:'post',--%>
+        <%--async:true,--%>
+        <%--data:{'courseId':'${sessionScope.get('courseById')}','type':true},--%>
+        <%--success:(data)=>{--%>
+        <%--for(var i=0;i<data.data.length;++i){--%>
+        <%--$('#homework_list').append('<a href="#" class="list-group-item list-group-item-action" target="homework">'+data.data[i].name+'</a>');--%>
+        <%--}--%>
+        <%--},--%>
+        <%--error:()=>{--%>
+        <%--Swal.fire({--%>
+        <%--text:'加载出错！请重试！',--%>
+        <%--type:'error'--%>
+        <%--});--%>
+        <%--}--%>
+        <%--});--%>
+        <%--});--%>
+        $(() => {
+            $.ajax({
+                url: '<%=request.getContextPath()%>/getExaminationPaperByCourseId',
+                type: 'post',
+                async: true,
+                data: {'courseId': '${sessionScope.get('courseById')}', 'type': false},
+                success: (data) => {
+                        for(var i=0;i<data.data.length;++i) {
+                            $('#pills-profile').append('<iframe name="exam" src="<%=request.getContextPath()%>/paper?id=' + data.data[i].id + '" class="container-fluid" align="right" ' +
+                                'style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');
+                        }
+                },
+                error: () => {
+                    Swal.fire({
+                        text: '网络错误！请重试！',
+                        type: 'error'
+                    });
+                    $('#pills-profile').append('<p>' +
+                        '暂无考试信息</p>')
+                }
+            });
+        });
         $('#pills-tab a').on('click', function (e) {
             e.preventDefault();
             $(this).tab('show');
-        })
+        });
+
+        function changeFrameHeight(that) {
+            $(that).height(document.documentElement.clientHeight * 0.7);
+        }
     </script>
 </body>
 </html>

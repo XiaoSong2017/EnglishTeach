@@ -162,7 +162,12 @@
                 <param name="noCache">true</param>
             </result>
         </action>
-        <action name="examinationPaperBean" class="examinationPaperBean">
+        <action name="examinationPaperBean" class="examinationPaperBean" method="getExaminationPaperByTeacherId">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
+        <action name="getExaminationPaperByCourseId" class="examinationPaperBean" method="getExaminationPaperByCourseId">
             <result name="success" type="json">
                 <param name="noCache">true</param>
             </result>
@@ -181,6 +186,12 @@
             <result name="success" type="json">
                 <param name="noCache">true</param>
             </result>
+        </action>
+        <action name="selectHomework">
+            <result>WEB-INF/view/select_homework.jsp</result>
+        </action>
+        <action name="paper" class="action.ExaminationPaperAction">
+            <result>WEB-INF/view/examination_paper.jsp</result>
         </action>
     </package>
 </struts>

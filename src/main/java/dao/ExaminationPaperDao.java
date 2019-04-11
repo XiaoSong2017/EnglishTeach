@@ -15,4 +15,6 @@ import java.util.List;
 public interface ExaminationPaperDao extends BaseDao<ExaminationPaperPo> {
 
     List<ExaminationPaperPo> getExaminationPaperByTeacherId(String teacherId,String type);
+
+    List<ExaminationPaperPo> getExaminationPaperByCourseId(String courseId, String type);
 }

@@ -9,6 +9,7 @@ import java.util.List;
 public class ExaminationPaperBean extends PageBean<ExaminationPaperPo> {
     private ExaminationPaperService examinationPaperService;
     private String teacherId;
+    private String courseId;
     private String type;
 
     public void setExaminationPaperService(ExaminationPaperService examinationPaperService) {
@@ -17,6 +18,10 @@ public class ExaminationPaperBean extends PageBean<ExaminationPaperPo> {
 
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     @JSON(serialize = false)
@@ -39,9 +44,12 @@ public class ExaminationPaperBean extends PageBean<ExaminationPaperPo> {
         return super.getData();
     }
 
-    @Override
-    public String execute() throws Exception {
+    public String getExaminationPaperByTeacherId() throws Exception {
         setData(examinationPaperService.getExaminationPaperByTeacherId(teacherId, type));
+        return super.execute();
+    }
+    public String getExaminationPaperByCourseId() throws Exception {
+        setData(examinationPaperService.getExaminationPaperByCourseId(courseId, type));
         return super.execute();
     }
 }
