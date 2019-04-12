@@ -38,7 +38,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "e_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "e_id", nullable = false)
     public int geteId() {
         return eId;
     }
@@ -48,7 +48,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "q_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "q_id", nullable = false)
     public int getqId() {
         return qId;
     }
@@ -58,7 +58,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "s_id", nullable = false, length = 20, insertable = false, updatable = false)
+    @Column(name = "s_id", nullable = false, length = 20)
     public String getsId() {
         return sId;
     }
@@ -96,7 +96,7 @@ public class AnswerRecordPo {
     }
 
     @ManyToOne
-    @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public ExaminationPaperPo getExaminationPaperByEId() {
         return examinationPaperByEId;
     }
@@ -106,7 +106,7 @@ public class AnswerRecordPo {
     }
 
     @ManyToOne
-    @JoinColumn(name = "q_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "q_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public QuestionPo getQuestionByQId() {
         return questionByQId;
     }
@@ -116,7 +116,7 @@ public class AnswerRecordPo {
     }
 
     @ManyToOne
-    @JoinColumn(name = "s_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "s_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public StudentPo getStudentBySId() {
         return studentBySId;
     }

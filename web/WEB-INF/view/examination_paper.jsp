@@ -27,12 +27,14 @@
 <div class="container-fluid">
     <h2 class="h2" id="examination_paper_name" align="center"></h2>
     <h6 align="right"><label class="label">距离考试结束还有：<strong style="color:red" id="time"></strong>秒</label></h6>
-    <form class="form-group">
+    <form class="form-group" action="<%=request.getContextPath()%>/saveAnswerRecord" method="post">
+        <input name="studentById" type="hidden" value="${sessionScope.get("ID")}">
+        <input name="examinationById" type="hidden" value="${param.get("id")}">
         <div id="parent_examination" class="container-fluid">
         </div>
         <div class="container-fluid justify-content-center" align="center">
             <label class="label">
-                <input class="btn btn-outline-primary" type="submit" value="交卷">
+                <input class="btn btn-outline-primary" type="submit" value="提交">
             </label>
         </div>
     </form>
@@ -68,7 +70,7 @@
             async: true,
             data: {'id': '${param.get("id")}'},
             success: (data) => {
-                if (data.resultCode === 'success') {
+                if (!isEmpty(data.list)&&data.resultCode === 'success') {
                     //console.log(data);
                     $('#examination_paper_name').text(data.list.name);
                     var startTime=new Date(data.list.startTime);
@@ -99,7 +101,7 @@
                                     '<ul class="list-group">';
                                 //console.log(option);
                                 for (let k = 0; k < option.length; ++k) {
-                                    temp += '<li class="list-group-item"><div class="radio"><label><input type="radio" name="' + question[j].id + '" value="' + option[k].mark + '">' + option[k].content + '</label></div></li>';
+                                    temp += '<li class="list-group-item"><div class="radio"><label><input type="radio" name="' + question[j].id + '" value="' + option[k].mark + '" required>' + option[k].content + '</label></div></li>';
                                 }
                                 temp += '</ul>';
                             }

@@ -111,6 +111,11 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="saveAnswerRecord" class="action.AnswerRecordAction" method="saveAnswerRecord">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+            </result>
+        </action>
         <action name="deleteExaminationPaperById" class="action.ExaminationPaperAction" method="deleteExaminationPaperById">
             <result name="success" type="json">
                 <param name="noCache">true</param>

@@ -21,7 +21,7 @@
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.jnotify.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/sweetalert2.min.css">
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/summernote-bs4.css">
-    <title>Title</title>
+    <title>作业列表</title>
 </head>
 <body>
 <div class="d-flex justify-content-center align-items-stretch bg-light">

@@ -45,9 +45,9 @@
             <%--</div>--%>
             <div class="container-fluid">
                 <iframe src="<%=request.getContextPath()%>/selectHomework" class="container-fluid" align="left"
-                        style="width: 20%" height="100%" onload="changeFrameHeight(this)"></iframe>
+                        style="width: 20%;height:100%" onload="changeFrameHeight(this)"></iframe>
                 <iframe name="homework" class="container-fluid" align="right"
-                        style="width: 80%" height="100%" onload="changeFrameHeight(this)"></iframe>
+                        style="width: 80%;height:100%" onload="changeFrameHeight(this)"></iframe>
             </div>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">

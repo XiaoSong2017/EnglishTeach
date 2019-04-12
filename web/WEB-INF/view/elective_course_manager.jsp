@@ -57,6 +57,7 @@
             <th class="col text-center">课程名</th>
             <th class="col text-center">学号</th>
             <th class="col text-center">选课学生</th>
+            <th class="col text-center">当前成绩</th>
             <th class="col text-center">
                 操作
                 <div class="btn-group" role="group">
@@ -86,6 +87,8 @@
             <td class="col text-center"><%=electiveCoursePo.getStudentBySId().getId()%>
             </td>
             <td class="col text-center"><%=electiveCoursePo.getStudentBySId().getName()%>
+            </td>
+            <td class="col text-center"><%=electiveCoursePo.getGrade()%>
             </td>
             <td class="col text-center">
                 <div class="btn-group" role="group">

@@ -78,6 +78,7 @@
     <bean name="examinationPaperService" class="service.ExaminationPaperService" scope="prototype" autowire="byName"/>
     <bean name="problemService" class="service.ProblemService" scope="prototype" autowire="byName"/>
     <bean name="topicService" class="service.TopicService" scope="prototype" autowire="byName"/>
+    <bean name="answerRecordService" class="service.AnswerRecordService" scope="prototype" autowire="byName"/>
     <!--Dao文件-->
     <bean name="baseDao" class="dao.implement.BaseDaoImpl" scope="prototype" autowire="byName"/>
     <bean name="studentDao" class="dao.implement.StudentDaoImpl" scope="prototype" autowire="byName"/>
@@ -113,4 +114,6 @@
     <!--配置Quartz框架来定时操作任务-->
    <!-- <bean id="quartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" p:targetObject-ref=""
     p:targetMethod=""/>-->
+    <!--算法-->
+    <bean name="simHash" class="algorithm.SimHash" autowire="byName" scope="prototype"/>
 </beans>

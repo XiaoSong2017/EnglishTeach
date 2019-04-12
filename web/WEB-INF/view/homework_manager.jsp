@@ -190,6 +190,25 @@
     </table>
 </div>
 </body>
+<div class="modal hide fade" id="preExaminationPaperByHomework" tabindex="-1" role="dialog" aria-labelledby="preHomeworkModalExamLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="preHomeworkModalExamLabel">查看作业</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="homework_modal_body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+            <%--</form>--%>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     function addExamPager(obj) {
         //console.log($(obj).parent().prev().children().children().children().eq(0));
@@ -317,7 +336,8 @@
                     $('#tbody_homework').append('<tr class="row">\n' +
                         '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
                         '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
-                        '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+                        '            <td class="col text-center"><a data-toggle="modal"\n' +
+                        '                       href="#preExaminationPaperByHomework" onclick="preExaminPapgerByHomework(\''+data.data[i].id+'\')">' + data.data[i].name + '</a></td>\n' +
                         '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
                         '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
                         '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
@@ -351,6 +371,10 @@
         });
     });
 
+    function preExaminPapgerByHomework(obj) {
+        $('#homework_modal_body').empty();
+        $('#homework_modal_body').append('<iframe src="<%=request.getContextPath()%>/paper?id='+obj+'" style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');
+    }
     function onclickAddHomework() {
         $.ajax({
             url: '<%=request.getContextPath()%>/courseBean',
