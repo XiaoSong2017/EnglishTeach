@@ -1,50 +1,32 @@
 package action;
 
-import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import dao.AnswerRecordDao;
-import dao.QuestionDao;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.json.annotations.JSON;
-import org.springframework.test.web.client.ResponseActions;
 import service.AnswerRecordService;
+
+import java.util.List;
 
 public class AnswerRecordAction extends ActionSupport {
     private String resultCode;
-    private int[] questionById;
-    private String[] content;
+    private List<String> questionById;
+    private List<String> content;
     private String studentById;
     private int examinationById;
     private AnswerRecordService answerRecordService;
 
-    public int[] getQuestionById() {
-        return questionById;
-    }
-
-    public void setQuestionById(int[] questionById) {
+    public void setQuestionById(List<String> questionById) {
         this.questionById = questionById;
     }
 
-    public String[] getContent() {
-        return content;
-    }
-
-    public void setContent(String[] content) {
+    public void setContent(List<String> content) {
         this.content = content;
-    }
-
-    public String getStudentById() {
-        return studentById;
     }
 
     public void setStudentById(String studentById) {
         this.studentById = studentById;
     }
 
-    public int getExaminationById() {
-        return examinationById;
-    }
 
     public void setExaminationById(int examinationById) {
         this.examinationById = examinationById;
@@ -60,9 +42,9 @@ public class AnswerRecordAction extends ActionSupport {
     }
 
     public String saveAnswerRecord() throws Exception {
-        resultCode=SUCCESS;
         answerRecordService.saveAnswerRecord(examinationById,questionById,content,studentById);
-        ServletActionContext.getResponse().getWriter().write("<script>Swal.fire({text: \"已提交！\", type: 'success'});</script>");
+        //ServletActionContext.getResponse().getWriter().write("<script>Swal.fire({text: \"已提交！\", type: 'success'});</script>");
+        resultCode=SUCCESS;
         return SUCCESS;
     }
 }

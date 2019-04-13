@@ -3,8 +3,9 @@ package service;
 import dao.AnswerRecordDao;
 import dao.ComponentDao;
 import dao.QuestionDao;
-import po.ComponentPo;
 import po.QuestionPo;
+
+import java.util.List;
 
 public class AnswerRecordService {
     private AnswerRecordDao answerRecordDao;
@@ -22,14 +23,16 @@ public class AnswerRecordService {
         this.questionDao = questionDao;
     }
 
-    public void saveAnswerRecord(int examinationById, int[] questionById, String[] content, String studentById) {
-        float[] core=new float[content.length];
-        for(int i=0;i<content.length;++i){
-            if(isObjectTopic(questionById[i])){
-                core[i]=onlineJudgment(questionById[i],content[i])?componentDao.getObjectByExamIdAndProblemId(examinationById,questionById[i]).getCore():0;
+    public void saveAnswerRecord(int examinationById, List<String> questionById, List<String> content, String studentById) {
+        float[] core=new float[content.size()];
+        int[] questionId=new int[content.size()];
+        for(int i=0;i<content.size();++i){
+            questionId[i]=Integer.valueOf(questionById.get(i));
+            if(isObjectTopic(questionId[i])){
+                core[i]=onlineJudgment(questionId[i],content.get(i))?componentDao.getObjectByExamIdAndProblemId(examinationById,questionId[i]).getCore():0;
             }
         }
-        answerRecordDao.saveOrUpdateAnswerRecords(examinationById,questionById,content,studentById,core);
+        answerRecordDao.saveOrUpdateAnswerRecords(examinationById,questionId,content,studentById,core);
     }
 
     public boolean onlineJudgment(int question,String content){

@@ -27,9 +27,8 @@
 <div class="container-fluid">
     <h2 class="h2" id="examination_paper_name" align="center"></h2>
     <h6 align="right"><label class="label">距离考试结束还有：<strong style="color:red" id="time"></strong>秒</label></h6>
-    <form class="form-group" action="<%=request.getContextPath()%>/saveAnswerRecord" method="post">
-        <input name="studentById" type="hidden" value="${sessionScope.get("ID")}">
-        <input name="examinationById" type="hidden" value="${param.get("id")}">
+    <form class="form-group" id="form_submit" onsubmit="return submitCheck()"
+          action="<%=request.getContextPath()%>/saveAnswerRecord" method="post">
         <div id="parent_examination" class="container-fluid">
         </div>
         <div class="container-fluid justify-content-center" align="center">
@@ -63,6 +62,53 @@
         $(obj).parent().next().collapse('toggle');
     }
 
+    function submitCheck() {
+        var data = $('#form_submit').serializeArray();
+        var questionById = [];
+        //console.log(data);
+        var content = [];
+        var studentById =${sessionScope.get('ID')};
+        var examinationById =${param.get("id")};
+        // console.log(studentById);
+        // console.log(examinationById);
+        for (var i = 0; i < data.length; ++i) {
+            questionById.push(data[i].name);
+            content.push(data[i].value);
+        }
+        console.log(questionById);
+        console.log(content);
+        var temp = $.param({'questionById': questionById}, true);
+        temp += '&' + $.param({'content': content}, true);
+        temp += '&studentById=' + studentById + '&examinationById=' + examinationById;
+        $.ajax({
+            url: '<%=request.getContextPath()%>/saveAnswerRecord',
+            type: 'post',
+            async: true,
+            dataType: 'json',
+            data: temp,
+            success: (data) => {
+                if (data.resultCode === 'success') {
+                    Swal.fire({
+                        text: '已提交！',
+                        type: 'success'
+                    });
+                } else {
+                    Swal.fire({
+                        text: '提交出错！请重试！',
+                        type: 'error'
+                    });
+                }
+            },
+            error: () => {
+                Swal.fire({
+                    text: '网络出错！请重试！',
+                    type: 'error'
+                });
+            }
+        });
+        return false;
+    }
+
     $(() => {
         $.ajax({
             url: '<%=request.getContextPath()%>/getExaminationPaperDetailById',
@@ -70,15 +116,15 @@
             async: true,
             data: {'id': '${param.get("id")}'},
             success: (data) => {
-                if (!isEmpty(data.list)&&data.resultCode === 'success') {
+                if (!isEmpty(data.list) && data.resultCode === 'success') {
                     //console.log(data);
                     $('#examination_paper_name').text(data.list.name);
-                    var startTime=new Date(data.list.startTime);
-                    var endTime=new Date(data.list.endTime);
-                    $('#time').text(parseInt(endTime-startTime)/1000);
-                    setInterval(()=>{
-                        $('#time').text(parseInt($('#time').text())-1);
-                    },1000);
+                    var startTime = new Date(data.list.startTime);
+                    var endTime = new Date(data.list.endTime);
+                    $('#time').text(parseInt(endTime - startTime) / 1000);
+                    setInterval(() => {
+                        $('#time').text(parseInt($('#time').text()) - 1);
+                    }, 1000);
                     var problem = data.list.problem;
                     problem.sort((a, b) => {
                         return parseInt(a.problemNumber) - parseInt(b.problemNumber);
