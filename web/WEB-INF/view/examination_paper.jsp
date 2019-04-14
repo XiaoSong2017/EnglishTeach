@@ -31,10 +31,8 @@
           action="<%=request.getContextPath()%>/saveAnswerRecord" method="post">
         <div id="parent_examination" class="container-fluid">
         </div>
-        <div class="container-fluid justify-content-center" align="center">
-            <label class="label">
-                <input class="btn btn-outline-primary" type="submit" value="提交">
-            </label>
+        <div class="container justify-content-center">
+            <button class="btn btn-outline-primary btn-block" ${param.getOrDefault("preview","")} type="submit">提交</button>
         </div>
     </form>
 </div>
@@ -131,9 +129,10 @@
                     });
                     //console.log(problem);
                     for (var i = 0; i < problem.length; ++i) {
-                        if (problem[i].type === 1 || problem[i].type === 2 || problem[i].type === 3) {
+                        var temp='';
+                        if (problem[i].type === 1 || problem[i].type === 2 || problem[i].type === 3||problem[i].type===6) {
                             var question = problem[i].question;
-                            var temp = '';
+                            if(!isEmpty(problem[i].content))temp+=problem[i].content;
                             question.sort((a, b) => {
                                 return parseInt(a.questionNumber) - parseInt(b.questionNumber);
                             });
@@ -143,7 +142,7 @@
                                 option.sort((a, b) => {
                                     return a.mark.localeCompare(b.mark);
                                 });
-                                temp += '<label class="label">' + question[j].questionNumber + '.' + (isEmpty(question[j].content) ? '' : question[j].content) + '</label>  ' +
+                                temp += '<label class="label">' + question[j].questionNumber + '.</label>  ' + (isEmpty(question[j].content) ? '' : question[j].content)+
                                     '<ul class="list-group">';
                                 //console.log(option);
                                 for (let k = 0; k < option.length; ++k) {
@@ -151,19 +150,32 @@
                                 }
                                 temp += '</ul>';
                             }
-                            $('#parent_examination').append('<div class="card">\n' +
-                                '        <div class="card-header">\n' +
-                                '            <a class="card-link" data-toggle="collapse" href="#" onclick="onclickCollapse(this)">\n' +
-                                '                第<label>' + (i + 1) + '</label>题：\n' +
-                                '            </a>\n' +
-                                '        </div>\n' +
-                                '        <div class="collapse" data-parent="#parent_examination">\n' +
-                                '            <div class="card-body">' + temp +
-                                '</div>\n' +
-                                '        </div>\n' +
-                                '    </div>');
                         }
+                        else if(problem[i].type===7||problem[i].type===8){
+                            if(!isEmpty(problem[i].content))temp+=problem[i].content;
+                            console.log(problem[i]);
+                            var question=problem[i].question;
+                            for (let j = 0; j < question.length; ++j) {
+                                temp += '<label class="label">' + question[j].questionNumber + '.</label>  ' + (isEmpty(question[j].content) ? '' : question[j].content)+'<textarea name="' + question[j].questionNumber + '" class="text-area"></textarea>';
+                            }
+                        }
+                        $('#parent_examination').append('<div class="card">\n' +
+                            '        <div class="card-header">\n' +
+                            '            <a class="card-link" data-toggle="collapse" href="#" onclick="onclickCollapse(this)">\n' +
+                            '                第<label>' + (i + 1) + '</label>题：\n' +
+                            '            </a>\n' +
+                            '        </div>\n' +
+                            '        <div class="collapse" data-parent="#parent_examination">\n' +
+                            '            <div class="card-body">' + temp +
+                            '</div>\n' +
+                            '        </div>\n' +
+                            '    </div>');
                     }
+                    $('.text-area').summernote({
+                        lang: 'zh-CN',
+                        placeholder: '请输入内容！',
+                        focus: true
+                    });
                 } else {
                     Swal.fire({
                         text: '加载失败！,请刷新重试！',

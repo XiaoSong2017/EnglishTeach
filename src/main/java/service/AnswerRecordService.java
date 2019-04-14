@@ -35,12 +35,12 @@ public class AnswerRecordService {
         answerRecordDao.saveOrUpdateAnswerRecords(examinationById,questionId,content,studentById,core);
     }
 
-    public boolean onlineJudgment(int question,String content){
+    private boolean onlineJudgment(int question, String content){
         QuestionPo questionPo=questionDao.getById(QuestionPo.class,question);
         return questionPo!=null&&questionPo.getAnswer().equals(content);
     }
 
-    public boolean isObjectTopic(int question){
+    private boolean isObjectTopic(int question){
         QuestionPo questionPo=questionDao.getById(QuestionPo.class,question);
         if(questionPo!=null){
             int topic=questionPo.getProblemByProblem().getTopicByType().getId();

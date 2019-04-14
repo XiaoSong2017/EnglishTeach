@@ -80,7 +80,7 @@
         <tr class="row">
             <td class="col text-center">
                 <nav>
-                    <ul class="pagination justify-content-center" id="pagination1"></ul>
+                    <%--<ul class="pagination justify-content-center" id="pagination1"></ul>--%>
                 </nav>
             </td>
         </tr>

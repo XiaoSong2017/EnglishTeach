@@ -373,7 +373,7 @@
 
     function preExaminPapgerByHomework(obj) {
         $('#homework_modal_body').empty();
-        $('#homework_modal_body').append('<iframe src="<%=request.getContextPath()%>/paper?id='+obj+'" style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');
+        $('#homework_modal_body').append('<iframe src="<%=request.getContextPath()%>/paper?id='+obj+'&preview=disabled" style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');
     }
     function onclickAddHomework() {
         $.ajax({

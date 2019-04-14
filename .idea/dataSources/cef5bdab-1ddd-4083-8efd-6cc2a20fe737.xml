@@ -1147,7 +1147,7 @@
     </column>
     <column id="299" parent="278" name="answer">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1460,7 +1460,7 @@
     </column>
     <column id="356" parent="285" name="content">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1499,7 +1499,7 @@
     </column>
     <column id="363" parent="286" name="content">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>mediumtext|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="364" parent="286" name="time">
@@ -1575,7 +1575,7 @@
     </column>
     <column id="377" parent="287" name="content">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="378" parent="287" name="problem">

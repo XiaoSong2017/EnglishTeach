@@ -48,7 +48,7 @@
             }
         },
         legend: {
-            data: ['分数', '学习时间', '总人数']
+            data: ['分数', '学习时间']
         },
         xAxis: [{
             type: 'value',
@@ -74,14 +74,6 @@
                 axisLabel: {
                     formatter: '{value} 分'
                 }
-            },
-            {
-                type: 'value',
-                name: '人数',
-                axisPointer: {
-                    type: 'shadow'
-                },
-                min: 0
             }
         ],
         series: [
@@ -96,14 +88,6 @@
                 name: '分数',
                 type: 'line',
                 data: [20, 49, 70, 23.2, 56, 76.7, 10, 100, 32.6, 20.0]
-            },
-            {
-                name: '总人数',
-                type: 'line',
-                color: '#00ffff',
-                smooth: true,
-                yAxisIndex: 1,
-                data: [2, 3, 56, 388, 244, 102, 203, 234, 230, 165]
             }
         ]
     };

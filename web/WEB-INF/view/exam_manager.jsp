@@ -384,7 +384,7 @@
 
     function preExaminPapgerByExam(obj) {
         $('#exam_modal_body').empty();
-        $('#exam_modal_body').append('<iframe src="<%=request.getContextPath()%>/paper?id='+obj+'" style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');
+        $('#exam_modal_body').append('<iframe src="<%=request.getContextPath()%>/paper?id='+obj+'&preview=disabled" style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');
     }
     function changeFrameHeight(that) {
         $(that).height(document.documentElement.clientHeight * 0.7);
