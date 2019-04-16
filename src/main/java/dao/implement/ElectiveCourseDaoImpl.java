@@ -2,7 +2,6 @@ package dao.implement;
 
 import dao.ElectiveCourseDao;
 import org.springframework.transaction.annotation.Transactional;
-import po.CoursePo;
 import po.ElectiveCoursePo;
 import po.StudentPo;
 import po.TeachingPo;
@@ -14,13 +13,13 @@ import static org.hibernate.internal.HEMLogging.logger;
 @Transactional
 public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> implements ElectiveCourseDao {
     @Override
-    public List<CoursePo> getCoursesByStudentId(String id) {
+    public List getCoursesByStudentId(String id) {
         return getSessionFactory().getCurrentSession().createQuery("select en.teachingByEId.courseByCId from ElectiveCoursePo en where en.studentBySId.id=?1").setParameter(1,id).getResultList();
     }
 
     @Override
     public void saveElectiveCoursesByAcademyId(String teachingId, String academyId) {
-        List<StudentPo> studentPos=getSessionFactory().getCurrentSession().createQuery("select en from StudentPo en where en.classesByClazz.specialtyBySpecialty.academyByAcademy.id=?1").setParameter(1,academyId).getResultList();
+        List studentPos=getSessionFactory().getCurrentSession().createQuery("select en from StudentPo en where en.classesByClazz.specialtyBySpecialty.academyByAcademy.id=?1").setParameter(1,academyId).getResultList();
         saveElectiveCourseByStudents(teachingId, studentPos);
     }
 
@@ -59,6 +58,11 @@ public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> impleme
     public void saveElectiveCourseByStudentId(String teachingId, String studentId) {
         List<StudentPo> studentPos=getSessionFactory().getCurrentSession().createQuery("select en from StudentPo en where en.id=?1").setParameter(1,studentId).getResultList();
         saveElectiveCourseByStudents(teachingId, studentPos);
+    }
+
+    @Override
+    public double getAverageCore(String studentById) {
+        return (Double) getSessionFactory().getCurrentSession().createQuery("select avg (en.grade) from ElectiveCoursePo en where en.sId=?1").setParameter(1,studentById).getResultList().get(0);
     }
 
     @Override

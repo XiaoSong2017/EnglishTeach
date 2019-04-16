@@ -13,6 +13,8 @@ public class UserAction extends ActionSupport {
     private String password;
     private int type;
     private StudentLogService studentLogService;
+    private String target;
+    private UserService userService;
 
     public void setStudentLogService(StudentLogService studentLogService) {
         this.studentLogService = studentLogService;
@@ -25,9 +27,6 @@ public class UserAction extends ActionSupport {
     public void setTarget(String target) {
         this.target = target;
     }
-
-    private String target;
-    private UserService userService;
 
     public String getAccount() {
         return account;
@@ -57,7 +56,7 @@ public class UserAction extends ActionSupport {
         this.userService = userService;
     }
 
-    public String login() throws Exception{
+    public String login() {
         if (getType()==1) {
             /*
              * 教师登录处理*/
@@ -84,7 +83,7 @@ public class UserAction extends ActionSupport {
         addActionMessage("用户输入有误！请重新输入！");
         return INPUT;
     }
-    public String logout() throws Exception{
+    public String logout() {
         if(ActionContext.getContext().getSession().get("user")==null)return ERROR;
         if(ActionContext.getContext().getSession().get("userType").equals("student")){
             studentLogService.updateById(new Timestamp(System.currentTimeMillis()), (long)ActionContext.getContext().getSession().get("LogId"));

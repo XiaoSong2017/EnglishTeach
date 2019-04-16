@@ -192,6 +192,11 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="studentLogBean" class="studentLogBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
         <action name="selectHomework">
             <result>WEB-INF/view/select_homework.jsp</result>
         </action>

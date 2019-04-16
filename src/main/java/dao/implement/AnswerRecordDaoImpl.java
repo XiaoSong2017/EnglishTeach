@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.springframework.transaction.annotation.Transactional;
 import po.AnswerRecordPo;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -20,6 +21,7 @@ public class AnswerRecordDaoImpl extends BaseDaoImpl<AnswerRecordPo> implements 
             answerRecordPo.seteId(examinationById);
             answerRecordPo.setqId(questionById[i]);
             answerRecordPo.setsId(studentById);
+            answerRecordPo.setTime(new Date(System.currentTimeMillis()));
             session.saveOrUpdate(answerRecordPo);
         }
     }

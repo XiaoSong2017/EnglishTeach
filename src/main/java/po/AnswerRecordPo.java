@@ -1,6 +1,7 @@
 package po;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +13,7 @@ public class AnswerRecordPo {
     private int qId;
     private String sId;
     private float core;
+    private Date time;
     private ExaminationPaperPo examinationPaperByEId;
     private QuestionPo questionByQId;
     private StudentPo studentBySId;
@@ -28,7 +30,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "answer", nullable = false, length = 255)
+    @Column(name = "answer", nullable = false)
     public String getAnswer() {
         return answer;
     }
@@ -77,6 +79,17 @@ public class AnswerRecordPo {
         this.core = core;
     }
 
+    @Basic
+    @Temporal(TemporalType.DATE)
+    @Column(name = "time")
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,12 +100,13 @@ public class AnswerRecordPo {
                 qId == that.qId &&
                 Float.compare(core, that.core) == 0 &&
                 Objects.equals(answer, that.answer) &&
-                Objects.equals(sId, that.sId);
+                Objects.equals(sId, that.sId)&&
+                Objects.equals(time,that.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, answer, eId, qId, sId, core);
+        return Objects.hash(id, answer, eId, qId, sId, core,time);
     }
 
     @ManyToOne
