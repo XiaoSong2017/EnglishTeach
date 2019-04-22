@@ -25,7 +25,7 @@ public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> impleme
 
     @Override
     public void saveElectiveCoursesBySpecialtyId(String teachingId, String specialtyId) {
-        List<StudentPo> studentPos=getSessionFactory().getCurrentSession().createQuery("select en from StudentPo en where en.classesByClazz.specialtyBySpecialty.id=?1").setParameter(1,Integer.valueOf(specialtyId)).getResultList();
+        List studentPos=getSessionFactory().getCurrentSession().createQuery("select en from StudentPo en where en.classesByClazz.specialtyBySpecialty.id=?1").setParameter(1,Integer.valueOf(specialtyId)).getResultList();
         saveElectiveCourseByStudents(teachingId, studentPos);
     }
 
