@@ -50,6 +50,7 @@
                 <value>po.SpecialtyPo</value>
                 <value>po.StudentPo</value>
                 <value>po.StudentLogPo</value>
+                <value>po.SubjectiveAnswerRecordPo</value>
                 <value>po.TeachResourcePo</value>
                 <value>po.TeacherPo</value>
                 <value>po.TeachingPo</value>

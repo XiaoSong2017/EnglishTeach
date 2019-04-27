@@ -1,11 +1,12 @@
 package po;
 
 import org.apache.struts2.json.annotations.JSON;
-import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "examination_paper")

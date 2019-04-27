@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "answer_record")
 public class AnswerRecordPo {
     private int id;

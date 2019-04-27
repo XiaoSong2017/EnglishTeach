@@ -47,7 +47,7 @@ public class ComponentPo {
     }
 
     @Basic
-    @Column(name = "title", nullable = true, length = 255)
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }

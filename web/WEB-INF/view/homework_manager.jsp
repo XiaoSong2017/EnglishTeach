@@ -169,8 +169,8 @@
         <thead class="thead-dark">
         <tr class="row">
             <th class="col text-center">序号</th>
-            <th class="col text-center">试题号</th>
-            <th class="col text-center">试题名称</th>
+            <th class="col text-center">作业号</th>
+            <th class="col text-center">作业名称</th>
             <th class="col text-center">开考时间</th>
             <th class="col text-center">结束时间</th>
             <th class="col text-center">出题人</th>

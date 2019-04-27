@@ -164,7 +164,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container mx-auto">
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
         <tr class="row">
