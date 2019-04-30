@@ -1,1 +1,1 @@
-# EnglishTeach 毕业设计
+# EnglishTeach The reform of college English teaching is guided by the theory of foreign language teaching. The main content of English language knowledge and application skills, learning strategies and intercultural communication is through computer network, teaching software, classroom comprehensive application, interactive learning mode and teaching methods. Teaching system. It requires full mobilization of the enthusiasm of both teachers and students, and emphasizes the leading role of teachers while highlighting students' independent learning.
