@@ -11,7 +11,7 @@ public class SubjectiveAnswerRecordPo extends AnswerRecordPo {
     private float similarity;
 
     @Basic
-    @Column(name = "similarity", nullable = false)
+    @Column(name = "similarity", nullable = false,length =4,precision = 3)
     public float getSimilarity() {
         return similarity;
     }

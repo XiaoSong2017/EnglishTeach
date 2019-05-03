@@ -7,5 +7,7 @@ import java.util.List;
 
 @Transactional
 public interface AnswerRecordDao extends BaseDao<AnswerRecordPo> {
-    void saveOrUpdateAnswerRecords(int examinationById, int[] questionById, List<String>content, String studentById, float[] core);
+    void saveOrUpdateAnswerRecords(int examinationById, List<Integer> questionById, List<String>content, String studentById, List<Float> core);
+
+    List<AnswerRecordPo> getObjectsByQuestionId(int i);
 }

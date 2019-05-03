@@ -99,6 +99,7 @@
     <bean name="answerRecordDao" class="dao.implement.AnswerRecordDaoImpl" scope="prototype" autowire="byName"/>
     <bean name="questionDao" class="dao.implement.QuestionDaoImpl" scope="prototype" autowire="byName"/>
     <bean name="optionsDao" class="dao.implement.OptionsDaoImpl" scope="prototype" autowire="byName"/>
+    <bean name="subjectiveAnswerRecordPoDao" class="dao.implement.SubjectiveAnswerRecordPoDaoImpl" scope="prototype" autowire="byName"/>
     <!--Bean文件-->
     <bean name="academyBean" class="bean.AcademyBean" scope="prototype" autowire="byName"/>
     <bean name="specialtyBean" class="bean.SpecialtyBean" scope="prototype" autowire="byName"/>
@@ -111,11 +112,12 @@
     <bean name="problemBean" class="bean.ProblemBean" scope="prototype" autowire="byName"/>
     <bean name="topicBean" class="bean.TopicBean" scope="prototype" autowire="byName"/>
     <bean name="studentLogBean" class="bean.StudentLogBean" scope="prototype" autowire="byName"/>
+    <bean name="subjectiveAnswerRecordBean" class="bean.SubjectiveAnswerRecordBean" scope="prototype" autowire="byName"/>
     <!--转换器配置-->
     <bean name="examinationPaperConverter" class="converter.ExaminationPaperConverter" autowire="byName"/>
     <!--配置Quartz框架来定时操作任务-->
    <!-- <bean id="quartz" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" p:targetObject-ref=""
     p:targetMethod=""/>-->
     <!--算法-->
-    <bean name="levenshtein" class="algorithm.Levenshtein" scope="prototype" autowire="byName"/>
+    <bean name="levenshtein" class="algorithm.Levenshtein" autowire="byName"/>
 </beans>

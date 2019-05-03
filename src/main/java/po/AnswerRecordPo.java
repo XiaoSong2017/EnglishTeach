@@ -71,7 +71,7 @@ public class AnswerRecordPo {
     }
 
     @Basic
-    @Column(name = "core")
+    @Column(name = "core",length = 4,precision = 2)
     public float getCore() {
         return core;
     }

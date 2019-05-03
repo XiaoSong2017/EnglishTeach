@@ -7,7 +7,7 @@ import java.util.Objects;
 @Table(name = "component")
 public class ComponentPo {
     private int id;
-    private int core;
+    private float core;
     private int problemNumber;
     private String title;
     private int eId;
@@ -27,12 +27,12 @@ public class ComponentPo {
     }
 
     @Basic
-    @Column(name = "core", nullable = false)
-    public int getCore() {
+    @Column(name = "core", nullable = false,length = 4,precision = 2)
+    public float getCore() {
         return core;
     }
 
-    public void setCore(int core) {
+    public void setCore(float core) {
         this.core = core;
     }
 

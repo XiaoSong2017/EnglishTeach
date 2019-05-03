@@ -40,7 +40,7 @@ public class StudentPo {
         this.name = name;
     }
 
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "password", nullable = false, length = 25)
     public String getPassword() {
         return password;
