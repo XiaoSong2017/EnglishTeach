@@ -26,13 +26,13 @@
 <body>
 <div class="container-fluid">
     <h2 class="h2" id="examination_paper_name" align="center"></h2>
-    <h6 align="right"><label class="label">距离考试结束还有：<strong style="color:red" id="time"></strong>秒</label></h6>
+    <h6 align="right"><label id="examState" class="label">距离考试结束还有：<strong style="color:red" id="time"></strong>秒</label></h6>
     <form class="form-group" id="form_submit" onsubmit="return submitCheck()"
           action="<%=request.getContextPath()%>/saveAnswerRecord" method="post">
         <div id="parent_examination" class="container-fluid">
         </div>
         <div class="container justify-content-center">
-            <button class="btn btn-outline-primary btn-block" ${param.getOrDefault("preview","")} type="submit">提交</button>
+            <button id="submit" class="btn btn-outline-primary btn-block" ${param.getOrDefault("preview","")} type="submit">提交</button>
         </div>
     </form>
 </div>
@@ -119,57 +119,75 @@
                     $('#examination_paper_name').text(data.list.name);
                     var startTime = new Date(data.list.startTime);
                     var endTime = new Date(data.list.endTime);
-                    $('#time').text(parseInt(endTime - startTime) / 1000);
-                    setInterval(() => {
-                        $('#time').text(parseInt($('#time').text()) - 1);
-                    }, 1000);
-                    var problem = data.list.problem;
-                    problem.sort((a, b) => {
-                        return parseInt(a.problemNumber) - parseInt(b.problemNumber);
-                    });
-                    //console.log(problem);
-                    for (var i = 0; i < problem.length; ++i) {
-                        var temp='';
-                        if (problem[i].type === 1 || problem[i].type === 2 || problem[i].type === 3||problem[i].type===6) {
-                            var question = problem[i].question;
-                            if(!isEmpty(problem[i].content))temp+=problem[i].content;
-                            question.sort((a, b) => {
-                                return parseInt(a.questionNumber) - parseInt(b.questionNumber);
-                            });
-                            //console.log(question);
-                            for (let j = 0; j < question.length; ++j) {
-                                const option = question[j].option;
-                                option.sort((a, b) => {
-                                    return a.mark.localeCompare(b.mark);
+                    var currentTime=new Date();
+                    if(currentTime<startTime){
+                        $('#examState').empty();
+                        $('#examState').text('未到时间！');
+                        $('#submit').attr('disabled',true);
+                    }else if(currentTime<=endTime){
+                        $('#time').text(parseInt(endTime - startTime) / 1000);
+                        setInterval(() => {
+                            var time=parseInt($('#time').text());
+                            if(time>=0){
+                                $('#time').text(--time);
+                            }else {
+                                $('#examState').empty();
+                                $('#examState').text('已结束！');
+                                $('#submit').attr('disabled',true);
+                            }
+                        }, 1000);
+                        var problem = data.list.problem;
+                        problem.sort((a, b) => {
+                            return parseInt(a.problemNumber) - parseInt(b.problemNumber);
+                        });
+                        //console.log(problem);
+                        for (var i = 0; i < problem.length; ++i) {
+                            var temp='';
+                            if (problem[i].type === 1 || problem[i].type === 2 || problem[i].type === 3||problem[i].type===6) {
+                                var question = problem[i].question;
+                                if(!isEmpty(problem[i].content))temp+=problem[i].content;
+                                question.sort((a, b) => {
+                                    return parseInt(a.questionNumber) - parseInt(b.questionNumber);
                                 });
-                                temp += '<label class="label">' + question[j].questionNumber + '.</label>  ' + (isEmpty(question[j].content) ? '' : question[j].content)+
-                                    '<ul class="list-group">';
-                                //console.log(option);
-                                for (let k = 0; k < option.length; ++k) {
-                                    temp += '<li class="list-group-item"><div class="radio"><label><input type="radio" name="' + question[j].id + '" value="' + option[k].mark + '" required>' + option[k].content + '</label></div></li>';
+                                //console.log(question);
+                                for (let j = 0; j < question.length; ++j) {
+                                    const option = question[j].option;
+                                    option.sort((a, b) => {
+                                        return a.mark.localeCompare(b.mark);
+                                    });
+                                    temp += '<label class="label">' + question[j].questionNumber + '.</label>  ' + (isEmpty(question[j].content) ? '' : question[j].content)+
+                                        '<ul class="list-group">';
+                                    //console.log(option);
+                                    for (let k = 0; k < option.length; ++k) {
+                                        temp += '<li class="list-group-item"><div class="radio"><label><input type="radio" name="' + question[j].id + '" value="' + option[k].mark + '" required>' + option[k].content + '</label></div></li>';
+                                    }
+                                    temp += '</ul>';
                                 }
-                                temp += '</ul>';
                             }
-                        }
-                        else if(problem[i].type===7||problem[i].type===8){
-                            if(!isEmpty(problem[i].content))temp+=problem[i].content;
-                            console.log(problem[i]);
-                            var question=problem[i].question;
-                            for (let j = 0; j < question.length; ++j) {
-                                temp += '<label class="label">' + question[j].questionNumber + '.</label>  ' + (isEmpty(question[j].content) ? '' : question[j].content)+'<textarea name="' + question[j].questionNumber + '" class="text-area"></textarea>';
+                            else if(problem[i].type===7||problem[i].type===8){
+                                if(!isEmpty(problem[i].content))temp+=problem[i].content;
+                                console.log(problem[i]);
+                                var question=problem[i].question;
+                                for (let j = 0; j < question.length; ++j) {
+                                    temp += '<label class="label">' + question[j].questionNumber + '.</label>  ' + (isEmpty(question[j].content) ? '' : question[j].content)+'<textarea name="' + question[j].questionNumber + '" class="text-area"></textarea>';
+                                }
                             }
+                            $('#parent_examination').append('<div class="card">\n' +
+                                '        <div class="card-header">\n' +
+                                '            <a class="card-link" data-toggle="collapse" href="#" onclick="onclickCollapse(this)">\n' +
+                                '                第<label>' + (i + 1) + '</label>题：\n' +
+                                '            </a>\n' +
+                                '        </div>\n' +
+                                '        <div class="collapse" data-parent="#parent_examination">\n' +
+                                '            <div class="card-body">' + temp +
+                                '</div>\n' +
+                                '        </div>\n' +
+                                '    </div>');
                         }
-                        $('#parent_examination').append('<div class="card">\n' +
-                            '        <div class="card-header">\n' +
-                            '            <a class="card-link" data-toggle="collapse" href="#" onclick="onclickCollapse(this)">\n' +
-                            '                第<label>' + (i + 1) + '</label>题：\n' +
-                            '            </a>\n' +
-                            '        </div>\n' +
-                            '        <div class="collapse" data-parent="#parent_examination">\n' +
-                            '            <div class="card-body">' + temp +
-                            '</div>\n' +
-                            '        </div>\n' +
-                            '    </div>');
+                    }else {
+                        $('#examState').empty();
+                        $('#examState').text('已结束！');
+                        $('#submit').attr('disabled',true);
                     }
                     $('.text-area').summernote({
                         lang: 'zh-CN',
