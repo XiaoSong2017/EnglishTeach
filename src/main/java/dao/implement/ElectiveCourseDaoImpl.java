@@ -62,7 +62,8 @@ public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> impleme
 
     @Override
     public double getAverageCore(String studentById) {
-        return (Double) getSessionFactory().getCurrentSession().createQuery("select avg (en.grade) from ElectiveCoursePo en where en.sId=?1").setParameter(1,studentById).getResultList().get(0);
+        Object result=getSessionFactory().getCurrentSession().createQuery("select avg (en.grade) from ElectiveCoursePo en where en.sId=?1").setParameter(1,studentById).getResultList().get(0);
+        return result==null?0:(Double)result;
     }
 
     @Override

@@ -90,7 +90,8 @@ public class StudentLogService {
     public List<RelationShip> getStudentOnlineTimeAndCore() {
         List<RelationShip> data = new ArrayList<>();
         for (StudentPo studentPo : studentDao.getAll(StudentPo.class)) {
-            data.add(new RelationShip(electiveCourseDao.getAverageCore(studentPo.getId()), onlineTime(studentPo.getId())));
+            double core=electiveCourseDao.getAverageCore(studentPo.getId());
+            if(core!=0) data.add(new RelationShip(core, onlineTime(studentPo.getId())));
         }
         return data;
     }
