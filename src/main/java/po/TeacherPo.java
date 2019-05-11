@@ -41,7 +41,8 @@ public class TeacherPo {
         this.name = name;
     }
 
-    @Basic
+    @JSON(serialize = false)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "password", nullable = false, length = 25)
     public String getPassword() {
         return password;
@@ -107,7 +108,8 @@ public class TeacherPo {
         this.teachResourcesById = teachResourcesById;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JSON(serialize = false)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "academy", referencedColumnName = "id", nullable = false)
     public AcademyPo getAcademyByAcademy() {
         return academyByAcademy;

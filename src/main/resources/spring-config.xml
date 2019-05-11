@@ -113,6 +113,7 @@
     <bean name="topicBean" class="bean.TopicBean" scope="prototype" autowire="byName"/>
     <bean name="studentLogBean" class="bean.StudentLogBean" scope="prototype" autowire="byName"/>
     <bean name="subjectiveAnswerRecordBean" class="bean.SubjectiveAnswerRecordBean" scope="prototype" autowire="byName"/>
+    <bean name="componentBean" class="bean.ComponentBean" scope="prototype" autowire="byName"/>
     <!--转换器配置-->
     <bean name="examinationPaperConverter" class="converter.ExaminationPaperConverter" autowire="byName"/>
     <!--配置Quartz框架来定时操作任务-->

@@ -14,11 +14,11 @@ public class ProblemPo {
     private String cId;
     private String tId;
     private Integer type;
-    private Set<ComponentPo> componentsById=new HashSet<>();
+    private Set<ComponentPo> componentsById = new HashSet<>();
     private CoursePo courseByCId;
     private TeacherPo teacherByTId;
     private TopicPo topicByType;
-    private Set<QuestionPo> questionsById=new HashSet<>();
+    private Set<QuestionPo> questionsById = new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -53,7 +53,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "c_id", nullable = false, length = 25,insertable = false,updatable = false)
+    @Column(name = "c_id", nullable = false, length = 25, insertable = false, updatable = false)
     public String getcId() {
         return cId;
     }
@@ -63,7 +63,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "t_id", nullable = false, length = 15,insertable = false,updatable = false)
+    @Column(name = "t_id", nullable = false, length = 15, insertable = false, updatable = false)
     public String gettId() {
         return tId;
     }
@@ -73,7 +73,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "type", nullable = true,insertable = false,updatable = false)
+    @Column(name = "type", nullable = true, insertable = false, updatable = false)
     public Integer getType() {
         return type;
     }
@@ -101,7 +101,7 @@ public class ProblemPo {
     }
 
     @JSON(serialize = false)
-    @OneToMany(mappedBy = "problemByQId",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "problemByQId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<ComponentPo> getComponentsById() {
         return componentsById;
     }
@@ -140,8 +140,7 @@ public class ProblemPo {
         this.topicByType = topicByType;
     }
 
-    @JSON(serialize = false)
-    @OneToMany(mappedBy = "problemByProblem",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "problemByProblem", cascade = CascadeType.ALL)
     public Set<QuestionPo> getQuestionsById() {
         return questionsById;
     }

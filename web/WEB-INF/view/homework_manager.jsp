@@ -209,6 +209,158 @@
         </div>
     </div>
 </div>
+<div class="modal hide fade" id="updateExaminationPaperByHomework" tabindex="-1" role="dialog" aria-labelledby="preHomeworkModalExamLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateHomeworkModalExamLabel">修改作业</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="update_homework_modal_body">
+                <div id=" update_parent_homework" class="container-fluid">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr class="row">
+                            <th><label for="update_homework_manager_course" class="label">选择课程：</label></th>
+                            <th><p id="update_homework_manager_course" class="text-center text-info"></p></th>
+                        </tr>
+                        <tr class="row">
+                            <th class="col text-center">
+                                <label for="update_home_work_title">作业标题：</label>
+                            </th>
+                            <th class="col text-center">
+                                <input id="update_home_work_title" type="text" required class="text-input text-center">
+                            </th>
+                            <th class="col text-center">
+                                <img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加题目"
+                                     onclick="addProblemByWork()" class="img-circle btn btn-outline-info" type="svg">
+                            </th>
+                        </tr>
+                        <tr class="row">
+                            <th class="col text-center">
+                                <label for="update_home_work_start_time">开始时间：</label>
+                            </th>
+                            <th class="col text-center">
+                                <input id="update_home_work_start_time" class="currentDate" type="datetime-local" required>
+                            </th>
+                        </tr>
+                        <tr class="row">
+                            <th class="col text-center">
+                                <label for="update_home_work_end_time">结束时间：</label>
+                            </th>
+                            <th class="col text-center">
+                                <input id="update_home_work_end_time" class="currentDate" type="datetime-local" required>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody_updte_work_Problem">
+                        <tr class="row">
+                            <td class="col" colspan="3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"
+                                           href="#">第<label class="label">1</label>题：</a>
+                                    </div>
+                                    <div class="collapse" data-parent="#update_parent_homework">
+                                        <div class="card-body">
+                                            <label class="label">
+                                                选择题型：
+                                                <select class="custom-select" required title="选择题型!"></select>
+                                            </label>
+                                            <table class="table table-striped">
+                                                <thead class="thead-light">
+                                                <tr class="row">
+                                                    <td class="col">
+                                                        <label class="label">题目内容：
+                                                            <textarea class="text-area" required></textarea>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="row">
+                                                    <td class="col">
+                                                        <label class="label">
+                                                            每一问分值：<input type="number" placeholder="请输入！" required>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="row">
+                                                    <td class="col">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                            <tr class="row">
+                                                                <td class="col">
+                                                                    <label class="label">问题：<textarea
+                                                                            class="text-area"></textarea></label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="row">
+                                                                <td class="col">
+                                                                    <label class="label">
+                                                                        参考答案：<textarea class="text-area"></textarea>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr class="row">
+                                                                <td class="col">
+                                                                    <label class="label">选项<span style="color: #e0a800">A</span>:
+                                                                        <textarea class="text-area"></textarea>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                            <tr class="row">
+                                                                <td class="col text-center">
+                                                                    <img role="button"
+                                                                         src="<%=request.getContextPath()%>/images/add.svg"
+                                                                         alt="添加选项！"
+                                                                         onclick="addTopic(this)"
+                                                                         class="img-circle btn btn-outline-info"
+                                                                         type="svg">
+                                                                </td>
+                                                            </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr class="row">
+                                                    <td class="col text-center">
+                                                        <img role="button"
+                                                             src="<%=request.getContextPath()%>/images/add.svg"
+                                                             alt="添加问题！"
+                                                             onclick="addQuestion(this)"
+                                                             class="img-circle btn btn-outline-info"
+                                                             type="svg">
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button class="btn btn-primary" data-dismiss="modal">修改</button>
+            </div>
+            <%--</form>--%>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     function addExamPager(obj) {
         //console.log($(obj).parent().prev().children().children().children().eq(0));
@@ -299,7 +451,7 @@
         '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
         '            <td class="col text-center">\n' +
         '                <div class="btn-group" role="group">\n' +
-        '                    <a class="btn btn-outline-info" data-toggle="modal">修改</a>\n' +
+        '                    <a class="btn btn-outline-info" data-toggle="modal" href="#updateExaminationPaperByHomework" onclick="updateExaminationPaperById(\''+ data.data[i].id + '\')">修改</a>\n' +
         '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
         '                </div>\n' +
         '            </td>\n' +
@@ -343,7 +495,7 @@
                         '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
                         '            <td class="col text-center">\n' +
                         '                <div class="btn-group" role="group">\n' +
-                        '                    <a class="btn btn-outline-info" data-toggle="modal">修改</a>\n' +
+                        '                    <a class="btn btn-outline-info" data-toggle="modal" href="#updateExaminationPaperByHomework" onclick="updateExaminationPaperById(\''+data.data[i].courseByCId.name+'\',\''+ data.data[i].id + '\',\''+ data.data[i].name +'\',\''+ data.data[i].startTime +'\',\''+ data.data[i].endTime +'\')">修改</a>\n' +
                         '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
                         '                </div>\n' +
                         '            </td>\n' +
@@ -371,6 +523,29 @@
         });
     });
 
+    function updateExaminationPaperById(nameByCourse,id,name,startTime,endTime) {
+        $('#update_homework_manager_course').text(nameByCourse);
+        $('#update_home_work_title').val(name);
+        $('#update_home_work_start_time').val(startTime);
+        $('#update_home_work_end_time').val(endTime);
+        $.ajax({
+            url:'<%=request.getContextPath()%>/componentBean',
+            type:'POST',
+            async:true,
+            data:{'examId':id},
+            success:(data)=>{
+                for(var i=0;i<data.data.length;++i){
+
+                }
+            },
+            error:()=>{
+                Swal.fire({
+                   text:'网络错误！请重试！',
+                   type:'error'
+                });
+            }
+        });
+    }
     function preExaminPapgerByHomework(obj) {
         $('#homework_modal_body').empty();
         $('#homework_modal_body').append('<iframe src="<%=request.getContextPath()%>/paper?id='+obj+'&preview=disabled" style="width: 100%" height="100%" onload="changeFrameHeight(this)"></iframe>');

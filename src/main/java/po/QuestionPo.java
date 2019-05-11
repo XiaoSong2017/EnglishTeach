@@ -30,7 +30,8 @@ public class QuestionPo {
         this.id = id;
     }
 
-    @Basic
+    @JSON(serialize = false)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "answer", nullable = false, length = 255)
     public String getAnswer() {
         return answer;
@@ -97,8 +98,7 @@ public class QuestionPo {
         this.answerRecordsById = answerRecordsById;
     }
 
-    @JSON(serialize = false)
-    @OneToMany(mappedBy = "questionByQuestion",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "questionByQuestion",cascade = CascadeType.ALL)
     public Set<OptionsPo> getOptionsById() {
         return optionsById;
     }

@@ -1173,7 +1173,7 @@
     <column id="304" parent="278" name="core">
       <Position>6</Position>
       <Comment>本题得分</Comment>
-      <DataType>float(3,2 digit) unsigned zerofill|0s</DataType>
+      <DataType>float(4,2 digit) unsigned zerofill|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="305" parent="278" name="time">
@@ -1260,7 +1260,7 @@
     </column>
     <column id="320" parent="280" name="core">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>float(4,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1664,6 +1664,7 @@
       <Position>3</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;123456&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="394" parent="289" name="class">
@@ -1728,7 +1729,7 @@
     </foreign-key>
     <column id="405" parent="291" name="similarity">
       <Position>1</Position>
-      <DataType>float|0s</DataType>
+      <DataType>float(4,3 digit)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

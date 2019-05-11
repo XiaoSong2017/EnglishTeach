@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -94,7 +96,8 @@ public class ComponentPo {
         return Objects.hash(id, core, problemNumber, title, eId, qId);
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JSON(serialize = false)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "e_id", referencedColumnName = "id", nullable = false)
     public ExaminationPaperPo getExaminationPaperByEId() {
         return examinationPaperByEId;

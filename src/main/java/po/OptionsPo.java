@@ -1,5 +1,7 @@
 package po;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -69,7 +71,8 @@ public class OptionsPo {
         return Objects.hash(id, content, mark, question);
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JSON(serialize = false)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "question", referencedColumnName = "id", nullable = false)
     public QuestionPo getQuestionByQuestion() {
         return questionByQuestion;

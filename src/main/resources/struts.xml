@@ -202,6 +202,11 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="componentBean" class="componentBean">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
         <action name="selectHomework">
             <result>WEB-INF/view/select_homework.jsp</result>
         </action>

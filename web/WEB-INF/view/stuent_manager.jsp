@@ -94,7 +94,7 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover d-table">
         <thead class="thead-dark">
         <%--<tr class="row"></tr>--%>
         <tr class="row">

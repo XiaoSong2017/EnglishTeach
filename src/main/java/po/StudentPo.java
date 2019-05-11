@@ -40,6 +40,7 @@ public class StudentPo {
         this.name = name;
     }
 
+    @JSON(serialize = false)
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "password", nullable = false, length = 25)
     public String getPassword() {
@@ -96,7 +97,8 @@ public class StudentPo {
         this.electiveCoursesById = electiveCoursesById;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JSON(serialize = false)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "class", referencedColumnName = "id", nullable = false)
     public ClassesPo getClassesByClazz() {
         return classesByClazz;
