@@ -334,7 +334,7 @@
             'tId': '<%=request.getSession().getAttribute("ID")%>',
             'componentsById': problems
         };
-        console.log(examinationPaper);
+        //console.log(examinationPaper);
         $.ajax({
             url: '<%=request.getContextPath()%>/saveExaminationPaper',
             type: 'post',
@@ -447,19 +447,20 @@
             data: {'examId': id},
             success: (data) => {
                 $('#tbody_update_work_Problem').empty();
-                for (var i = 0,temp; i < data.data.length; ++i) {
+                var data1=data.data;
+                for (var i = 0,temp; i < data1.length; ++i) {
                     temp = '<tr class="row"><td class="col" colspan="3">' +
                         '<div class="card">' +
                         '<div class="card-header">' +
                         '<a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"' +
-                        ' href="#">第<label class="label">' + data.data[i].problemNumber + '</label>题：</a>' +
+                        ' href="#">第<label class="label">' + data1[i].problemNumber + '</label>题：</a>' +
                         '</div>' +
                         '<div class="collapse" data-parent="#update_parent_homework">' +
                         '<div class="card-body">选择题型：' +
                         '<label class="label">' +
                         '<select class="custom-select" required title="选择题型!">';
                     for (var j = 0; j < topic.length; ++j) {
-                        if (data.data[i].problemByQId.topicByType.id === topic[j].id) {
+                        if (data1[i].problemByQId.topicByType.id === topic[j].id) {
                             temp += '<option class="selectedItem" value="' + topic[j].id + '" selected="selected">' + topic[j].name + '</option>';
                         } else {
                             temp += '<option class="selectedItem" value="' + topic[j].id + '">' + topic[j].name + '</option>';
@@ -467,18 +468,20 @@
                     }
                     temp += '</select></label>';
                     temp+='<table class="table table-striped"><thead class="thead-light"><tr class="row"><td class="col">' +
-                        '<label class="label">题目内容：<textarea class="text-area" required></textarea></label></td>' +
-                        '</tr><tr class="row"><td class="col"><label class="label">每一问分值：<input type="number" placeholder="请输入！" required value="' + data.data[i].core + '"></label>' +
+                        '<label class="label">题目内容：<textarea class="text-area">'+(isEmpty(data1[i].title)?'':data1[i].title)+'</textarea></label></td>' +
+                        '</tr><tr class="row"><td class="col"><label class="label">每一问分值：<input type="number" placeholder="请输入！" required value="' + data1[i].core + '"></label>' +
                         '</td></tr></thead>';
                     temp+='<tbody>';
-                    for (var j = 0,k; j < data.data[i].problemByQId.questionsById.length; ++j) {
+                    var question=data1[i].problemByQId.questionsById;
+                    for (var j = 0,k; j < question.length; ++j) {
                         temp += '<tr class="row"><td class="col"><table class="table table-striped"><thead>' +
-                            '<tr class="row"><td class="col"><label class="label">问题：<textarea class="text-area"></textarea></label></td></tr>' +
-                            '<tr class="row"><td class="col"><label class="label">参考答案：<textarea class="text-area"></textarea></label></td></tr>' +
+                            '<tr class="row"><td class="col"><label class="label">问题：<textarea class="text-area">'+isEmpty(question[j].content)?'':question[j].content+'</textarea></label></td></tr>' +
+                            '<tr class="row"><td class="col"><label class="label">参考答案：<textarea class="text-area">'+isEmpty(question[j].answer)?'':question[j].answer+'</textarea></label></td></tr>' +
                             '</thead><tbody>';
-                        for (k = 0; k < data.data[i].problemByQId.questionsById[j].optionsById.length; ++k) {
-                            temp += '<tr class="row"><td class="col"><label class="label">选项<span style="color: #e0a800">' + data.data[i].problemByQId.questionsById[j].optionsById[k].mark + '</span>:' +
-                                '<textarea class="text-area"></textarea></label></td></tr>';
+                        var option=question[j].optionsById;
+                        for (k = 0; k < option.length; ++k) {
+                            temp += '<tr class="row"><td class="col"><label class="label">选项<span style="color: #e0a800">' + option[k].mark + '</span>:' +
+                                '<textarea class="text-area">'+option[k].content+'</textarea></label></td></tr>';
                         }
                         temp += '</tbody><tfoot><tr class="row"><td class="col text-center">' +
                             '<img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加选项！" onclick="addTopic(this)" class="img-circle btn btn-outline-info" type="svg">' +
@@ -489,8 +492,8 @@
                         '<img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加问题！" onclick="addQuestion(this)" class="img-circle btn btn-outline-info" type="svg">'+
                         '</td></tr></tfoot>';
                     temp += '</table></div></div></div></td></tr>';
+                    console.log(temp);
                     $('#tbody_update_work_Problem').append(temp);
-                    //console.log(temp);
                 }
                 $('.text-area').summernote({
                     lang: 'zh-CN',

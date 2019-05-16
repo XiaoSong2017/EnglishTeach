@@ -30,8 +30,7 @@ public class QuestionPo {
         this.id = id;
     }
 
-    @JSON(serialize = false)
-    @Basic(fetch = FetchType.LAZY)
+    @Basic
     @Column(name = "answer", nullable = false, length = 255)
     public String getAnswer() {
         return answer;

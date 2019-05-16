@@ -32,10 +32,10 @@
                         </tr>
                         <tr class="row">
                             <th class="col text-center">
-                                <label for="home_work_title">试卷名称：</label>
+                                <label for="exam_work_title">试卷名称：</label>
                             </th>
                             <th class="col text-center">
-                                <input type="text" id="home_work_title" required class="text-input">
+                                <input type="text" id="exam_work_title" required class="text-input">
                             </th>
                             <th class="col text-center">
                                 <img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加题目"
@@ -280,7 +280,7 @@
             'tId': '<%=request.getSession().getAttribute("ID")%>',
             'componentsById': problems
         };
-        console.log(examinationPaper);
+        //console.log(examinationPaper);
         $.ajax({
             url: '<%=request.getContextPath()%>/saveExaminationPaper',
             type: 'post',

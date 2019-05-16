@@ -73,8 +73,8 @@
             questionById.push(data[i].name);
             content.push(data[i].value);
         }
-        console.log(questionById);
-        console.log(content);
+        //console.log(questionById);
+        //console.log(content);
         var temp = $.param({'questionById': questionById}, true);
         temp += '&' + $.param({'content': content}, true);
         temp += '&studentById=' + studentById + '&examinationById=' + examinationById;
