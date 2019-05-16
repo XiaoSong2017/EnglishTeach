@@ -2,13 +2,11 @@ package dao.implement;
 
 import dao.AnswerRecordDao;
 import org.hibernate.Session;
-import org.springframework.transaction.annotation.Transactional;
 import po.AnswerRecordPo;
 
 import java.util.Date;
 import java.util.List;
 
-@Transactional
 public class AnswerRecordDaoImpl extends BaseDaoImpl<AnswerRecordPo> implements AnswerRecordDao {
     @Override
     public void saveOrUpdateAnswerRecords(int examinationById, List<Integer> questionById, List<String> content, String studentById, List<Float> core) {

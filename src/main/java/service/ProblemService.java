@@ -2,6 +2,7 @@ package service;
 
 import dao.ProblemDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.ProblemPo;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class ProblemService {
         return problemDao.getAll(ProblemPo.class);
     }
 
+    @Transactional
     public void deleteProblemById(int problemId) throws Exception{
         problemDao.delete(ProblemPo.class,problemId);
     }

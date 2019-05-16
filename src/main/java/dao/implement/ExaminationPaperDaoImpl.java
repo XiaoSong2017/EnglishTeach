@@ -1,12 +1,10 @@
 package dao.implement;
 
 import dao.ExaminationPaperDao;
-import org.springframework.transaction.annotation.Transactional;
 import po.ExaminationPaperPo;
 
 import java.util.List;
 
-@Transactional
 public class ExaminationPaperDaoImpl extends BaseDaoImpl<ExaminationPaperPo> implements ExaminationPaperDao {
     @Override
     public List<ExaminationPaperPo> getExaminationPaperByTeacherId(String teacherId,String type) {

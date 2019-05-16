@@ -1,10 +1,9 @@
 package dao;
 
-import org.springframework.transaction.annotation.Transactional;
 import po.ElectiveCoursePo;
 
 import java.util.List;
-@Transactional
+
 public interface ElectiveCourseDao extends BaseDao<ElectiveCoursePo> {
 
     List getCoursesByStudentId(String id);

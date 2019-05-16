@@ -1,12 +1,10 @@
 package dao.implement;
 
 import dao.StudentDao;
-import org.springframework.transaction.annotation.Transactional;
 import po.StudentPo;
 
 import java.util.List;
 
-@Transactional
 public class StudentDaoImpl extends BaseDaoImpl<StudentPo> implements StudentDao {
     @Override
     public List<StudentPo> getStudentsByClassId(String id) {

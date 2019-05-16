@@ -2,6 +2,7 @@ package service;
 
 import dao.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.*;
 
 import java.util.*;
@@ -18,12 +19,19 @@ public class ExaminationPaperService {
         return examinationPaperDao.getExaminationPaperByTeacherId(teacherId, type);
     }
 
+    @Transactional
     public void deleteExaminationPaperById(String id) {
         examinationPaperDao.delete(ExaminationPaperPo.class, Integer.valueOf(id));
     }
 
+    @Transactional
     public void saveExaminationPaper(ExaminationPaperPo examinationPaperPo) {
         examinationPaperDao.saveOrUpdate(examinationPaperPo);
+    }
+
+    @Transactional
+    public void updateExaminationPaper(ExaminationPaperPo examinationPaperPo){
+        examinationPaperDao.update(examinationPaperPo);
     }
 
     public Map<String, Object> getExaminationPaperDetailById(int id) {

@@ -2,14 +2,12 @@ package dao.implement;
 
 import dao.TeachingDao;
 import org.hibernate.query.Query;
-import org.springframework.transaction.annotation.Transactional;
 import po.CoursePo;
 import po.TeachingPo;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
-@Transactional
 public class TeachingDaoImpl extends BaseDaoImpl<TeachingPo> implements TeachingDao {
     @Override
     public List<CoursePo> getCourseByTeacherId(String id) {

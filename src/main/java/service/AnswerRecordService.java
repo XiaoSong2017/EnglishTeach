@@ -5,6 +5,8 @@ import dao.AnswerRecordDao;
 import dao.ComponentDao;
 import dao.QuestionDao;
 import dao.SubjectiveAnswerRecordPoDao;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.AnswerRecordPo;
 import po.QuestionPo;
 import po.SubjectiveAnswerRecordPo;
@@ -12,7 +14,7 @@ import po.SubjectiveAnswerRecordPo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class AnswerRecordService {
     private AnswerRecordDao answerRecordDao;
     private SubjectiveAnswerRecordPoDao subjectiveAnswerRecordPoDao;
@@ -39,9 +41,10 @@ public class AnswerRecordService {
         this.questionDao = questionDao;
     }
 
+    @Transactional
     public void saveAnswerRecord(int examinationById, List<String> questionById, List<String> content, String studentById) {
-        List<Float> core=new ArrayList<Float>();
-        List<Integer> questionId=new ArrayList<Integer>();
+        List<Float> core= new ArrayList<>();
+        List<Integer> questionId= new ArrayList<>();
         for(int i=0;i<content.size();++i){
             int questionIdById=Integer.valueOf(questionById.get(i));
             if(isObjectTopic(questionIdById)){
@@ -60,7 +63,6 @@ public class AnswerRecordService {
                 subjectiveAnswerRecordPo.setTime(new Date(System.currentTimeMillis()));
                 subjectiveAnswerRecordPo.setAnswer(content.get(i));
                 subjectiveAnswerRecordPoDao.saveOrUpdate(subjectiveAnswerRecordPo);
-                questionId.remove(i);
                 content.remove(i);
             }
         }

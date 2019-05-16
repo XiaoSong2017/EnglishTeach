@@ -4,6 +4,7 @@ import dao.ElectiveCourseDao;
 import dao.StudentDao;
 import dao.TeachingDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.ElectiveCoursePo;
 import po.StudentPo;
 import po.TeachingPo;
@@ -32,10 +33,12 @@ public class ElectiveCourseService {
         return electiveCourseDao.getAll(ElectiveCoursePo.class);
     }
 
+    @Transactional
     public void deleteElectiveCourseById(int electiveCourseId) {
         electiveCourseDao.delete(ElectiveCoursePo.class, electiveCourseId);
     }
 
+    @Transactional
     public boolean updateElectiveCourseById(String electiveCourseId, String studentId, String teacherId, String courseId) {
         TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
         if (teachingPo == null) return false;
@@ -67,6 +70,7 @@ public class ElectiveCourseService {
         return electiveCourseDao.getElectiveCourseByTeacherId(teacherId);
     }
 
+    @Transactional
     public void saveElectiveCourseByAcademyId(String s, String teacherId, String courseId) {
         TeachingPo teachingPo=teachingDao.getTeachingByCourseIdAndTeacherId(teacherId,courseId);
         if(teachingPo!=null){
@@ -81,6 +85,7 @@ public class ElectiveCourseService {
         }
     }
 
+    @Transactional
     public void saveElectiveCourseByClassesId(String s, String teacherId, String courseId) {
         TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
         if (teachingPo != null) {
@@ -88,6 +93,7 @@ public class ElectiveCourseService {
         }
     }
 
+    @Transactional
     public void saveElectiveCourseByStudentId(String s, String teacherId, String courseId) {
         TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
         if (teachingPo != null) {

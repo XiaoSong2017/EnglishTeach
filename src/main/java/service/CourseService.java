@@ -5,6 +5,7 @@ import dao.CourseDao;
 import dao.ElectiveCourseDao;
 import dao.TeachingDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.CoursePo;
 import po.TeacherPo;
 import po.TeachingPo;
@@ -44,10 +45,12 @@ public class CourseService{
     public List<CoursePo> getAll() {
         return courseDao.getAll(CoursePo.class);
     }
+    @Transactional
     public void deleteCourseById(String id){
         courseDao.delete(CoursePo.class,id);
     }
 
+    @Transactional
     public void updateCourseById(String id, String name) {
         CoursePo coursePo=courseDao.getById(CoursePo.class,id);
         coursePo.setName(name);

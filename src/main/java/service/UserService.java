@@ -4,6 +4,7 @@ import dao.ClassesDao;
 import dao.StudentDao;
 import dao.TeacherDao;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.ClassesPo;
 import po.StudentPo;
 import po.TeacherPo;
@@ -58,10 +59,12 @@ public class UserService {
         studentDao.save(studentPo);
     }
 
+    @Transactional
     public void deleteStudent(String id){
         studentDao.delete(StudentPo.class,id);
     }
 
+    @Transactional
     public void updateStudent(String id, String name, String classes,String password) {
         StudentPo studentPo=studentDao.getById(StudentPo.class,id);
         studentPo.setId(id);

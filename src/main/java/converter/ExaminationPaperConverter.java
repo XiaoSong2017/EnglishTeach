@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import dao.CourseDao;
+import dao.ExaminationPaperDao;
 import dao.TeacherDao;
 import org.apache.struts2.util.StrutsTypeConverter;
 import po.*;
@@ -14,6 +15,7 @@ import java.util.*;
 public class ExaminationPaperConverter extends StrutsTypeConverter {
     private TeacherDao teacherDao;
     private CourseDao courseDao;
+    private ExaminationPaperDao examinationPaperDao;
 
     public void setTeacherDao(TeacherDao teacherDao) {
         this.teacherDao = teacherDao;
@@ -23,13 +25,20 @@ public class ExaminationPaperConverter extends StrutsTypeConverter {
         this.courseDao = courseDao;
     }
 
+    public void setExaminationPaperDao(ExaminationPaperDao examinationPaperDao) {
+        this.examinationPaperDao = examinationPaperDao;
+    }
+
     @Override
     public Object convertFromString(Map map, String[] strings, Class aClass) {
 //        logger(strings.toString());
         JSONObject jsonObject = JSON.parseObject(strings[0]);
         TeacherPo teacherPo=teacherDao.getById(TeacherPo.class,jsonObject.getString("tId"));
         CoursePo coursePo=courseDao.getById(CoursePo.class,jsonObject.getString("cId"));
-        ExaminationPaperPo examinationPaperPo = new ExaminationPaperPo();
+        ExaminationPaperPo examinationPaperPo;
+        if(jsonObject.containsKey("id"))
+            examinationPaperPo=examinationPaperDao.getById(ExaminationPaperPo.class,jsonObject.getInteger("id"));
+        else examinationPaperPo = new ExaminationPaperPo();
         examinationPaperPo.setName(jsonObject.getString("name"));
         examinationPaperPo.setType(jsonObject.getBoolean("type"));
         examinationPaperPo.setStartTime(jsonObject.getTimestamp("startTime"));

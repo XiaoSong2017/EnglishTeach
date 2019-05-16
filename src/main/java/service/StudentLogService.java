@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.StudentLogPo;
 import po.StudentPo;
 import vo.RelationShip;
@@ -46,6 +47,7 @@ public class StudentLogService {
         this.studentLogDao = studentLogDao;
     }
 
+    @Transactional
     public Long save(Timestamp loginTime, Timestamp logoutTime, String id) {
         StudentLogPo studentLogPo = new StudentLogPo();
         studentLogPo.setLoginTime(loginTime);
@@ -61,6 +63,7 @@ public class StudentLogService {
         return SUCCESS;
     }
 
+    @Transactional
     public void updateById(Timestamp logoutTime, long id) {
         StudentLogPo studentLogPo = studentLogDao.getById(StudentLogPo.class, id);
         studentLogPo.setLogoutTime(logoutTime);

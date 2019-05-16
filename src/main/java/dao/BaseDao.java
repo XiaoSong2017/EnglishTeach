@@ -1,12 +1,10 @@
 package dao;
 
 import com.sun.istack.NotNull;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Transactional
 public interface BaseDao<T> {
     /**
      * 根据ID加载实体

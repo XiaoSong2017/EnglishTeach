@@ -5,6 +5,7 @@ import dao.TeacherDao;
 import dao.TeachingDao;
 import org.apache.struts2.json.annotations.JSON;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.CoursePo;
 import po.TeacherPo;
 import po.TeachingPo;
@@ -48,16 +49,19 @@ public class TeachingService {
     public List<TeachingPo> getAll() {
         return teachingDao.getAll(TeachingPo.class);
     }
+    @Transactional
     public void deleteTeachingById(int electiveCourseId) {
         teachingDao.delete(TeachingPo.class,electiveCourseId);
     }
 
+    @Transactional
     public void saveTeaching(String cId, String tId, String usualProportion, String examProportion) {
         TeachingPo teachingPo=new TeachingPo();
         setTeaching(cId, tId, usualProportion, examProportion, teachingPo, courseDao, teacherDao);
         teachingDao.save(teachingPo);
     }
 
+    @Transactional
     public void updateTeachingById(String id,String cId, String tId, String usualProportion, String examProportion) {
         TeachingPo teachingPo=teachingDao.getById(TeachingPo.class,Integer.valueOf(id));
         setTeaching(cId, tId, usualProportion, examProportion, teachingPo, courseDao, teacherDao);

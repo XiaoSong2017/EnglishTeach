@@ -1,12 +1,10 @@
 package dao.implement;
 
 import dao.ComponentDao;
-import org.springframework.transaction.annotation.Transactional;
 import po.ComponentPo;
 
 import java.util.List;
 
-@Transactional
 public class ComponentDaoImpl extends BaseDaoImpl<ComponentPo> implements ComponentDao {
     @Override
     public ComponentPo getObjectByExamIdAndProblemId(int examinationById, int problemId) {

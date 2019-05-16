@@ -7,6 +7,7 @@ import dao.FilesDao;
 import dao.TeacherDao;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import po.CoursePo;
 import po.TeachResourcePo;
 import po.TeacherPo;
@@ -45,6 +46,7 @@ public class FileService {
         return teachResourcePo;
     }
 
+    @Transactional
     public boolean uploadFile(String fileName, String contentType, File file, String courseId) {
         TeachResourcePo teachResourcePo = new TeachResourcePo();
         String userId = String.valueOf(ActionContext.getContext().getSession().getOrDefault("ID", null));
@@ -71,6 +73,7 @@ public class FileService {
         return filesDao.getByUser(TeachResourcePo.class, pageNumber,pageSize, id);
     }
 
+    @Transactional
     public void deleteFileById(String id) {
         filesDao.delete(TeachResourcePo.class, id);
     }
