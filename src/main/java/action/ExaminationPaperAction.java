@@ -74,4 +74,9 @@ public class ExaminationPaperAction extends ActionSupport{
         resultCode=SUCCESS;
         return SUCCESS;
     }
+
+    public String updateExaminationPager()throws Exception{
+        examinationPaperService.updateExaminationPaper(examinationPaperPo);
+        return resultCode=SUCCESS;
+    }
 }

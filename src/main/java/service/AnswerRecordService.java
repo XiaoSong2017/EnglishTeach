@@ -14,6 +14,7 @@ import po.SubjectiveAnswerRecordPo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class AnswerRecordService {
     private AnswerRecordDao answerRecordDao;
@@ -21,6 +22,7 @@ public class AnswerRecordService {
     private ComponentDao componentDao;
     private QuestionDao questionDao;
     private Levenshtein levenshtein;
+
     public void setAnswerRecordDao(AnswerRecordDao answerRecordDao) {
         this.answerRecordDao = answerRecordDao;
     }
@@ -43,19 +45,22 @@ public class AnswerRecordService {
 
     @Transactional
     public void saveAnswerRecord(int examinationById, List<String> questionById, List<String> content, String studentById) {
-        List<Float> core= new ArrayList<>();
-        List<Integer> questionId= new ArrayList<>();
-        for(int i=0;i<content.size();++i){
-            int questionIdById=Integer.valueOf(questionById.get(i));
-            if(isObjectTopic(questionIdById)){
+        List<Float> core = new ArrayList<>();
+        List<Integer> questionId = new ArrayList<>();
+        for (int i = 0; i < content.size(); ++i) {
+            int questionIdById = Integer.valueOf(questionById.get(i));
+            if (isObjectTopic(questionIdById)) {
                 questionId.add(questionIdById);
-                core.add(onlineJudgment(questionIdById,content.get(i))?componentDao.getObjectByExamIdAndProblemId(examinationById,questionIdById).getCore():0);
-            }else {
-                float similarity=0;
-                for(AnswerRecordPo answerRecordPo:answerRecordDao.getObjectsByQuestionId(questionIdById)){
-                    similarity=Math.max(similarity,levenshtein.getSimilarity(content.get(i),answerRecordPo.getAnswer()));
+                core.add(onlineJudgment(questionIdById, content.get(i)) ? componentDao.getObjectByExamIdAndProblemId(examinationById, questionIdById).getCore() : 0);
+            } else {
+                float similarity = 0;
+                for (AnswerRecordPo answerRecordPo : answerRecordDao.getObjectsByQuestionId(questionIdById)) {
+                    /**
+                     * 截取除去Summernote框架输出字符串<p></p>之间的结果进行计算
+                     */
+                    similarity = Math.max(similarity, levenshtein.getSimilarity(content.get(i).substring(content.get(i).indexOf(">")+1, content.get(i).lastIndexOf("<")-1), answerRecordPo.getAnswer().substring(answerRecordPo.getAnswer().indexOf(">")+1, answerRecordPo.getAnswer().lastIndexOf("<")-1)));
                 }
-                SubjectiveAnswerRecordPo subjectiveAnswerRecordPo=new SubjectiveAnswerRecordPo();
+                SubjectiveAnswerRecordPo subjectiveAnswerRecordPo = new SubjectiveAnswerRecordPo();
                 subjectiveAnswerRecordPo.setSimilarity(similarity);
                 subjectiveAnswerRecordPo.setqId(questionIdById);
                 subjectiveAnswerRecordPo.seteId(examinationById);
@@ -66,20 +71,20 @@ public class AnswerRecordService {
                 content.remove(i);
             }
         }
-        answerRecordDao.saveOrUpdateAnswerRecords(examinationById,questionId,content,studentById,core);
+        answerRecordDao.saveOrUpdateAnswerRecords(examinationById, questionId, content, studentById, core);
     }
 
-    private boolean onlineJudgment(int question, String content){
-        QuestionPo questionPo=questionDao.getById(QuestionPo.class,question);
-        return questionPo!=null&&questionPo.getAnswer().equals(content);
+    private boolean onlineJudgment(int question, String content) {
+        QuestionPo questionPo = questionDao.getById(QuestionPo.class, question);
+        return questionPo != null && questionPo.getAnswer().equals(content);
     }
 
-    private boolean isObjectTopic(int question){
-        QuestionPo questionPo=questionDao.getById(QuestionPo.class,question);
-        if(questionPo!=null){
-            int topic=questionPo.getProblemByProblem().getTopicByType().getId();
-            return topic!=7&&topic!=8;
-        }else return false;
+    private boolean isObjectTopic(int question) {
+        QuestionPo questionPo = questionDao.getById(QuestionPo.class, question);
+        if (questionPo != null) {
+            int topic = questionPo.getProblemByProblem().getTopicByType().getId();
+            return topic != 7 && topic != 8;
+        } else return false;
     }
 
     public List<SubjectiveAnswerRecordPo> getSubjectiveAnswerRecords() {

@@ -1,5 +1,6 @@
 package service;
 
+import com.sun.istack.NotNull;
 import dao.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class ExaminationPaperService {
     }
 
     @Transactional
-    public void updateExaminationPaper(ExaminationPaperPo examinationPaperPo){
+    public void updateExaminationPaper(@NotNull ExaminationPaperPo examinationPaperPo){
         examinationPaperDao.update(examinationPaperPo);
     }
 

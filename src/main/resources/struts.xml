@@ -126,6 +126,11 @@
                 <param name="noCache">true</param>
             </result>
         </action>
+        <action name="updateExaminationPager" class="action.ExaminationPaperAction" method="updateExaminationPager">
+            <result name="success" type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
         <action name="getExaminationPaperDetailById" class="action.ExaminationPaperAction" method="getExaminationPaperDetailById">
             <result name="success" type="json">
                 <param name="noCache">true</param>
