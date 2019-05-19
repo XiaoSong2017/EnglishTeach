@@ -73,7 +73,7 @@ public class ProblemPo {
     }
 
     @Basic
-    @Column(name = "type", nullable = true, insertable = false, updatable = false)
+    @Column(name = "type", nullable = false, insertable = false, updatable = false)
     public Integer getType() {
         return type;
     }

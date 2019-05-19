@@ -39,7 +39,7 @@
                             </th>
                             <th class="col text-center">
                                 <img role="button" src="<%=request.getContextPath()%>/images/add.svg" alt="添加题目"
-                                     onclick="addProblemByWork()" class="img-circle btn btn-outline-info" type="svg">
+                                     onclick="addProblem(this)" class="img-circle btn btn-outline-info" type="svg">
                             </th>
                         </tr>
                         <tr class="row">
@@ -124,7 +124,7 @@
                                                                     <img role="button"
                                                                          src="<%=request.getContextPath()%>/images/add.svg"
                                                                          alt="添加选项！"
-                                                                         onclick="addTopic(this)"
+                                                                         onclick="addOption(this)"
                                                                          class="img-circle btn btn-outline-info"
                                                                          type="svg">
                                                                 </td>
@@ -285,6 +285,7 @@
         var rows = $('#tbody_update_work_Problem').children();
         var problems = [];
         for (var i = 0; i < rows.length; ++i) {
+            var componentId = $(rows.eq(i).children().children().children().eq(0).children().children()).attr("component");
             var problemNumber = rows.eq(i).children().children().children().eq(0).children().children().text();
             var problemTopic = rows.eq(i).children().children().children().eq(1).children().children().eq(0).children().val();
             var problemContent = rows.eq(i).children().children().children().eq(1).children().children().eq(1).children().eq(0).children().eq(0).children().children().children().summernote('code');
@@ -295,86 +296,90 @@
             for (var j = 0; j < rowsI.length; ++j) {
                 var tableJ = rowsI.eq(j).children().children();
                 var theadJ = tableJ.children().eq(0);
+                var questionId = $(theadJ.children().eq(0).children().children().children()).attr("question");
                 var questionContent = theadJ.children().eq(0).children().children().children().summernote('code');
                 var answer = theadJ.children().eq(1).children().children().children().summernote('code');
                 var options = [];
                 var tbodyJ = tableJ.children().eq(1);
                 for (var k = 0; k < tbodyJ.children().length; ++k) {
+                    var optionId = $(tbodyJ.children().eq(k).children().children().children().eq(0)).attr('option');
                     var mark = tbodyJ.children().eq(k).children().children().children().eq(0).text();
                     var optionContent = tbodyJ.children().eq(k).children().children().children().eq(1).summernote('code');
-                    var option = {
-                        'mark': mark,
-                        'content': optionContent
-                    };
+                    var option = {};
+                    if (!isEmpty(optionId)) option.id = optionId;
+                    option.mark = mark;
+                    option.content = optionContent;
                     options.push(option);
                     //console.log(tbodyJ.children().eq(k).children().children().children().eq(0).text());
                 }
-                var question = {
-                    'questionNumber': j + 1,
-                    'question': questionContent,
-                    'answer': answer,
-                    'option': options
-                };
+                var question = {};
+                if (!isEmpty(questionId)) question.id = questionId;
+                question.questionNumber = j + 1;
+                question.question = questionContent;
+                question.answer = answer;
+                question.option = options;
                 questions.push(question);
             }
-            var problem = {
-                'problemNumber': problemNumber,
-                'type': problemTopic,
-                'content': problemContent,
-                'core': core,
-                'question': questions
-            };
+            var problem = {};
+            if (!isEmpty(componentId)) {
+                problem.id = componentId;
+            }
+            problem.problemNumber = problemNumber;
+            problem.type = problemTopic;
+            problem.content = problemContent;
+            problem.core = core;
+            problem.question = questions;
             problems.push(problem);
             //console.log(rowsI.eq(0).children().children());
         }
         examinationPaper.componentsById = problems;
-        //console.log(examinationPaper);
-        $.ajax({
-            url: '<%=request.getContextPath()%>/updateExaminationPager',
-            async: true,
-            type: 'POST',
-            datatype: 'json',
-            data: {'examinationPaperPo': JSON.stringify(examinationPaper)},
-            success:
-                (data) => {
-                    if (data.resultCode === 'success') {
-                        $.ajax({
-                            url: '<%=request.getContextPath()%>/examinationPaperBean',
-                            datatype: 'json',
-                            async: true,
-                            type: 'post',
-                            data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: true},
-                            success: (data) => {
-                                $('#tbody_homework').empty();
-                                for (var i = 0; i < data.data.length; ++i) {
-                                    $('#tbody_homework').append('<tr class="row">\n' +
-                                        '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
-                                        '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
-                                        '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
-                                        '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
-                                        '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
-                                        '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
-                                        '            <td class="col text-center">\n' +
-                                        '                <div class="btn-group" role="group">\n' +
-                                        '                    <a class="btn btn-outline-info" data-toggle="modal" href="#updateExaminationPaperByHomework" onclick="updateExaminationPaperById(\'' + data.data[i].courseByCId.name + '\',\'' + data.data[i].courseByCId.id + '\',\'' + data.data[i].id + '\',\'' + data.data[i].name + '\',\'' + data.data[i].startTime + '\',\'' + data.data[i].endTime + '\')">修改</a>\n' +
-                                        '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
-                                        '                </div>\n' +
-                                        '            </td>\n' +
-                                        '        </tr>');
-                                }
-                                Swal.fire({text: "添加已完成！", type: 'success'});
-                            },
-                            error: () => {
-                                Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});
-                            }
-                        });
-                    } else Swal.fire({text: "修改出错！请确保上传无误后重试！", type: 'error'});
-                },
-            error:
-                () => {
-                    Swal.fire({text: "上传出错！请确保输入无误后重试！", type: 'error'});
-                }
-        })
+        console.log(examinationPaper);
+        <%--$.ajax({--%>
+        <%--url: '<%=request.getContextPath()%>/updateExaminationPager',--%>
+        <%--async: true,--%>
+        <%--type: 'POST',--%>
+        <%--datatype: 'json',--%>
+        <%--data: {'examinationPaperPo': JSON.stringify(examinationPaper)},--%>
+        <%--success:--%>
+        <%--(data) => {--%>
+        <%--if (data.resultCode === 'success') {--%>
+        <%--$.ajax({--%>
+        <%--url: '<%=request.getContextPath()%>/examinationPaperBean',--%>
+        <%--datatype: 'json',--%>
+        <%--async: true,--%>
+        <%--type: 'post',--%>
+        <%--data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: true},--%>
+        <%--success: (data) => {--%>
+        <%--$('#tbody_homework').empty();--%>
+        <%--for (var i = 0; i < data.data.length; ++i) {--%>
+        <%--$('#tbody_homework').append('<tr class="row">\n' +--%>
+        <%--'            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +--%>
+        <%--'            <td class="col text-center">' + data.data[i].id + '</td>\n' +--%>
+        <%--'            <td class="col text-center">' + data.data[i].name + '</td>\n' +--%>
+        <%--'            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +--%>
+        <%--'            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +--%>
+        <%--'            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +--%>
+        <%--'            <td class="col text-center">\n' +--%>
+        <%--'                <div class="btn-group" role="group">\n' +--%>
+        <%--'                    <a class="btn btn-outline-info" data-toggle="modal" href="#updateExaminationPaperByHomework" onclick="updateExaminationPaperById(\'' + data.data[i].courseByCId.name + '\',\'' + data.data[i].courseByCId.id + '\',\'' + data.data[i].id + '\',\'' + data.data[i].name + '\',\'' + data.data[i].startTime + '\',\'' + data.data[i].endTime + '\')">修改</a>\n' +--%>
+        <%--'                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +--%>
+        <%--'                </div>\n' +--%>
+        <%--'            </td>\n' +--%>
+        <%--'        </tr>');--%>
+        <%--}--%>
+        <%--Swal.fire({text: "修改已完成！", type: 'success'});--%>
+        <%--},--%>
+        <%--error: () => {--%>
+        <%--Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});--%>
+        <%--}--%>
+        <%--});--%>
+        <%--} else Swal.fire({text: "修改出错！请确保上传无误后重试！", type: 'error'});--%>
+        <%--},--%>
+        <%--error:--%>
+        <%--() => {--%>
+        <%--Swal.fire({text: "上传出错！请确保输入无误后重试！", type: 'error'});--%>
+        <%--}--%>
+        <%--})--%>
         ;
     }
 
@@ -563,7 +568,7 @@
                         '<div class="card">' +
                         '<div class="card-header">' +
                         '<a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"' +
-                        ' href="#">第<label class="label">' + data1[i].problemNumber + '</label>题：</a>' +
+                        ' href="#">第<label class="label" component="' + data1[i].id + '">' + data1[i].problemNumber + '</label>题：</a>' +
                         '</div>' +
                         '<div class="collapse" data-parent="#update_parent_homework">' +
                         '<div class="card-body">选择题型：' +
@@ -578,18 +583,18 @@
                     }
                     temp += '</select></label>';
                     temp += '<table class="table table-striped"><thead class="thead-light"><tr class="row"><td class="col">' +
-                        '<label class="label">题目内容：<textarea class="text-area">' + (isEmpty(data1[i].title) ? '' : data1[i].title) + '</textarea></label></td>' +
+                        '<label class="label">题目内容：<textarea class="text-area" problem="' + data1[i].problemByQId.id + '">' + (isEmpty(data1[i].title) ? '' : data1[i].title) + '</textarea></label></td>' +
                         '</tr><tr class="row"><td class="col"><label class="label">每一问分值：<input type="number" placeholder="请输入！" required value="' + data1[i].core + '"></label>' +
                         '</td></tr></thead>';
                     temp += '<tbody>';
                     var question = data1[i].problemByQId.questionsById;
                     for (var j = 0, length3 = question.length; j < length3; ++j) {
                         temp += '<tr class="row"><td class="col"><table class="table table-striped"><thead>' +
-                            '<tr class="row"><td class="col"><label class="label">问题：<textarea class="text-area">' + (isEmpty(question[j].content) ? '' : question[j].content) + '</textarea></label></td></tr>' +
+                            '<tr class="row"><td class="col"><label class="label">问题：<textarea class="text-area" question="' + question[j].id + '">' + (isEmpty(question[j].content) ? '' : question[j].content) + '</textarea></label></td></tr>' +
                             '<tr class="row"><td class="col"><label class="label">参考答案：<textarea class="text-area">' + (isEmpty(question[j].answer) ? '' : question[j].answer) + '</textarea></label></td></tr>' +
                             '</thead><tbody>';
                         for (var option = question[j].optionsById, k = 0, length4 = option.length; k < length4; ++k) {
-                            temp += '<tr class="row"><td class="col"><label class="label">选项<span style="color: #e0a800">' + option[k].mark + '</span>:' +
+                            temp += '<tr class="row"><td class="col"><label class="label">选项<span style="color: #e0a800" option="' + option[k].id + '">' + option[k].mark + '</span>:' +
                                 '<textarea class="text-area">' + option[k].content + '</textarea></label></td></tr>';
                         }
                         temp += '</tbody><tfoot><tr class="row"><td class="col text-center">' +
@@ -642,26 +647,40 @@
         $(obj).parent().next().collapse('toggle');
     }
 
-    function addProblemByWork() {
-        // console.log($('#tbody_work_Problem').children('last'));
-        var row = $('#tbody_work_Problem').children().eq(parseInt($('#tbody_work_Problem').children().length) - 1).clone();
+    function addProblem(obj) {
+        var row = $(obj).children().eq(parseInt($('#tbody_work_Problem').children().length) - 1).clone();
         //console.log(row.children().children().children().eq(0).children().children().text());
         var label = row.children().children().children().eq(0).children().children();
         label.text(parseInt(label.text()) + 1);
         $('#tbody_work_Problem').append(row);
+        $('.text-area').summernote({
+            lang: 'zh-CN',
+            placeholder: '请输入内容！',
+            focus: true
+        });
     }
 
     function addQuestion(obj) {
         var tbody = $(obj).parent().parent().parent().prev();
         var row = tbody.children().eq(parseInt(tbody.children().length) - 1).clone();
         tbody.append(row);
+        $('.text-area').summernote({
+            lang: 'zh-CN',
+            placeholder: '请输入内容！',
+            focus: true
+        });
     }
 
-    function addTopic(obj) {
+    function addOption(obj) {
         var tbody = $(obj).parent().parent().parent().prev();
         var row = tbody.children().eq(parseInt(tbody.children().length) - 1).clone();
         row.children().children().children().eq(0).text(String.fromCharCode(row.children().children().children().eq(0).text().charCodeAt() + 1));
         tbody.append(row);
+        $('.text-area').summernote({
+            lang: 'zh-CN',
+            placeholder: '请输入内容！',
+            focus: true
+        });
     }
 </script>
 </html>
