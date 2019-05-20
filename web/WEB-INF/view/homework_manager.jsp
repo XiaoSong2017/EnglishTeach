@@ -60,98 +60,6 @@
                         </tr>
                         </thead>
                         <tbody id="tbody_work_Problem">
-                        <tr class="row">
-                            <td class="col" colspan="3">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"
-                                           href="#">第<label class="label">1</label>题：</a>
-                                    </div>
-                                    <div class="collapse" data-parent="#parent_homework">
-                                        <div class="card-body">
-                                            <label class="label">
-                                                选择题型：
-                                                <select class="custom-select" required title="选择题型!"></select>
-                                            </label>
-                                            <table class="table table-striped">
-                                                <thead class="thead-light">
-                                                <tr class="row">
-                                                    <td class="col">
-                                                        <label class="label">题目内容：
-                                                            <textarea class="text-area" required></textarea>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr class="row">
-                                                    <td class="col">
-                                                        <label class="label">
-                                                            每一问分值：<input type="number" placeholder="请输入！" required>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr class="row">
-                                                    <td class="col">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                            <tr class="row">
-                                                                <td class="col">
-                                                                    <label class="label">问题：<textarea
-                                                                            class="text-area"></textarea></label>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="row">
-                                                                <td class="col">
-                                                                    <label class="label">
-                                                                        参考答案：<textarea class="text-area"></textarea>
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr class="row">
-                                                                <td class="col">
-                                                                    <label class="label">选项<span style="color: #e0a800">A</span>:
-                                                                        <textarea class="text-area"></textarea>
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                            <tfoot>
-                                                            <tr class="row">
-                                                                <td class="col text-center">
-                                                                    <img role="button"
-                                                                         src="<%=request.getContextPath()%>/images/add.svg"
-                                                                         alt="添加选项！"
-                                                                         onclick="addOption(this)"
-                                                                         class="img-circle btn btn-outline-info"
-                                                                         type="svg">
-                                                                </td>
-                                                            </tr>
-                                                            </tfoot>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                <tr class="row">
-                                                    <td class="col text-center">
-                                                        <img role="button"
-                                                             src="<%=request.getContextPath()%>/images/add.svg"
-                                                             alt="添加问题！"
-                                                             onclick="addQuestion(this)"
-                                                             class="img-circle btn btn-outline-info"
-                                                             type="svg">
-                                                    </td>
-                                                </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -267,17 +175,17 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button class="btn btn-primary" data-dismiss="modal" onclick="updateExamPager()">修改</button>
+                <button class="btn btn-primary" data-dismiss="modal" onclick="updateExamPagerByHomework(true)">修改</button>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    function updateExamPager() {
+    function updateExamPagerByHomework(examType) {
         var examinationPaper = {};
         examinationPaper.id = $('#update_id').val();
         examinationPaper.cId = $('#update_cId').val();
-        examinationPaper.type = 1;
+        examinationPaper.type = examType;
         examinationPaper.tId = '<%=request.getSession().getAttribute("ID")%>';
         examinationPaper.name = $('#update_home_work_title').val();
         examinationPaper.startTime = $('#update_home_work_start_time').val();
@@ -333,54 +241,52 @@
             //console.log(rowsI.eq(0).children().children());
         }
         examinationPaper.componentsById = problems;
-        console.log(examinationPaper);
-        <%--$.ajax({--%>
-        <%--url: '<%=request.getContextPath()%>/updateExaminationPager',--%>
-        <%--async: true,--%>
-        <%--type: 'POST',--%>
-        <%--datatype: 'json',--%>
-        <%--data: {'examinationPaperPo': JSON.stringify(examinationPaper)},--%>
-        <%--success:--%>
-        <%--(data) => {--%>
-        <%--if (data.resultCode === 'success') {--%>
-        <%--$.ajax({--%>
-        <%--url: '<%=request.getContextPath()%>/examinationPaperBean',--%>
-        <%--datatype: 'json',--%>
-        <%--async: true,--%>
-        <%--type: 'post',--%>
-        <%--data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: true},--%>
-        <%--success: (data) => {--%>
-        <%--$('#tbody_homework').empty();--%>
-        <%--for (var i = 0; i < data.data.length; ++i) {--%>
-        <%--$('#tbody_homework').append('<tr class="row">\n' +--%>
-        <%--'            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +--%>
-        <%--'            <td class="col text-center">' + data.data[i].id + '</td>\n' +--%>
-        <%--'            <td class="col text-center">' + data.data[i].name + '</td>\n' +--%>
-        <%--'            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +--%>
-        <%--'            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +--%>
-        <%--'            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +--%>
-        <%--'            <td class="col text-center">\n' +--%>
-        <%--'                <div class="btn-group" role="group">\n' +--%>
-        <%--'                    <a class="btn btn-outline-info" data-toggle="modal" href="#updateExaminationPaperByHomework" onclick="updateExaminationPaperById(\'' + data.data[i].courseByCId.name + '\',\'' + data.data[i].courseByCId.id + '\',\'' + data.data[i].id + '\',\'' + data.data[i].name + '\',\'' + data.data[i].startTime + '\',\'' + data.data[i].endTime + '\')">修改</a>\n' +--%>
-        <%--'                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +--%>
-        <%--'                </div>\n' +--%>
-        <%--'            </td>\n' +--%>
-        <%--'        </tr>');--%>
-        <%--}--%>
-        <%--Swal.fire({text: "修改已完成！", type: 'success'});--%>
-        <%--},--%>
-        <%--error: () => {--%>
-        <%--Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});--%>
-        <%--}--%>
-        <%--});--%>
-        <%--} else Swal.fire({text: "修改出错！请确保上传无误后重试！", type: 'error'});--%>
-        <%--},--%>
-        <%--error:--%>
-        <%--() => {--%>
-        <%--Swal.fire({text: "上传出错！请确保输入无误后重试！", type: 'error'});--%>
-        <%--}--%>
-        <%--})--%>
-        ;
+        //console.log(examinationPaper);
+        $.ajax({
+            url: '<%=request.getContextPath()%>/updateExaminationPager',
+            async: true,
+            type: 'POST',
+            datatype: 'json',
+            data: {'examinationPaperPo': JSON.stringify(examinationPaper)},
+            success: (data) => {
+                if (data.resultCode === 'success') {
+                    $.ajax({
+                        url: '<%=request.getContextPath()%>/examinationPaperBean',
+                        datatype: 'json',
+                        async: true,
+                        type: 'post',
+                        data: {teacherId: '<%=request.getSession().getAttribute("ID")%>', type: examType},
+                        success: (data) => {
+                            $('#tbody_homework').empty();
+                            for (var i = 0; i < data.data.length; ++i) {
+                                $('#tbody_homework').append('<tr class="row">\n' +
+                                    '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
+                                    '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
+                                    '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+                                    '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
+                                    '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
+                                    '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +
+                                    '            <td class="col text-center">\n' +
+                                    '                <div class="btn-group" role="group">\n' +
+                                    '                    <a class="btn btn-outline-info" data-toggle="modal" href="#updateExaminationPaperByHomework" onclick="updateExaminationPaperById(\'' + data.data[i].courseByCId.name + '\',\'' + data.data[i].courseByCId.id + '\',\'' + data.data[i].id + '\',\'' + data.data[i].name + '\',\'' + data.data[i].startTime + '\',\'' + data.data[i].endTime + '\')">修改</a>\n' +
+                                    '                    <a class="btn btn-outline-danger" onclick="deleteExaminationPaperById(\'' + data.data[i].id + '\',this)">删除</a>\n' +
+                                    '                </div>\n' +
+                                    '            </td>\n' +
+                                    '        </tr>');
+                            }
+                            Swal.fire({text: "修改已完成！", type: 'success'});
+                        },
+                        error: () => {
+                            Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});
+                        }
+                    });
+                } else Swal.fire({text: "修改出错！请确保上传无误后重试！", type: 'error'});
+            },
+            error:
+                () => {
+                    Swal.fire({text: "上传出错！请确保输入无误后重试！", type: 'error'});
+                }
+        });
     }
 
     function addExamPager(obj) {
@@ -648,11 +554,74 @@
     }
 
     function addProblem(obj) {
-        var row = $(obj).children().eq(parseInt($('#tbody_work_Problem').children().length) - 1).clone();
-        //console.log(row.children().children().children().eq(0).children().children().text());
-        var label = row.children().children().children().eq(0).children().children();
-        label.text(parseInt(label.text()) + 1);
-        $('#tbody_work_Problem').append(row);
+        var tbody = $(obj).parent().parent().parent().next();
+        //console.log(lastRow.children().children().children().eq(0).children().children().text());
+        tbody.append('<tr class="row">\n' +
+            '                            <td class="col" colspan="3">\n' +
+            '                                <div class="card">\n' +
+            '                                    <div class="card-header">\n' +
+            '                                        <a class="card-link" data-toggle="collapse" onclick="onclickCollapse(this)"\n' +
+            '                                           href="#">第<label class="label">' + (parseInt(tbody.children().length) + 1) + '</label>题：</a>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="collapse" data-parent="#parent_homework">\n' +
+            '                                        <div class="card-body">\n' +
+            '                                            <label class="label">\n' +
+            '                                                选择题型：\n' +
+            '                                                <select class="custom-select" required title="选择题型!"></select>\n' +
+            '                                            </label>\n' +
+            '                                            <table class="table table-striped">\n' +
+            '                                                <thead class="thead-light">\n' +
+            '                                                <tr class="row">\n' +
+            '                                                    <td class="col">\n' +
+            '                                                        <label class="label">题目内容：\n' +
+            '                                                            <textarea class="text-area" required></textarea>\n' +
+            '                                                        </label>\n' +
+            '                                                    </td>\n' +
+            '                                                </tr>\n' +
+            '                                                <tr class="row">\n' +
+            '                                                    <td class="col">\n' +
+            '                                                        <label class="label">\n' +
+            '                                                            每一问分值：<input type="number" placeholder="请输入！" required>\n' +
+            '                                                        </label>\n' +
+            '                                                    </td>\n' +
+            '                                                </tr>\n' +
+            '                                                </thead>\n' +
+            '                                                <tbody>\n' +
+            '                                                </tbody>\n' +
+            '                                                <tfoot>\n' +
+            '                                                <tr class="row">\n' +
+            '                                                    <td class="col text-center">\n' +
+            '                                                        <img role="button"\n' +
+            '                                                             src="<%=request.getContextPath()%>/images/add.svg"\n' +
+            '                                                             alt="添加问题！"\n' +
+            '                                                             onclick="addQuestion(this)"\n' +
+            '                                                             class="img-circle btn btn-outline-info"\n' +
+            '                                                             type="svg">\n' +
+            '                                                    </td>\n' +
+            '                                                </tr>\n' +
+            '                                                </tfoot>\n' +
+            '                                            </table>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                            </td>\n' +
+            '                        </tr>');
+        $.ajax({
+            url: '<%=request.getContextPath()%>/topicBean',
+            async: true,
+            type: 'post',
+            success: (data) => {
+                topic = data.data;
+                for (var i = 0; i < data.data.length; ++i) {
+                    //console.log('select:'+$('#tbody_work_Problem').children().eq(0).children().children().children().eq(1).children().children().eq(0).children());
+                    $(tbody).children().eq(parseInt(tbody.children().length) - 1).children().children().children().eq(1).children().children().eq(0).children()
+                        .append(' <option class="selectedItem" value="' + data.data[i].id + '">' + data.data[i].name + '</option>');
+                }
+            },
+            error: () => {
+                Swal.fire({text: "加载失败！请刷新页面重试！", type: 'error'});
+            }
+        });
         $('.text-area').summernote({
             lang: 'zh-CN',
             placeholder: '请输入内容！',
@@ -662,8 +631,41 @@
 
     function addQuestion(obj) {
         var tbody = $(obj).parent().parent().parent().prev();
-        var row = tbody.children().eq(parseInt(tbody.children().length) - 1).clone();
-        tbody.append(row);
+        tbody.append('<tr class="row">' +
+            '                                                    <td class="col">\n' +
+            '                                                        <table class="table table-striped">\n' +
+            '                                                            <thead>\n' +
+            '                                                            <tr class="row">\n' +
+            '                                                                <td class="col">\n' +
+            '                                                                    <label class="label">问题' + (parseInt(tbody.children().length) + 1) + '：<textarea\n' +
+            '                                                                            class="text-area"></textarea></label>\n' +
+            '                                                                </td>\n' +
+            '                                                            </tr>\n' +
+            '                                                            <tr class="row">\n' +
+            '                                                                <td class="col">\n' +
+            '                                                                    <label class="label">\n' +
+            '                                                                        参考答案：<textarea class="text-area"></textarea>\n' +
+            '                                                                    </label>\n' +
+            '                                                                </td>\n' +
+            '                                                            </tr>\n' +
+            '                                                            </thead>\n' +
+            '                                                            <tbody>\n' +
+            '                                                            </tbody>\n' +
+            '                                                            <tfoot>\n' +
+            '                                                            <tr class="row">\n' +
+            '                                                                <td class="col text-center">\n' +
+            '                                                                    <img role="button"\n' +
+            '                                                                         src="<%=request.getContextPath()%>/images/add.svg"\n' +
+            '                                                                         alt="添加选项！"\n' +
+            '                                                                         onclick="addOption(this)"\n' +
+            '                                                                         class="img-circle btn btn-outline-info"\n' +
+            '                                                                         type="svg">\n' +
+            '                                                                </td>\n' +
+            '                                                            </tr>\n' +
+            '                                                            </tfoot>' +
+            '                                                        </table>' +
+            '                                                    </td>' +
+            '                                                </tr>');
         $('.text-area').summernote({
             lang: 'zh-CN',
             placeholder: '请输入内容！',
@@ -673,9 +675,14 @@
 
     function addOption(obj) {
         var tbody = $(obj).parent().parent().parent().prev();
-        var row = tbody.children().eq(parseInt(tbody.children().length) - 1).clone();
-        row.children().children().children().eq(0).text(String.fromCharCode(row.children().children().children().eq(0).text().charCodeAt() + 1));
-        tbody.append(row);
+        //console.log(tbody.children().length);
+        tbody.append('<tr class="row">' +
+            '                                                                <td class="col">' +
+            '                                                                    <label class="label">选项<span style="color: #e0a800">' + String.fromCharCode('A'.charCodeAt() + tbody.children().length) + '</span>:' +
+            '                                                                        <textarea class="text-area"></textarea>' +
+            '                                                                    </label>' +
+            '                                                                </td>' +
+            '                                                            </tr>');
         $('.text-area').summernote({
             lang: 'zh-CN',
             placeholder: '请输入内容！',
