@@ -95,12 +95,12 @@ public class FileAction extends ActionSupport {
     public String setUploadFile() throws Exception {
         HttpServletResponse response=ServletActionContext.getResponse();
         response.setCharacterEncoding("UTF-8");
-        PrintWriter printWriter=response.getWriter();
+        //PrintWriter printWriter=response.getWriter();
         if (fileService.uploadFile(filesFileName, filesContentType, files, courseId)) {
-            printWriter.write("<script>alert('上传成功！');</script>");
+            //printWriter.write("<script>alert('上传成功！');</script>");
             return SUCCESS;
         } else {
-            printWriter.write("<script>alert('上传失败！请重试！');</script>");
+            //printWriter.write("<script>alert('上传失败！请重试！');</script>");
             return ERROR;
         }
     }

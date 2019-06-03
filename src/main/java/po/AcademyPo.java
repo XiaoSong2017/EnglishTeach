@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "academy",comment="学院表")
 @Table(name = "academy")
 public class AcademyPo {
     private int id;
@@ -17,7 +18,7 @@ public class AcademyPo {
 
     @Id
     @GeneratedValue
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false,columnDefinition = "integer COMMENT '学院ID'")
     public int getId() {
         return id;
     }
@@ -27,7 +28,7 @@ public class AcademyPo {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "name", nullable = false, length = 255,columnDefinition = "varchar(255) COMMENT '学院名称'")
     public String getName() {
         return name;
     }

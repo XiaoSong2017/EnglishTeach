@@ -59,6 +59,7 @@ public class ElectiveCourseService {
         electiveCoursePo.setGrade(Integer.valueOf(grade));
     }
 
+    @Transactional
     public void addElectiveCourseById(String studentId, String teachingId, String usualGrade,
                                       String examGrade, String grade) {
         ElectiveCoursePo electiveCoursePo = new ElectiveCoursePo();
@@ -78,6 +79,7 @@ public class ElectiveCourseService {
         }
     }
 
+    @Transactional
     public void saveElectiveCourseBySpecialtyId(String s, String teacherId, String courseId) {
         TeachingPo teachingPo = teachingDao.getTeachingByCourseIdAndTeacherId(teacherId, courseId);
         if (teachingPo != null) {

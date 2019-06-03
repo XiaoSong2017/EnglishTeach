@@ -4,8 +4,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.json.annotations.JSON;
 import service.CourseService;
 
-import static com.sun.activation.registries.LogSupport.log;
-
 public class CourseAction extends ActionSupport {
     private CourseService courseService;
     private String id;

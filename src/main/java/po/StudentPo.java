@@ -20,7 +20,6 @@ public class StudentPo {
     private Set<StudentLogPo> studentLogsById=new HashSet<>();
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false, length = 20)
     public String getId() {
         return id;

@@ -50,6 +50,7 @@ public class UserService {
         return teacherPo.getPassword().equals(password);
     }
 
+    @Transactional
     public void addStudent(String id, String name, String classes) {
         StudentPo studentPo=new StudentPo();
         studentPo.setId(id);
@@ -67,11 +68,12 @@ public class UserService {
     @Transactional
     public void updateStudent(String id, String name, String classes,String password) {
         StudentPo studentPo=studentDao.getById(StudentPo.class,id);
+        if(studentPo==null)studentPo=new StudentPo();
         studentPo.setId(id);
         studentPo.setName(name);
         studentPo.setPassword(password);
         studentPo.setClassesByClazz(classesDao.getById(ClassesPo.class,Integer.valueOf(classes)));
-        studentDao.update(studentPo);
+        studentDao.saveOrUpdate(studentPo);
     }
 
     public List<StudentPo> getAllStudent(){

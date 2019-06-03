@@ -1,8 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="EnglishTeach:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="EnglishTeach:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/EnglishTeach_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="EnglishTeach/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="EnglishTeach" />
@@ -10,14 +9,15 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Struts 2-2.5.14.1" />
           <element id="library" level="project" name="Hibernate 5.4.1-5.4.1" />
-          <element id="library" level="project" name="Spring MVC-4.3.18.RELEASE" />
           <element id="library" level="project" name="Spring-4.3.18.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.18.RELEASE" />
           <element id="library" level="project" name="c3p0-0.9.5.2" />
-          <element id="library" level="project" name="mysql-connector-java-8.0.12" />
           <element id="library" level="project" name="quartz-2.2.3" />
           <element id="library" level="project" name="fastjson-1.2.56" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.16" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="EnglishTeach/web/Web" />
     </root>
   </artifact>
 </component>

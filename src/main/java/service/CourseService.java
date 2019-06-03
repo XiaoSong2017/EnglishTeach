@@ -57,6 +57,7 @@ public class CourseService{
         courseDao.update(coursePo);
     }
 
+    @Transactional
     public  void addCourse(@NotNull String id,@NotNull String name){
         CoursePo coursePo=new CoursePo();
         coursePo.setId(id);

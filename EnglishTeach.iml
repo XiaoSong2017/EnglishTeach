@@ -60,31 +60,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.12" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.20" level="application_server_libraries" />
     <orderEntry type="library" name="Struts 2-2.5.14.1" level="project" />
     <orderEntry type="library" name="Hibernate 5.4.1-5.4.1" level="project" />
     <orderEntry type="library" name="Spring-4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="c3p0-0.9.5.2" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-8.0.12" level="project" />
-    <orderEntry type="library" name="html5shiv" level="application" />
-    <orderEntry type="library" name="respond" level="application" />
-    <orderEntry type="library" name="popper" level="application" />
-    <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="quartz-2.2.3" level="project" />
     <orderEntry type="library" name="fastjson-1.2.56" level="project" />
-    <orderEntry type="module-library" scope="TEST">
-      <library name="JUnit5.3">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/junit-jupiter-api-5.5.0-M1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/apiguardian-api-1.0.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/opentest4j-1.1.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/junit-platform-commons-1.5.0-M1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.3">
         <CLASSES>
@@ -97,5 +80,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="mysql-connector-java-8.0.16" level="project" />
   </component>
 </module>

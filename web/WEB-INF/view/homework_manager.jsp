@@ -468,7 +468,7 @@
             success: (data) => {
                 $('#tbody_update_work_Problem').empty();
                 var data1 = data.data;
-                var temp;
+                var temp='';
                 for (var i = 0, length1 = data1.length; i < length1; ++i) {
                     temp += '<tr class="row"><td class="col" colspan="3">' +
                         '<div class="card">' +
@@ -513,7 +513,10 @@
                         '</td></tr></tfoot></table>';
                     temp += '</div></div></div></td></tr>';
                 }
-                $('#tbody_update_work_Problem').append(temp);
+                //console.log(temp);
+                //$('#tbody_update_work_Problem').append(temp);
+                $('#tbody_update_work_Problem').html(temp);
+                //document.getElementById('tbody_update_work_Problem').innerHTML=temp;
                 $('.text-area').summernote({
                     lang: 'zh-CN',
                     placeholder: '请输入内容！',

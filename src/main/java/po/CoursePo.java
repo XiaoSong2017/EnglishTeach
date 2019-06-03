@@ -18,7 +18,6 @@ public class CoursePo {
     private Set<TeachingPo> teachingsById=new HashSet<>();
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false, length = 25)
     public String getId() {
         return id;

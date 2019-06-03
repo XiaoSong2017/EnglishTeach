@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@org.hibernate.annotations.Table(appliesTo = "answer_record",comment="答题记录表")
 @Table(name = "answer_record")
 public class AnswerRecordPo {
     private int id;
@@ -21,7 +22,7 @@ public class AnswerRecordPo {
 
     @Id
     @GeneratedValue
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false,columnDefinition = "integer COMMENT '答题记录ID'")
     public int getId() {
         return id;
     }

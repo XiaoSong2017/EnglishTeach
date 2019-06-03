@@ -2,6 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="dataSource" uuid="cef5bdab-1ddd-4083-8efd-6cc2a20fe737">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <configured-by-url>true</configured-by-url>
@@ -10,19 +11,6 @@
 E:/Workspaces/IDEA/EnglishTeach/src/main/resources/spring-config.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/english_teach?useUnicode=true&amp;characterEncoding=UTF8&amp;serverTimezone=GMT%2B8&amp;useSSL=false</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="jdbc" uuid="ad06c3a1-66ea-450b-a16b-312692e5147d">
-      <driver-ref>db2</driver-ref>
-      <imported>true</imported>
-      <remarks>jdbc.properties
-
-E:/Workspaces/IDEA/EnglishTeach/src/main/resources/jdbc.properties</remarks>
-      <jdbc-driver>com.ibm.db2.jcc.DB2Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/english_teach?useUnicode=true&amp;characterEncoding=UTF8&amp;serverTimezone=GMT%2B8&amp;useSSL=false</jdbc-url>
-      <driver-properties>
-        <property name="clientProgramName" value="DataGrip" />
-        <property name="retrieveMessagesFromServerOnGetMessage" value="true" />
-      </driver-properties>
     </data-source>
   </component>
 </project>
