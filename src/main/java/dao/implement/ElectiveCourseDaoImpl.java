@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import po.ElectiveCoursePo;
 import po.StudentPo;
 import po.TeachingPo;
+import vo.RelationShip;
 
 import java.util.List;
 
@@ -60,9 +61,9 @@ public class ElectiveCourseDaoImpl extends BaseDaoImpl<ElectiveCoursePo> impleme
     }
 
     @Override
-    public double getAverageCore(String studentById) {
-        Object result = getSessionFactory().getCurrentSession().createQuery("select avg (en.grade) from ElectiveCoursePo en where en.sId=?1").setParameter(1, studentById).getResultList().get(0);
-        return result == null ? 0 : (Double) result;
+    public RelationShip getAverageCore(String studentById) {
+        List<RelationShip>list= getSessionFactory().getCurrentSession().createQuery("select new vo.RelationShip(avg(en.examGrade),avg(en.usualGrade),avg(en.grade),0.0) from ElectiveCoursePo en where en.sId=?1").setParameter(1, studentById).list();
+        return list==null?null:list.get(0);
     }
 
     @Override

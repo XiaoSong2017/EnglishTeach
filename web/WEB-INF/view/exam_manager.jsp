@@ -263,7 +263,8 @@
                                 $('#tbody_exam').append('<tr class="row">\n' +
                                     '            <td class="col text-center">' + (parseInt(i) + 1) + '</td>\n' +
                                     '            <td class="col text-center">' + data.data[i].id + '</td>\n' +
-                                    '            <td class="col text-center">' + data.data[i].name + '</td>\n' +
+                                    '            <td class="col text-center"><a data-toggle="modal"\n' +
+                                    '                       href="#preExaminationPaperByExam" onclick="preExaminPapgerByExam(\''+data.data[i].id+'\')">' + data.data[i].name + '</a></td>\n' +
                                     '            <td class="col text-center">' + data.data[i].startTime + '</td>\n' +
                                     '            <td class="col text-center">' + data.data[i].endTime + '</td>\n' +
                                     '            <td class="col text-center">' + '<%=request.getSession().getAttribute("user")%>' + '</td>\n' +

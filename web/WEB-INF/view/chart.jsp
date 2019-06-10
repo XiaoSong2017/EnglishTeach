@@ -31,12 +31,17 @@
             type: 'post',
             asynd: true,
             success: (data) => {
-                var value=[];
+                var grade=[];
+                var examGrade=[];
+                var usualGrade=[];
+                console.log(data);
                 data.data.sort((a,b)=>{
                     return a.time-b.time;
                 });
                 for (var i = 0; i < data.data.length; ++i) {
-                   value.push([data.data[i].time,data.data[i].core]);
+                    grade.push([data.data[i].time,data.data[i].core]);
+                    examGrade.push([data.data[i].time,data.data[i].examCore]);
+                    usualGrade.push([data.data[i].time,data.data[i].usualCore]);
                 }
                 var myChart = echarts.init(document.getElementById('chart'));
                 var option = {
@@ -62,7 +67,7 @@
                         }
                     },
                     legend: {
-                        data: ['分数']
+                        data: ['总成绩平均分数','平时成绩平均分数','考试成绩平均分数']
                     },
                     xAxis: [{
                         type: 'value',
@@ -91,10 +96,23 @@
                     ],
                     series: [
                         {
-                            name: '分数',
+                            name: '总成绩平均分数',
                             type: 'line',
+                            color:'#ff0c2d',
                             smooth: true,
-                            data: value
+                            data: grade
+                        },{
+                            name: '平时成绩平均分数',
+                            type: 'line',
+                            color:'#ff09e3',
+                            smooth: true,
+                            data: usualGrade
+                        },{
+                            name: '考试成绩平均分数',
+                            type: 'line',
+                            color:'#2740ff',
+                            smooth: true,
+                            data: examGrade
                         }
                     ]
                 };

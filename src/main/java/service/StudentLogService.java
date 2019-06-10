@@ -15,10 +15,7 @@ import vo.RelationShip;
 import javax.management.relation.Relation;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
@@ -93,9 +90,13 @@ public class StudentLogService {
     public List<RelationShip> getStudentOnlineTimeAndCore() {
         List<RelationShip> data = new ArrayList<>();
         for (StudentPo studentPo : studentDao.getAll(StudentPo.class)) {
-            double core=electiveCourseDao.getAverageCore(studentPo.getId());
-            if(core!=0) data.add(new RelationShip(core, onlineTime(studentPo.getId())));
+            RelationShip res=electiveCourseDao.getAverageCore(studentPo.getId());
+            if(res!=null&& res.getCore() != null&&res.getUsualCore()!=null&&res.getExamCore()!=null) {
+                res.setTime(onlineTime(studentPo.getId()));
+                data.add(res);
+            }
         }
+        //System.out.println(Arrays.toString(data.toArray()));
         return data;
     }
 }
