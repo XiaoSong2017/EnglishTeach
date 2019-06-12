@@ -58,7 +58,7 @@ public class AnswerRecordService {
                     /**
                      * 截取除去Summernote框架输出字符串<p></p>之间的结果进行计算
                      */
-                    similarity = Math.max(similarity, levenshtein.getSimilarity(content.get(i).substring(content.get(i).indexOf(">")+1, content.get(i).lastIndexOf("<")-1), answerRecordPo.getAnswer().substring(answerRecordPo.getAnswer().indexOf(">")+1, answerRecordPo.getAnswer().lastIndexOf("<")-1)));
+                    similarity = Math.max(similarity, levenshtein.getSimilarity(content.get(i).substring(content.get(i).indexOf(">") + 1, content.get(i).lastIndexOf("<") - 1), answerRecordPo.getAnswer().substring(answerRecordPo.getAnswer().indexOf(">") + 1, answerRecordPo.getAnswer().lastIndexOf("<") - 1)));
                 }
                 SubjectiveAnswerRecordPo subjectiveAnswerRecordPo = new SubjectiveAnswerRecordPo();
                 subjectiveAnswerRecordPo.setSimilarity(similarity);
@@ -87,6 +87,7 @@ public class AnswerRecordService {
         } else return false;
     }
 
+    @Transactional(readOnly = true)
     public List<SubjectiveAnswerRecordPo> getSubjectiveAnswerRecords() {
         return subjectiveAnswerRecordPoDao.getAll(SubjectiveAnswerRecordPo.class);
     }

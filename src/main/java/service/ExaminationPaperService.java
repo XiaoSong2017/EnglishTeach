@@ -16,6 +16,7 @@ public class ExaminationPaperService {
         this.examinationPaperDao = examinationPaperDao;
     }
 
+    @Transactional(readOnly = true)
     public List<ExaminationPaperPo> getExaminationPaperByTeacherId(String teacherId, String type) {
         return examinationPaperDao.getExaminationPaperByTeacherId(teacherId, type);
     }
@@ -35,6 +36,7 @@ public class ExaminationPaperService {
         examinationPaperDao.update(examinationPaperPo);
     }
 
+    @Transactional(readOnly = true)
     public Map<String, Object> getExaminationPaperDetailById(int id) {
         Map<String, Object> list = new HashMap<>();
         ExaminationPaperPo examinationPaperPo = examinationPaperDao.getById(ExaminationPaperPo.class, id);
@@ -75,6 +77,7 @@ public class ExaminationPaperService {
         return list;
     }
 
+    @Transactional(readOnly = true)
     public List<ExaminationPaperPo> getExaminationPaperByCourseId(String courseId, String type) {
         return examinationPaperDao.getExaminationPaperByCourseId(courseId, type);
     }

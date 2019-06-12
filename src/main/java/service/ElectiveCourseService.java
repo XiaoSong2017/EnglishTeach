@@ -29,6 +29,7 @@ public class ElectiveCourseService {
         this.teachingDao = teachingDao;
     }
 
+    @Transactional(readOnly = true)
     public List<ElectiveCoursePo> getAll() {
         return electiveCourseDao.getAll(ElectiveCoursePo.class);
     }
@@ -67,6 +68,7 @@ public class ElectiveCourseService {
         electiveCourseDao.save(electiveCoursePo);
     }
 
+    @Transactional(readOnly = true)
     public List<ElectiveCoursePo> getElectiveCourseByTeacherId(String teacherId) {
         return electiveCourseDao.getElectiveCourseByTeacherId(teacherId);
     }

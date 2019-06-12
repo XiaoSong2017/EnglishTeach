@@ -87,6 +87,7 @@ public class StudentLogService {
     /**
      * 学习时间分配比例和学习成绩对比
      */
+    @Transactional(readOnly = true)
     public List<RelationShip> getStudentOnlineTimeAndCore() {
         List<RelationShip> data = new ArrayList<>();
         for (StudentPo studentPo : studentDao.getAll(StudentPo.class)) {

@@ -39,6 +39,7 @@ public class FileService {
         this.teacherDao = teacherDao;
     }
 
+    @Transactional
     public TeachResourcePo downloadFile(String id) {
         TeachResourcePo teachResourcePo = filesDao.getById(TeachResourcePo.class, id);
         teachResourcePo.setDowns(teachResourcePo.getDowns() + 1);
@@ -69,6 +70,7 @@ public class FileService {
         } else return false;
     }
 
+    @Transactional(readOnly = true)
     public PageBean<TeachResourcePo> getFilesByUser(int pageNumber, int pageSize, String id) {
         return filesDao.getByUser(TeachResourcePo.class, pageNumber,pageSize, id);
     }
@@ -78,10 +80,12 @@ public class FileService {
         filesDao.delete(TeachResourcePo.class, id);
     }
 
+    @Transactional(readOnly = true)
     public List<TeachResourcePo> getFiles() {
         return filesDao.getAll(TeachResourcePo.class);
     }
 
+    @Transactional(readOnly = true)
     public List<TeachResourcePo> getFilesByCourseId(String courseId){
         return filesDao.getFilesByCourseId(courseId);
     }

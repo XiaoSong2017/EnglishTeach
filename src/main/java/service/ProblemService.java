@@ -15,6 +15,7 @@ public class ProblemService {
         this.problemDao = problemDao;
     }
 
+    @Transactional(readOnly = true)
     public List<ProblemPo> getAll() {
         return problemDao.getAll(ProblemPo.class);
     }
