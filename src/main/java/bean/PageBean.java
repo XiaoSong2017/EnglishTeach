@@ -18,7 +18,7 @@ public class PageBean<T> {
      */
     private long totalRecords;
     /**
-     * 总面数
+     * 总页数
      */
     private long totalPageNo;
     /**
